@@ -1,0 +1,12 @@
+body {
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+}
+
+.container {
+  margin: 0 auto;
+  width: 500px;
+}

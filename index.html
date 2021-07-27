@@ -10,9 +10,66 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header>
+  <header class="background-color-navy">
+    <nav>
+      <div class="row">
+        <a href=""><h2>Daily Summary</h2></a>
+        <a href=""><h2>Log</h2></a>
+        <a href=""><h2>Recipes</h2></a>
+        <a href=""><h2>Favorite Recipes</h2></a>
+      </div>
+    </nav>
   </header>
   <main>
+    <div class="container">
+      <div class="padding-left-20 form-header row background-color-navy margin-top-50 align-items-center">
+        <h3>Your Daily Summary</h3>
+        <h3 class="todays-date">Date</h3>
+      </div>
+      <div class="form-body back background-color-gray padding-left-20">
+        <h4 class="margin-top-0 padding-top-20">Add Targets to Get Started:</h4>
+        <form>
+          <div class="margin-top-10 row">
+            <div class="column-33">
+              <label name="calories"> Calories (kcal)</label>
+            </div>
+            <div class="column-66 padding-right">
+              <input type="text" id="calories">
+            </div>
+          </div>
+          <div class="margin-top-10 row align-items-center">
+            <div class="column-33">
+              <label name="protein">Protein (g)</label>
+            </div>
+            <div class="column-66 padding-right">
+              <input type="text" id="protein">
+            </div>
+          </div>
+          <div class="margin-top-10 row align-items-center">
+            <div class="column-33">
+              <label name="fats">Fats (g)</label>
+            </div>
+            <div class="column-66 padding-right">
+              <input type="text" id="fats">
+            </div>
+          </div>
+          <div class="margin-top-10 row align-items-center">
+            <div class="column-33">
+              <label name="carbohydrates">Carbohydrates (g)</label>
+            </div>
+            <div class="column-66 padding-right">
+              <input type="text" id="carbohydrates">
+            </div>
+          </div>
+          <div class="submit-button margin-top-10 text-align-right button-padding">
+            <button>Submit</button>
+          </div>
+        </form>
+      </div>
+      <div class="add-meal-button text-align-center margin-top-50">
+        <button>Add Meal</button>
+      </div>
+    </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>

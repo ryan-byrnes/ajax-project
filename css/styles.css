@@ -1,0 +1,108 @@
+a {
+  text-decoration: none;
+}
+
+button {
+  color: white;
+  background-color: rgb(10, 82, 130);
+  border: none;
+  border-radius: 5px;
+  height: 25px;
+  width: 23%;
+}
+
+nav h2 {
+  color: white;
+  padding-left: 20px;
+}
+
+input {
+  border-radius: 5px;
+  border: 0.5px solid black;
+  height: 25px;
+  width: 100%;
+}
+
+.form-header h3 {
+  color: white;
+}
+
+.background-color-navy {
+  background-color: rgb(10, 82, 130);
+}
+
+.column-third {
+  flex-basis: calc(100 / 3);
+}
+
+.column-two-thirds {
+  flex-basis: calc(100 * (2 / 3));
+}
+
+.text-align-right {
+  text-align: right;
+}
+
+.background-color-gray {
+  background-color: #f0f0f0;
+}
+
+.margin-top-50 {
+  margin-top: 50px;
+}
+
+.margin-top-0 {
+  margin-top: 0;
+}
+
+.form-header {
+  height: 40px;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.padding-left-20 {
+  padding-left: 20px;
+}
+
+.form-body {
+  height: 250px;
+}
+
+.padding-top-20 {
+  padding-top: 20px;
+}
+
+.margin-top-10 {
+  margin-top: 10px;
+}
+
+.display-inline {
+  display: inline;
+}
+
+.column-33 {
+  flex-basis: 33%;
+}
+
+.column-66 {
+  flex-basis: 66%;
+}
+
+.width-80 {
+  width: 80%;
+}
+
+.padding-right {
+  padding-right: 20px;
+}
+
+.button-padding {
+  padding-right: 25px;
+}
+
+.text-align-center {
+  text-align: center;
+}
