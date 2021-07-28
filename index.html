@@ -8,12 +8,81 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
+  <script src="https://developer.edamam.com/attribution/badge.js"></script>
 </head>
 <body>
-  <header>
+  <header class="background-color-navy">
+    <nav>
+      <div class="row">
+        <a href=""><h2>Daily Summary</h2></a>
+        <a href=""><h2>Log</h2></a>
+        <a href=""><h2>Recipes</h2></a>
+        <a href=""><h2>Favorite Recipes</h2></a>
+      </div>
+    </nav>
   </header>
   <main>
+    <div class="container">
+      <div class="padding-left-20 padding-right form-header row justify-content-space-between background-color-navy margin-top-50 align-items-center">
+        <h3>Your Daily Summary</h3>
+        <div>
+          <h3 class="todays-date">Date</h3>
+        </div>
+      </div>
+      <div data-view="target-input-form" class="form-body back background-color-gray padding-left-20">
+        <h4 class="margin-top-0 padding-top-20">Add Targets to Get Started:</h4>
+        <form class="target-input-form">
+          <div class="margin-top-10 row">
+            <div class="column-33">
+              <label name="calories"> Calories (kcal)</label>
+            </div>
+            <div class="column-66 padding-right">
+              <input type="text" id="calories">
+            </div>
+          </div>
+          <div class="margin-top-10 row align-items-center">
+            <div class="column-33">
+              <label name="protein">Protein (g)</label>
+            </div>
+            <div class="column-66 padding-right">
+              <input type="text" id="protein">
+            </div>
+          </div>
+          <div class="margin-top-10 row align-items-center">
+            <div class="column-33">
+              <label name="fats">Fats (g)</label>
+            </div>
+            <div class="column-66 padding-right">
+              <input type="text" id="fats">
+            </div>
+          </div>
+          <div class="margin-top-10 row align-items-center">
+            <div class="column-33">
+              <label name="carbohydrates">Carbs (g)</label>
+            </div>
+            <div class="column-66 padding-right">
+              <input type="text" id="carbohydrates">
+            </div>
+          </div>
+          <div class="submit-button margin-top-10 text-align-right padding-right">
+            <button class="daily-target-submit">Submit</button>
+          </div>
+        </form>
+      </div>
+      <div data-view="daily-targets" class="hidden form-body background-color-gray padding-left-20">
+
+      </div>
+      <div class="add-meal-button text-align-center margin-top-50">
+        <button class="meal-button">Add Meal</button>
+      </div>
+    </div>
   </main>
+  <footer class="background-color-navy">
+    <div class="row justify-content-flex-end">
+      <div id="edamam-badge" data-color="transparent"></div>
+    </div>
+
+  </footer>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>

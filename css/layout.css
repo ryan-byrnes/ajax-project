@@ -1,0 +1,34 @@
+* {
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+}
+
+.container {
+  margin: 0 auto;
+  width: 500px;
+}
+
+.hidden {
+  display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    margin: 0 auto;
+    width: 400px;
+  }
+
+  @media only screen and (max-width: 375px) {
+    .container {
+      margin: 0 auto;
+      width: 325px;
+    }
+  }
+}
