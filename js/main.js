@@ -14,12 +14,13 @@ function submitTargets() {
   data.view = 'daily-targets';
   inputForm.reset();
 
-  trackTargetProgress();
+  var dataViewDiv = document.querySelector('div[data-view = daily-targets]');
+  trackTargetProgress(dataViewDiv);
   switchViews();
 
 }
 
-function trackTargetProgress() {
+function trackTargetProgress(element) {
 
   /*
         <div class="row align-items-center">
@@ -72,10 +73,9 @@ function trackTargetProgress() {
         </div>
 */
 
-  var dataViewDiv = document.querySelector('div[data-view = daily-targets]');
   var calorieRow = document.createElement('div');
   calorieRow.setAttribute('class', 'row align-items-center');
-  dataViewDiv.appendChild(calorieRow);
+  element.appendChild(calorieRow);
 
   var calorieColumnThird = document.createElement('div');
   calorieColumnThird.setAttribute('class', 'column-33');
@@ -107,7 +107,7 @@ function trackTargetProgress() {
 
   var proteinRow = document.createElement('div');
   proteinRow.setAttribute('class', 'row align-items-center');
-  dataViewDiv.appendChild(proteinRow);
+  element.appendChild(proteinRow);
 
   var proteinColumnThird = document.createElement('div');
   proteinColumnThird.setAttribute('class', 'column-33');
@@ -139,7 +139,7 @@ function trackTargetProgress() {
 
   var fatsRow = document.createElement('div');
   fatsRow.setAttribute('class', 'row align-items-center');
-  dataViewDiv.appendChild(fatsRow);
+  element.appendChild(fatsRow);
 
   var fatsColumnThird = document.createElement('div');
   fatsColumnThird.setAttribute('class', 'column-33');
@@ -171,7 +171,7 @@ function trackTargetProgress() {
 
   var carbohydratesRow = document.createElement('div');
   carbohydratesRow.setAttribute('class', 'row align-items-center');
-  dataViewDiv.appendChild(carbohydratesRow);
+  element.appendChild(carbohydratesRow);
 
   var carbohydratesColumnThird = document.createElement('div');
   carbohydratesColumnThird.setAttribute('class', 'column-33');
@@ -198,6 +198,8 @@ function trackTargetProgress() {
   carbohydratesProgressFillText.setAttribute('class', 'margin-top-0 color-white font-weight-bold');
   carbohydratesProgressFillText.textContent = carbohydratesProgressFillDiv.style.width;
   carbohydratesProgressFillDiv.appendChild(carbohydratesProgressFillText);
+
+  return element;
 
 }
 
