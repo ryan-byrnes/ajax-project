@@ -2,6 +2,13 @@ a {
   text-decoration: none;
 }
 
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
 button {
   color: white;
   background-color: rgb(10, 82, 130);
@@ -14,6 +21,15 @@ button {
 nav h2 {
   color: white;
   padding-left: 20px;
+  font-size: 1rem;
+}
+
+@media only screen and (max-width: 375px) {
+  nav h2 {
+    color: white;
+    padding-left: 10px;
+    font-size: 0.95rem;
+  }
 }
 
 input {
@@ -141,4 +157,13 @@ input {
 
 .font-weight-bold {
   font-weight: bold;
+}
+
+.justify-content-flex-end {
+  justify-content: flex-end;
+}
+
+#edamam-badge {
+  width: 200px;
+  text-align: right;
 }
