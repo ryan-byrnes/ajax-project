@@ -1,5 +1,3 @@
-// var dailyTargetSubmitButton = document.querySelector('.daily-target-submit');
-
 document.addEventListener('submit', submitTargets);
 
 function submitTargets() {
@@ -22,6 +20,57 @@ function submitTargets() {
 }
 
 function trackTargetProgress() {
+
+  /*
+        <div class="row align-items-center">
+          <div class="column-33">
+            <p class="daily-target-calories">Calories: 0/0 kcal</p>
+          </div>
+          <div class="column-66 padding-right">
+            <div class="progress-bar background-color-white row align-items-center">
+              <div style="width: 100%;" class="fill-progress-calories progress text-align-center padding-top-3">
+                <p class="text-progress-calories margin-top-0 color-white font-weight-bold">100%</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="column-33">
+            <p class="daily-target-protein">Protein: 0/0g</p>
+          </div>
+          <div class="column-66 padding-right">
+            <div class="progress-bar background-color-white row align-items-center">
+              <div style="width: 75%;" class="fill-progress-protein progress text-align-center padding-top-3">
+                <p class="text-progress-protein margin-top-0 color-white font-weight-bold">75%</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="column-33">
+            <p class="daily-target-fats">Fats: 0/0g</p>
+          </div>
+          <div class="column-66 padding-right">
+            <div class="progress-bar background-color-white row align-items-center">
+              <div style="width: 50%;" class="fill-progress-fats progress text-align-center padding-top-3">
+                <p class="text-progress-fats margin-top-0 color-white font-weight-bold">50%</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="column-33">
+            <p class="daily-target-carbohydrates">Carbohydrates: 0/0g</p>
+          </div>
+          <div class="column-66 padding-right">
+            <div class="progress-bar background-color-white row align-items-center">
+              <div style="width: 25%;" class="fill-progress-carbohydrates progress text-align-center padding-top-3">
+                <p class="text-progress-carbohydrates margin-top-0 color-white font-weight-bold">25%</p>
+              </div>
+            </div>
+          </div>
+        </div>
+*/
 
   var dataViewDiv = document.querySelector('div[data-view = daily-targets]');
   var calorieRow = document.createElement('div');
@@ -150,36 +199,6 @@ function trackTargetProgress() {
   carbohydratesProgressFillText.textContent = carbohydratesProgressFillDiv.style.width;
   carbohydratesProgressFillDiv.appendChild(carbohydratesProgressFillText);
 
-  // var calorieText = document.querySelector('.daily-target-calories');
-  // var proteinText = document.querySelector('.daily-target-protein');
-  // var fatsText = document.querySelector('.daily-target-fats');
-  // var carbohydrateText = document.querySelector('.daily-target-carbohydrates');
-
-  // calorieText.textContent = 'Calories: ' + data.dailyTotals.calories + '/' + data.targets.calories + ' kcal';
-  // proteinText.textContent = 'Protein: ' + data.dailyTotals.protein + '/' + data.targets.protein + 'g';
-  // fatsText.textContent = 'Fats: ' + data.dailyTotals.fats + '/' + data.targets.fats + 'g';
-  // carbohydrateText.textContent = 'Carbs: ' + data.dailyTotals.carbohydrates + '/' + data.targets.carbohydrates + 'g';
-
-  // var calorieFill = document.querySelector('.fill-progress-calories');
-  // var proteinFill = document.querySelector('.fill-progress-protein');
-  // var fatsFill = document.querySelector('.fill-progress-fats');
-  // var carbohydratesFill = document.querySelector('.fill-progress-carbohydrates');
-
-  // calorieFill.style.width = data.dailyTotals.calories / data.targets.calories * 100 + '%';
-  // proteinFill.style.width = data.dailyTotals.protein / data.targets.protein * 100 + '%';
-  // fatsFill.style.width = data.dailyTotals.fats / data.targets.fats * 100 + '%';
-  // carbohydratesFill.style.width = data.dailyTotals.carbohydrates / data.targets.carbohydrates * 100 + '%';
-
-  // var calorieFillText = document.querySelector('.text-progress-calories');
-  // var proteinFillText = document.querySelector('.text-progress-protein');
-  // var fatsFillText = document.querySelector('.text-progress-fats');
-  // var carbohydratesFillText = document.querySelector('.text-progress-carbohydrates');
-
-  // calorieFillText.textContent = calorieFill.style.width;
-  // proteinFillText.textContent = proteinFill.style.width;
-  // fatsFillText.textContent = fatsFill.style.width;
-  // carbohydratesFillText.textContent = carbohydratesFill.style.width;
-
 }
 
 function switchViews() {
@@ -193,54 +212,3 @@ function switchViews() {
     }
   }
 }
-
-/*
-        <div class="row align-items-center">
-          <div class="column-33">
-            <p class="daily-target-calories">Calories: 0/0 kcal</p>
-          </div>
-          <div class="column-66 padding-right">
-            <div class="progress-bar background-color-white row align-items-center">
-              <div style="width: 100%;" class="fill-progress-calories progress text-align-center padding-top-3">
-                <p class="text-progress-calories margin-top-0 color-white font-weight-bold">100%</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row align-items-center">
-          <div class="column-33">
-            <p class="daily-target-protein">Protein: 0/0g</p>
-          </div>
-          <div class="column-66 padding-right">
-            <div class="progress-bar background-color-white row align-items-center">
-              <div style="width: 75%;" class="fill-progress-protein progress text-align-center padding-top-3">
-                <p class="text-progress-protein margin-top-0 color-white font-weight-bold">75%</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row align-items-center">
-          <div class="column-33">
-            <p class="daily-target-fats">Fats: 0/0g</p>
-          </div>
-          <div class="column-66 padding-right">
-            <div class="progress-bar background-color-white row align-items-center">
-              <div style="width: 50%;" class="fill-progress-fats progress text-align-center padding-top-3">
-                <p class="text-progress-fats margin-top-0 color-white font-weight-bold">50%</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row align-items-center">
-          <div class="column-33">
-            <p class="daily-target-carbohydrates">Carbohydrates: 0/0g</p>
-          </div>
-          <div class="column-66 padding-right">
-            <div class="progress-bar background-color-white row align-items-center">
-              <div style="width: 25%;" class="fill-progress-carbohydrates progress text-align-center padding-top-3">
-                <p class="text-progress-carbohydrates margin-top-0 color-white font-weight-bold">25%</p>
-              </div>
-            </div>
-          </div>
-        </div>
-*/
