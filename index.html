@@ -72,17 +72,59 @@
       <div data-view="daily-targets" class="hidden form-body background-color-gray padding-left-20">
 
       </div>
+
+      <div class=" margin-top-50 padding-left-20 padding-right form-header row justify-content-space-between background-color-navy margin-top-50 align-items-center">
+        <h3>Your Daily Summary</h3>
+        <div>
+          <h3 class="todays-date">Date</h3>
+        </div>
+      </div>
+
       <div class="add-meal-button text-align-center margin-top-50">
         <button class="meal-button">Add Meal</button>
       </div>
     </div>
   </main>
+
   <footer class="background-color-navy">
     <div class="row justify-content-flex-end">
       <div id="edamam-badge" data-color="transparent"></div>
     </div>
-
   </footer>
+
+
+  <div class="modal-window position-fixed tint row center">
+    <form class="modal-form">
+      <fieldset>
+        <div
+          class="padding-left-20 padding-right modal-header row justify-content-space-between background-color-navy align-items-center">
+          <h3>New Meal</h3>
+          <div>
+            <h3 class="todays-date">Date</h3>
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <h3 class="margin-top-30 padding-left-20">Meal Name</h3>
+          <p class="padding-left-20 margin-top-30">(ie. Meal 1, Breakfast, Snack 1, etc.)</p>
+        </div>
+        <label class="" name="meal-name">
+          <input class="width-90 margin-left-10" type="text" id="meal-name">
+        </label>
+        <div class="row align-items-center">
+          <h3 class="margin-top-30 padding-left-20">Add Food Item</h3>
+          <p class="padding-left-20 margin-top-30">(ie. 4oz chicken breast, 1 large egg, etc.)</p>
+        </div>
+        <label name="food-item">
+          <input class="width-90 margin-left-10" type="text" id="food-item">
+        </label>
+        <div class="modal-add-meal text-align-right margin-top-10">
+          <button class="daily-target-submit margin-right margin-top-10">Add Meal</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+
+
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>

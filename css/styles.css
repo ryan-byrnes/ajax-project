@@ -31,6 +31,22 @@ input {
   padding-left: 7px;
 }
 
+fieldset {
+  background-color: white;
+  border: none;
+  height: 350px;
+  width: 500px;
+  padding: 0;
+}
+
+.margin-left {
+  margin-left: 40px;
+}
+
+.margin-bottom-0 {
+  margin-bottom: 0;
+}
+
 .form-header h3 {
   color: white;
 }
@@ -165,6 +181,43 @@ input {
 
 .justify-content-flex-end {
   justify-content: flex-end;
+}
+
+.tint {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.width-90 {
+  width: 95%;
+}
+
+.margin-right {
+  margin-right: 15px;
+}
+
+.margin-top-30 {
+  margin-top: 30px;
+}
+
+.margin-left-10 {
+  margin-left: 10px;
+}
+
+.position-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-header {
+  color: white;
 }
 
 #edamam-badge {
