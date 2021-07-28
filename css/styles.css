@@ -9,15 +9,6 @@ footer {
   width: 100%;
 }
 
-button {
-  color: white;
-  background-color: rgb(10, 82, 130);
-  border: none;
-  border-radius: 5px;
-  height: 25px;
-  width: 23%;
-}
-
 nav h2 {
   color: white;
   padding-left: 20px;
@@ -121,8 +112,21 @@ input {
 }
 
 .meal-button {
+  color: white;
+  background-color: rgb(10, 82, 130);
+  border: none;
+  border-radius: 5px;
   height: 35px;
   width: 30%;
+}
+
+.daily-target-submit {
+  color: white;
+  background-color: rgb(10, 82, 130);
+  border: none;
+  border-radius: 5px;
+  height: 25px;
+  width: 23%;
 }
 
 .justify-content-space-between {
