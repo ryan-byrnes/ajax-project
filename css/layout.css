@@ -1,3 +1,7 @@
+* {
+  font-family: sans-serif;
+}
+
 body {
   margin: 0 auto;
 }
@@ -9,4 +13,8 @@ body {
 .container {
   margin: 0 auto;
   width: 500px;
+}
+
+.hidden {
+  display: none;
 }

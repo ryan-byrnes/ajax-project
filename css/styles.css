@@ -21,6 +21,7 @@ input {
   border: 0.5px solid black;
   height: 25px;
   width: 100%;
+  padding-left: 7px;
 }
 
 .form-header h3 {
@@ -84,11 +85,11 @@ input {
 }
 
 .column-33 {
-  flex-basis: 33%;
+  flex-basis: calc(100% / 3);
 }
 
 .column-66 {
-  flex-basis: 66%;
+  flex-basis: calc(100% * (2 / 3));
 }
 
 .width-80 {
@@ -99,10 +100,45 @@ input {
   padding-right: 20px;
 }
 
-.button-padding {
-  padding-right: 25px;
-}
-
 .text-align-center {
   text-align: center;
+}
+
+.meal-button {
+  height: 35px;
+  width: 30%;
+}
+
+.justify-content-space-between {
+  justify-content: space-between;
+}
+
+.progress-bar {
+  border-radius: 5px;
+  border: 1px solid black;
+  height: 25px;
+  width: 100%;
+}
+
+.background-color-white {
+  background-color: white;
+}
+
+.progress {
+  border-radius: 5px;
+  border: none;
+  height: 23px;
+  background-color: rgb(76, 175, 80);
+}
+
+.color-white {
+  color: white;
+}
+
+.padding-top-3 {
+  padding-top: 3px;
+}
+
+.font-weight-bold {
+  font-weight: bold;
 }

@@ -22,13 +22,15 @@
   </header>
   <main>
     <div class="container">
-      <div class="padding-left-20 form-header row background-color-navy margin-top-50 align-items-center">
+      <div class="padding-left-20 padding-right form-header row justify-content-space-between background-color-navy margin-top-50 align-items-center">
         <h3>Your Daily Summary</h3>
-        <h3 class="todays-date">Date</h3>
+        <div>
+          <h3 class="todays-date">Date</h3>
+        </div>
       </div>
-      <div class="form-body back background-color-gray padding-left-20">
+      <div data-view="target-input-form" class="form-body back background-color-gray padding-left-20">
         <h4 class="margin-top-0 padding-top-20">Add Targets to Get Started:</h4>
-        <form>
+        <form class="target-input-form">
           <div class="margin-top-10 row">
             <div class="column-33">
               <label name="calories"> Calories (kcal)</label>
@@ -55,19 +57,69 @@
           </div>
           <div class="margin-top-10 row align-items-center">
             <div class="column-33">
-              <label name="carbohydrates">Carbohydrates (g)</label>
+              <label name="carbohydrates">Carbs (g)</label>
             </div>
             <div class="column-66 padding-right">
               <input type="text" id="carbohydrates">
             </div>
           </div>
-          <div class="submit-button margin-top-10 text-align-right button-padding">
-            <button>Submit</button>
+          <div class="submit-button margin-top-10 text-align-right padding-right">
+            <button class="daily-target-submit">Submit</button>
           </div>
         </form>
       </div>
+      <div data-view="daily-targets" class="hidden form-body background-color-gray padding-left-20">
+        <div class="row align-items-center">
+          <div class="column-33">
+            <p class="daily-target-calories">Calories: 0/0 kcal</p>
+          </div>
+          <div class="column-66 padding-right">
+            <div class="progress-bar background-color-white row align-items-center">
+              <div style="width: 100%;" class="fill-progress-calories progress text-align-center padding-top-3">
+                <p class="text-progress-calories margin-top-0 color-white font-weight-bold">100%</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="column-33">
+            <p class="daily-target-protein">Protein: 0/0g</p>
+          </div>
+          <div class="column-66 padding-right">
+            <div class="progress-bar background-color-white row align-items-center">
+              <div style="width: 75%;" class="fill-progress-protein progress text-align-center padding-top-3">
+                <p class="text-progress-protein margin-top-0 color-white font-weight-bold">75%</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="column-33">
+            <p class="daily-target-fats">Fats: 0/0g</p>
+          </div>
+          <div class="column-66 padding-right">
+            <div class="progress-bar background-color-white row align-items-center">
+              <div style="width: 50%;" class="fill-progress-fats progress text-align-center padding-top-3">
+                <p class="text-progress-fats margin-top-0 color-white font-weight-bold">50%</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="column-33">
+            <p class="daily-target-carbohydrates">Carbohydrates: 0/0g</p>
+          </div>
+          <div class="column-66 padding-right">
+            <div class="progress-bar background-color-white row align-items-center">
+              <div style="width: 25%;" class="fill-progress-carbohydrates progress text-align-center padding-top-3">
+                <p class="text-progress-carbohydrates margin-top-0 color-white font-weight-bold">25%</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="add-meal-button text-align-center margin-top-50">
-        <button>Add Meal</button>
+        <button class="meal-button">Add Meal</button>
       </div>
     </div>
   </main>
