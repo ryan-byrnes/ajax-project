@@ -17,7 +17,7 @@ var data = {
     {
       date: '',
       mealName: '',
-      mealItem: [],
+      foodItem: [],
       entryId: ''
 
     }

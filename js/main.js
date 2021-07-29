@@ -36,7 +36,7 @@ var newMealButton = document.querySelector('.add-meal-submit');
 newMealButton.addEventListener('click', submitNewMeal);
 
 function submitNewMeal() {
-  // debugger;
+
   event.preventDefault();
 
   var inputForm = document.querySelector('.new-meal-modal-form');
@@ -262,7 +262,7 @@ function switchViews() {
   }
 }
 
-function createNewMealEntry(element) {
+function createNewMealEntry(entry) {
 
   /*  <div class=" margin-top-50 padding-left-20 padding-right form-header row justify-content-space-between background-color-navy margin-top-50 align-items-center">
         <h3>Your Daily Summary</h3>
@@ -292,4 +292,17 @@ function createNewMealEntry(element) {
   var headerDiv = document.createElement('div');
   headerDiv.setAttribute('class', 'margin-top-50 padding-left-20 padding-right form-header row justify-content-space-between background-color-navy margin-top-50 align-items-center');
   element.prepend(headerDiv);
+
+  var mealName = document.createElement('h3');
+  mealName.textContent = data.mealEntries[data.mealEntries.entryId - 1].mealName;
+  headerDiv.appendChild(mealName);
+
+  var dateDiv = document.createElement('div');
+  headerDiv.appendChild(dateDiv);
+
+  var dateValue = document.createElement('h3');
+  dateValue.setAttribute('class', 'todays-date');
+  dateValue.textContent = 'Date';
+  dateDiv.appendChild(dateValue);
+
 }
