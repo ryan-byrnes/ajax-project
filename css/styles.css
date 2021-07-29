@@ -2,6 +2,10 @@ a {
   text-decoration: none;
 }
 
+table {
+  width: 100%;
+}
+
 footer {
   position: absolute;
   bottom: 0;
@@ -39,12 +43,32 @@ fieldset {
   padding: 0;
 }
 
+tbody > tr > td {
+  padding-top: 1em;
+}
+
+tbody tr > td {
+  border-bottom: 1px solid black;
+}
+
+.height-225 {
+  height: 225px;
+}
+
 .margin-left {
   margin-left: 40px;
 }
 
 .margin-bottom-0 {
   margin-bottom: 0;
+}
+
+.margin-bottom-50 {
+  margin-bottom: 50px;
+}
+
+.width-900 {
+  width: 900px;
 }
 
 .form-header h3 {
@@ -171,6 +195,10 @@ fieldset {
   color: white;
 }
 
+.color-navy {
+  color: rgb(10, 82, 130);
+}
+
 .padding-top-3 {
   padding-top: 3px;
 }
@@ -184,7 +212,15 @@ fieldset {
 }
 
 .tint {
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.flex-basis-40 {
+  flex-basis: 40%;
+}
+
+.flex-basis-15 {
+  flex-basis: 15%;
 }
 
 .width-90 {

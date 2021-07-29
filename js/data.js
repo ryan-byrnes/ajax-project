@@ -8,11 +8,21 @@ var data = {
     carbohydrates: 0
   },
   dailyTotals: {
-    calories: 100,
-    protein: 50,
-    fats: 10,
-    carbohydrates: 150
+    calories: 0,
+    protein: 0,
+    fats: 0,
+    carbohydrates: 0
   },
+  mealEntries: [
+    {
+      date: '',
+      mealName: '',
+      mealItem: [],
+      entryId: ''
+
+    }
+  ],
   veiw: 'target-input-form',
-  date: ''
+  date: '',
+  nextMealEntryId: 1
 };

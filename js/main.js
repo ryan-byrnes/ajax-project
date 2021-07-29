@@ -1,3 +1,7 @@
+/* need function to update daily totals
+    new submit event handler for new meal entries
+    */
+
 document.addEventListener('submit', submitTargets);
 
 function submitTargets() {
@@ -18,6 +22,26 @@ function submitTargets() {
   trackTargetProgress(dataViewDiv);
   switchViews();
 
+}
+
+function submitNewMeal() {
+  event.preventDefault();
+
+  var inputForm = document.querySelector('.new-meal-modal-form');
+  var inputValue = inputForm.elements;
+
+  data.mealEntries[data.nextMealEntryId - 1].mealName = inputValue.mealName.value;
+  data.mealEntries[data.nextMealEntryId - 1].mealName = inputValue.mealName.value;
+  data.mealEntries[data.nextMealEntryId - 1].entryId = data.nextMealEntryId;
+
+  var dataViewDiv = document.querySelector('div[data-view = current-day-meals');
+  createNewMealEntry(dataViewDiv);
+
+  inputForm.reset();
+  data.nextMealEntryId += 1;
+
+  var modalDiv = document.querySelector('div[data-view=new-meal-modal');
+  modalDiv.classList.toggle('hidden');
 }
 
 function trackTargetProgress(element) {
@@ -213,4 +237,36 @@ function switchViews() {
       dataViewElements[i].classList.add('hidden');
     }
   }
+}
+
+function createNewMealEntry(element) {
+
+  /*  <div class=" margin-top-50 padding-left-20 padding-right form-header row justify-content-space-between background-color-navy margin-top-50 align-items-center">
+        <h3>Your Daily Summary</h3>
+        <div>
+          <h3 class="todays-date">Date</h3>
+        </div>
+      </div>
+      <div class="table">
+        <table>
+          <thead>
+            <tr class="row justify-content-space-between">
+              <td class="flex-basis-40">Food Item</td>
+              <td class="flex-basis-15">Calories</td>
+              <td class="flex-basis-15">Protein</td>
+              <td class="flex-basis-15">Fats</td>
+              <td class="flex-basis-15">Carbs</td>
+            </tr>
+          </thead>
+          <tbody class="space-under">
+            <tr>
+              <td class="font-weight-bold"><a class="color-navy" href="">Add Food Item</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+*/
+  var headerDiv = document.createElement('div');
+  headerDiv.setAttribute('class', 'margin-top-50 padding-left-20 padding-right form-header row justify-content-space-between background-color-navy margin-top-50 align-items-center');
+  element.prepend(headerDiv);
 }
