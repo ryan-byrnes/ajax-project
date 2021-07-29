@@ -24,5 +24,6 @@ var data = {
   ],
   veiw: 'target-input-form',
   date: '',
-  nextMealEntryId: 1
+  nextMealEntryId: 1,
+  xhrResponse: ''
 };

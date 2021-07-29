@@ -2,7 +2,8 @@
     new submit event handler for new meal entries
     */
 
-document.addEventListener('submit', submitTargets);
+var targetSubmitButton = document.querySelector('.daily-target-submit');
+targetSubmitButton.addEventListener('click', submitTargets);
 
 function submitTargets() {
   event.preventDefault();
@@ -24,15 +25,37 @@ function submitTargets() {
 
 }
 
+var addMealButton = document.querySelector('.add-meal-button');
+addMealButton.addEventListener('click', function () {
+  var modalDiv = document.querySelector('div[data-view=new-meal-modal');
+  modalDiv.classList.toggle('hidden');
+});
+
+var newMealButton = document.querySelector('.add-meal-submit');
+
+newMealButton.addEventListener('click', submitNewMeal);
+
 function submitNewMeal() {
+  // debugger;
   event.preventDefault();
 
   var inputForm = document.querySelector('.new-meal-modal-form');
   var inputValue = inputForm.elements;
 
-  data.mealEntries[data.nextMealEntryId - 1].mealName = inputValue.mealName.value;
-  data.mealEntries[data.nextMealEntryId - 1].mealName = inputValue.mealName.value;
+  data.mealEntries[data.nextMealEntryId - 1].mealName = inputValue['meal-name'].value;
+  data.mealEntries[data.nextMealEntryId - 1].foodItem = inputValue['food-item'].value;
   data.mealEntries[data.nextMealEntryId - 1].entryId = data.nextMealEntryId;
+
+  var xhr = new XMLHttpRequest();
+
+  xhr.open('GET', 'https://api.edamam.com/api/food-database/v2/parser?app_id=c2713387&app_key=4ef3b4c8226f2708aa7e3b8b470ed40e&ingr=' + encodeURI(inputValue['food-item'].value) + '&nutrition-type=cooking');
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    console.log(xhr.status);
+    console.log(xhr.response);
+    data.xhrResponse = xhr.response;
+  });
+  xhr.send();
 
   var dataViewDiv = document.querySelector('div[data-view = current-day-meals');
   createNewMealEntry(dataViewDiv);
