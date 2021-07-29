@@ -18,8 +18,8 @@ var data = {
       date: '',
       mealName: '',
       foodItem: [],
+      foodEntryId: 1,
       entryId: ''
-
     }
   ],
   veiw: 'target-input-form',

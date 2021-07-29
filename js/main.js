@@ -1,5 +1,5 @@
 /* need function to update daily totals
-    new submit event handler for new meal entries
+    Add food item modal and submit form
     */
 
 var targetSubmitButton = document.querySelector('.daily-target-submit');
@@ -43,7 +43,7 @@ function submitNewMeal() {
   var inputValue = inputForm.elements;
 
   data.mealEntries[data.nextMealEntryId - 1].mealName = inputValue['meal-name'].value;
-  data.mealEntries[data.nextMealEntryId - 1].foodItem = inputValue['food-item'].value;
+  data.mealEntries[data.nextMealEntryId - 1].foodItem[data.nextMealEntryId - 1] = inputValue['food-item'].value;
   data.mealEntries[data.nextMealEntryId - 1].entryId = data.nextMealEntryId;
 
   var xhr = new XMLHttpRequest();
@@ -54,11 +54,13 @@ function submitNewMeal() {
     console.log(xhr.status);
     console.log(xhr.response);
     data.xhrResponse = xhr.response;
+    var tableBody = document.querySelector('tbody');
+    tableBody.prepend(addFoodItem(data.xhrResponse));
   });
   xhr.send();
 
   var dataViewDiv = document.querySelector('div[data-view = current-day-meals');
-  createNewMealEntry(dataViewDiv);
+  dataViewDiv.append(createNewMealEntry(data.mealEntries[data.mealEntries.entryId - 1]));
 
   inputForm.reset();
   data.nextMealEntryId += 1;
@@ -264,16 +266,16 @@ function switchViews() {
 
 function createNewMealEntry(entry) {
 
-  /*  <div class=" margin-top-50 padding-left-20 padding-right form-header row justify-content-space-between background-color-navy margin-top-50 align-items-center">
-        <h3>Your Daily Summary</h3>
-        <div>
-          <h3 class="todays-date">Date</h3>
-        </div>
-      </div>
-      <div class="table">
+  /*  <div class="table">
         <table>
           <thead>
-            <tr class="row justify-content-space-between">
+            <tr class=" margin-top-50 padding-left-20 padding-right form-header row justify-content-space-between background-color-navy margin-top-50 align-items-center color-white font-weight-bold">
+              <td>Your Daily Summary</td>
+              <div>
+                <td class="todays-date">Date</td>
+              </div>
+            </tr>
+            <tr class="heading-row row font-weight-bold">
               <td class="flex-basis-40">Food Item</td>
               <td class="flex-basis-15">Calories</td>
               <td class="flex-basis-15">Protein</td>
@@ -289,20 +291,120 @@ function createNewMealEntry(entry) {
         </table>
       </div>
 */
-  var headerDiv = document.createElement('div');
-  headerDiv.setAttribute('class', 'margin-top-50 padding-left-20 padding-right form-header row justify-content-space-between background-color-navy margin-top-50 align-items-center');
-  element.prepend(headerDiv);
+  var tableDiv = document.createElement('div');
+  tableDiv.setAttribute('class', 'table');
 
-  var mealName = document.createElement('h3');
-  mealName.textContent = data.mealEntries[data.mealEntries.entryId - 1].mealName;
-  headerDiv.appendChild(mealName);
+  var table = document.createElement('table');
+  tableDiv.append(table);
+
+  var tableHead = document.createElement('thead');
+  table.append(tableHead);
+
+  var tableHeadRow = document.createElement('tr');
+  tableHeadRow.setAttribute('class', 'margin-top-50 padding-left-20 padding-right form-header row justify-content-space-between background-color-navy margin-top-50 align-items-center color-white font-weight-bold');
+  tableHead.append(tableHeadRow);
+
+  var addMealName = document.createElement('td');
+  addMealName.textContent = data.mealEntries[data.mealEntries.length - 1].mealName;
+  tableHeadRow.appendChild(addMealName);
 
   var dateDiv = document.createElement('div');
-  headerDiv.appendChild(dateDiv);
+  tableHeadRow.append(dateDiv);
 
-  var dateValue = document.createElement('h3');
-  dateValue.setAttribute('class', 'todays-date');
-  dateValue.textContent = 'Date';
-  dateDiv.appendChild(dateValue);
+  var tdDate = document.createElement('td');
+  tdDate.setAttribute('class', 'todays-date');
+  tdDate.textContent = data.mealEntries[data.mealEntries.length - 1].date;
+
+  var tableHeadRow2 = document.createElement('tr');
+  tableHeadRow2.setAttribute('class', 'heading-row row font-weight-bold');
+  tableHead.append(tableHeadRow2);
+
+  var tdFoodItem = document.createElement('td');
+  tdFoodItem.setAttribute('class', 'flex-basis-40');
+  tdFoodItem.textContent = 'Food Item';
+  tableHeadRow2.append(tdFoodItem);
+
+  var tdCalories = document.createElement('td');
+  tdCalories.setAttribute('class', 'flex-basis-15');
+  tdCalories.textContent = 'Calories';
+  tableHeadRow2.append(tdCalories);
+
+  var tdProtein = document.createElement('td');
+  tdProtein.setAttribute('class', 'flex-basis-15');
+  tdProtein.textContent = 'Protein';
+  tableHeadRow2.append(tdProtein);
+
+  var tdFats = document.createElement('td');
+  tdFats.setAttribute('class', 'flex-basis-15');
+  tdFats.textContent = 'Fats';
+  tableHeadRow2.append(tdFats);
+
+  var tdCarbohydrates = document.createElement('td');
+  tdCarbohydrates.setAttribute('class', 'flex-basis-15');
+  tdCarbohydrates.textContent = 'Carbs';
+  tableHeadRow2.append(tdCarbohydrates);
+
+  var tableBody = document.createElement('tbody');
+  table.append(tableBody);
+
+  var tableBodyRow2 = document.createElement('tr');
+  tableBody.append(tableBodyRow2);
+
+  var tdAddFoodItem = document.createElement('td');
+  tdAddFoodItem.setAttribute('class', 'font-weight-bold');
+  tableBodyRow2.append(tdAddFoodItem);
+
+  var addFoodItemAnchor = document.createElement('a');
+  addFoodItemAnchor.setAttribute('class', 'add-new-food-item color-navy');
+  addFoodItemAnchor.setAttribute('href', '');
+  addFoodItemAnchor.textContent = 'Add Food Item';
+  tdAddFoodItem.append(addFoodItemAnchor);
+
+  return tableDiv;
 
 }
+
+// Add a food entry to day
+
+function addFoodItem(entry) {
+
+  var tableBodyRow = document.createElement('tr');
+  tableBodyRow.setAttribute('class', 'row');
+
+  var tdFoodItemName = document.createElement('td');
+  tdFoodItemName.setAttribute('class', 'flex-basis-40');
+  tdFoodItemName.textContent = data.mealEntries[data.mealEntries.length - 1].foodItem[data.mealEntries[data.mealEntries.length - 1].foodItem.length - 1];
+  tableBodyRow.append(tdFoodItemName);
+
+  var tdCaloriesValue = document.createElement('td');
+  tdCaloriesValue.setAttribute('class', 'flex-basis-15');
+  tdCaloriesValue.textContent = data.xhrResponse.hints[0].food.nutrients.ENERC_KCAL;
+  tableBodyRow.append(tdCaloriesValue);
+
+  var tdProteinValue = document.createElement('td');
+  tdProteinValue.setAttribute('class', 'flex-basis-15');
+  tdProteinValue.textContent = data.xhrResponse.hints[0].food.nutrients.PROCNT;
+  tableBodyRow.append(tdProteinValue);
+
+  var tdFatsValue = document.createElement('td');
+  tdFatsValue.setAttribute('class', 'flex-basis-15');
+  tdFatsValue.textContent = data.xhrResponse.hints[0].food.nutrients.FAT;
+  tableBodyRow.append(tdFatsValue);
+
+  var tdCarbohydratesValue = document.createElement('td');
+  tdCarbohydratesValue.setAttribute('class', 'flex-basis-15');
+  tdCarbohydratesValue.textContent = data.xhrResponse.hints[0].food.nutrients.CHOCDF;
+  tableBodyRow.append(tdCarbohydratesValue);
+
+  data.mealEntries[data.mealEntries.length - 1].foodEntryId += 1;
+
+  return tableBodyRow;
+
+}
+
+var addNewFoodItem = document.querySelector('.add-new-food-item');
+
+addNewFoodItem.addEventListener('click', function openAddFoodItemModal() {
+  var showModal = document.querySelector('.add-food-item-modal');
+  showModal.classList.toggle('hidden');
+});
