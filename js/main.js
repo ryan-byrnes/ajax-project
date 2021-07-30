@@ -338,6 +338,7 @@ function createNewMealEntry(entry) {
   tableHead.append(tableHeadRow);
 
   var addMealName = document.createElement('td');
+  addMealName.setAttribute('class', 'meal-name-td');
   for (var i = 0; i < data.mealEntries.length; i++) {
     if (i === data.mealEntries[i].entryId - 1) {
       addMealName.textContent = data.mealEntries[i].mealName;
@@ -389,6 +390,7 @@ function createNewMealEntry(entry) {
   tableHeadRow2.append(tdCarbohydrates);
 
   var tableBody = document.createElement('tbody');
+  tableBody.setAttribute('class', 'table-body-append');
   table.append(tableBody);
 
   var tableBodyRow2 = document.createElement('tr');
@@ -407,12 +409,23 @@ function createNewMealEntry(entry) {
 // Add a food entry to day
 
 function addFoodItem(entry) {
-
   var tableBodyRow = document.createElement('tr');
   tableBodyRow.setAttribute('class', 'row');
 
   var tdFoodItemName = document.createElement('td');
   tdFoodItemName.setAttribute('class', 'flex-basis-40');
+  // var mealNameText = document.querySelectorAll('.meal-name-td');
+  // for (var i = 0; i < data.mealEntries.length; i++) {
+  //   for (i = 0; i < mealNameText.length; i++) {
+
+  //     if (data.mealEntries[i].mealName === mealNameText[i].textContent && data.mealEntries.foodItem) {
+  //       for (i = 0; i < data.mealEntries.foodItem.length; i++) {
+  //         mealNameText[i].closest(tableBodyRow).append(tdFoodItemName);
+  //       }
+  //     }
+
+  //   }
+  // }
   tdFoodItemName.textContent = data.mealEntries[data.mealEntries.length - 1].foodItem[data.mealEntries[data.mealEntries.length - 1].foodItem.length - 1];
   tableBodyRow.append(tdFoodItemName);
 
@@ -441,52 +454,55 @@ function addFoodItem(entry) {
   return tableBodyRow;
 
 }
-
+var eventTarget;
 document.addEventListener('click', function openAddFoodItemModal() {
   if (event.target.id === 'add-new-food-item') {
+    eventTarget = event.target;
     var showModal = document.querySelector('.add-food-item-modal');
     showModal.classList.toggle('hidden');
     console.log('click');
   }
 });
-
 var addNewItemButton = document.querySelector('.add-next-food-item');
-
 addNewItemButton.addEventListener('click', addNextFoodItem);
-
 function addNextFoodItem() {
   event.preventDefault();
-
   var inputForm = document.querySelector('.next-item-modal-form');
   var inputValue = inputForm.elements;
-
   var xhr = new XMLHttpRequest();
-
   xhr.open('GET', 'https://api.edamam.com/api/food-database/v2/parser?app_id=c2713387&app_key=4ef3b4c8226f2708aa7e3b8b470ed40e&ingr=' + encodeURI(inputValue['new-food-item'].value) + '&nutrition-type=cooking');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     console.log(xhr.status);
     console.log(xhr.response);
     data.xhrResponse = xhr.response;
-    var tableBody = document.querySelector('tbody');
-    tableBody.prepend(addFoodItem(data.xhrResponse));
+    eventTarget.closest('tbody').prepend(addFoodItem(data.xhrResponse));
   });
   xhr.send();
-
   inputForm.reset();
   var showModal = document.querySelector('.add-food-item-modal');
   showModal.classList.toggle('hidden');
-
 }
 
 function showTodaysMeals() {
   var dataViewDiv = document.querySelector('div[data-view = current-day-meals');
+  var mealNameText = document.querySelectorAll('.meal-name-td');
+  var tableBody = document.querySelector('tbody');
 
   for (var i = 0; i < data.mealEntries.length; i++) {
     if (dateToday === data.mealEntries[i].date) {
       dataViewDiv.append(createNewMealEntry(data.mealEntries[i]));
     }
+    // for (i = 0; i < data.mealEntries.length; i++) {
+    //   for (i = 0; i < mealNameText.length; i++) {
+
+    //     if (data.mealEntries[i].mealName === mealNameText[i].textContent) {
+    //       for (i = 0; i < data.mealEntries.foodItem.length; i++) {
+    //         mealNameText[i].closest(tableBody).append(data.mealEntries.foodItem[i]);
+    //       }
+    //     }
+    //   }
+    // }
   }
 }
-
 window.addEventListener('DOMContentLoaded', showTodaysMeals);
