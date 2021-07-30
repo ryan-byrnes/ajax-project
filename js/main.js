@@ -83,8 +83,14 @@ function submitNewMeal() {
     console.log(xhr.status);
     console.log(xhr.response);
     data.xhrResponse = xhr.response;
-    var tableBody = document.querySelector('tbody');
-    tableBody.prepend(addFoodItem(data.xhrResponse));
+    var tableBody = document.querySelectorAll('tbody');
+
+    if (tableBody.length === 1) {
+      tableBody[0].append(addFoodItem(data.xhrResponse));
+    } else {
+      tableBody[tableBody.length - 1].append(addFoodItem(data.xhrResponse));
+    }
+
     data.mealEntries[data.mealEntries.length - 1].nutrients.calories = data.xhrResponse.hints[0].food.nutrients.ENERC_KCAL;
     data.mealEntries[data.mealEntries.length - 1].nutrients.protein = data.xhrResponse.hints[0].food.nutrients.PROCNT;
     data.mealEntries[data.mealEntries.length - 1].nutrients.fats = data.xhrResponse.hints[0].food.nutrients.FAT;
@@ -93,7 +99,7 @@ function submitNewMeal() {
   xhr.send();
 
   var dataViewDiv = document.querySelector('div[data-view = current-day-meals');
-  dataViewDiv.prepend(createNewMealEntry(data.mealEntries[data.mealEntries.entryId - 1]));
+  dataViewDiv.append(createNewMealEntry(data.mealEntries[data.mealEntries.entryId - 1]));
 
   inputForm.reset();
   data.nextMealEntryId += 1;
@@ -426,7 +432,9 @@ function addFoodItem(entry) {
 
   //   }
   // }
-  tdFoodItemName.textContent = data.mealEntries[data.mealEntries.length - 1].foodItem[data.mealEntries[data.mealEntries.length - 1].foodItem.length - 1];
+  // data.mealEntries[data.mealEntries.length - 1].foodItem[data.mealEntries[data.mealEntries.length - 1].foodItem.length - 1]
+
+  tdFoodItemName.textContent = data.xhrResponse.text;
   tableBodyRow.append(tdFoodItemName);
 
   var tdCaloriesValue = document.createElement('td');
@@ -476,7 +484,7 @@ function addNextFoodItem() {
     console.log(xhr.status);
     console.log(xhr.response);
     data.xhrResponse = xhr.response;
-    eventTarget.closest('tbody').prepend(addFoodItem(data.xhrResponse));
+    eventTarget.closest('tbody').append(addFoodItem(data.xhrResponse));
   });
   xhr.send();
   inputForm.reset();
