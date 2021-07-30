@@ -2,6 +2,19 @@
     Add food item modal and submit form
     */
 
+var date = new Date();
+var month = date.getUTCMonth() + 1;
+var day = date.getUTCDate();
+var year = date.getUTCFullYear();
+
+var dateToday = month + '/' + day + '/' + year;
+
+data.date = dateToday;
+var dateText = document.querySelector('.todays-date');
+dateText.textContent = dateToday;
+
+console.log(dateToday);
+
 var targetSubmitButton = document.querySelector('.daily-target-submit');
 targetSubmitButton.addEventListener('click', submitTargets);
 
@@ -39,6 +52,22 @@ function submitNewMeal() {
 
   event.preventDefault();
 
+  data.mealEntries.push({
+    date: '',
+    mealName: '',
+    foodItem: [],
+    nutrients: {
+      calories: 0,
+      protein: 0,
+      fats: 0,
+      carbohydrates: 0
+    },
+    foodEntryId: 1,
+    entryId: ''
+  });
+
+  data.mealEntries[data.nextMealEntryId - 1].date = dateToday;
+
   var inputForm = document.querySelector('.new-meal-modal-form');
   var inputValue = inputForm.elements;
 
@@ -56,11 +85,15 @@ function submitNewMeal() {
     data.xhrResponse = xhr.response;
     var tableBody = document.querySelector('tbody');
     tableBody.prepend(addFoodItem(data.xhrResponse));
+    data.mealEntries[data.mealEntries.length - 1].nutrients.calories = data.xhrResponse.hints[0].food.nutrients.ENERC_KCAL;
+    data.mealEntries[data.mealEntries.length - 1].nutrients.protein = data.xhrResponse.hints[0].food.nutrients.PROCNT;
+    data.mealEntries[data.mealEntries.length - 1].nutrients.fats = data.xhrResponse.hints[0].food.nutrients.FAT;
+    data.mealEntries[data.mealEntries.length - 1].nutrients.carbohydrates = data.xhrResponse.hints[0].food.nutrients.CHOCDF;
   });
   xhr.send();
 
   var dataViewDiv = document.querySelector('div[data-view = current-day-meals');
-  dataViewDiv.append(createNewMealEntry(data.mealEntries[data.mealEntries.entryId - 1]));
+  dataViewDiv.prepend(createNewMealEntry(data.mealEntries[data.mealEntries.entryId - 1]));
 
   inputForm.reset();
   data.nextMealEntryId += 1;
@@ -305,15 +338,26 @@ function createNewMealEntry(entry) {
   tableHead.append(tableHeadRow);
 
   var addMealName = document.createElement('td');
-  addMealName.textContent = data.mealEntries[data.mealEntries.length - 1].mealName;
+  for (var i = 0; i < data.mealEntries.length; i++) {
+    if (i === data.mealEntries[i].entryId - 1) {
+      addMealName.textContent = data.mealEntries[i].mealName;
+    }
+    // if (data.mealEntries[i].entryId === entry.entryId) {
+    //   addMealName.textContent = data.mealEntries[i].mealName;
+    // }
+  }
   tableHeadRow.appendChild(addMealName);
 
   var dateDiv = document.createElement('div');
   tableHeadRow.append(dateDiv);
 
   var tdDate = document.createElement('td');
-  tdDate.setAttribute('class', 'todays-date');
-  tdDate.textContent = data.mealEntries[data.mealEntries.length - 1].date;
+  for (i = 0; i < data.mealEntries.length; i++) {
+    if (i === data.mealEntries[i].entryId - 1) {
+      tdDate.textContent = data.mealEntries[i].date;
+    }
+  }
+  tableHeadRow.append(tdDate);
 
   var tableHeadRow2 = document.createElement('tr');
   tableHeadRow2.setAttribute('class', 'heading-row row font-weight-bold');
@@ -351,14 +395,10 @@ function createNewMealEntry(entry) {
   tableBody.append(tableBodyRow2);
 
   var tdAddFoodItem = document.createElement('td');
-  tdAddFoodItem.setAttribute('class', 'font-weight-bold');
+  tdAddFoodItem.setAttribute('class', 'font-weight-bold add-new-food-item color-navy');
+  tdAddFoodItem.setAttribute('id', 'add-new-food-item');
+  tdAddFoodItem.textContent = 'Add Food Item';
   tableBodyRow2.append(tdAddFoodItem);
-
-  var addFoodItemAnchor = document.createElement('a');
-  addFoodItemAnchor.setAttribute('class', 'add-new-food-item color-navy');
-  addFoodItemAnchor.setAttribute('href', '');
-  addFoodItemAnchor.textContent = 'Add Food Item';
-  tdAddFoodItem.append(addFoodItemAnchor);
 
   return tableDiv;
 
@@ -402,9 +442,51 @@ function addFoodItem(entry) {
 
 }
 
-var addNewFoodItem = document.querySelector('.add-new-food-item');
+document.addEventListener('click', function openAddFoodItemModal() {
+  if (event.target.id === 'add-new-food-item') {
+    var showModal = document.querySelector('.add-food-item-modal');
+    showModal.classList.toggle('hidden');
+    console.log('click');
+  }
+});
 
-addNewFoodItem.addEventListener('click', function openAddFoodItemModal() {
+var addNewItemButton = document.querySelector('.add-next-food-item');
+
+addNewItemButton.addEventListener('click', addNextFoodItem);
+
+function addNextFoodItem() {
+  event.preventDefault();
+
+  var inputForm = document.querySelector('.next-item-modal-form');
+  var inputValue = inputForm.elements;
+
+  var xhr = new XMLHttpRequest();
+
+  xhr.open('GET', 'https://api.edamam.com/api/food-database/v2/parser?app_id=c2713387&app_key=4ef3b4c8226f2708aa7e3b8b470ed40e&ingr=' + encodeURI(inputValue['new-food-item'].value) + '&nutrition-type=cooking');
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    console.log(xhr.status);
+    console.log(xhr.response);
+    data.xhrResponse = xhr.response;
+    var tableBody = document.querySelector('tbody');
+    tableBody.prepend(addFoodItem(data.xhrResponse));
+  });
+  xhr.send();
+
+  inputForm.reset();
   var showModal = document.querySelector('.add-food-item-modal');
   showModal.classList.toggle('hidden');
-});
+
+}
+
+function showTodaysMeals() {
+  var dataViewDiv = document.querySelector('div[data-view = current-day-meals');
+
+  for (var i = 0; i < data.mealEntries.length; i++) {
+    if (dateToday === data.mealEntries[i].date) {
+      dataViewDiv.append(createNewMealEntry(data.mealEntries[i]));
+    }
+  }
+}
+
+window.addEventListener('DOMContentLoaded', showTodaysMeals);

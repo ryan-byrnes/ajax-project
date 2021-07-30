@@ -13,17 +13,18 @@ var data = {
     fats: 0,
     carbohydrates: 0
   },
-  mealEntries: [
-    {
-      date: '',
-      mealName: '',
-      foodItem: [],
-      foodEntryId: 1,
-      entryId: ''
-    }
-  ],
+  mealEntries: [],
   veiw: 'target-input-form',
   date: '',
   nextMealEntryId: 1,
   xhrResponse: ''
 };
+
+window.addEventListener('beforeunload', function () {
+  localStorage.setItem('meal-data', JSON.stringify(data));
+});
+
+var previousInput = localStorage.getItem('meal-data');
+if (previousInput !== null) {
+  data = JSON.parse(previousInput);
+}
