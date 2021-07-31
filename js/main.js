@@ -93,15 +93,15 @@ function submitNewMeal() {
       tableBody[tableBody.length - 1].append(addFoodItem(data.xhrResponse));
     }
 
-    data.mealEntries[data.mealEntries.length - 1].nutrients.calories = data.xhrResponse.hints[0].food.nutrients.ENERC_KCAL;
-    data.mealEntries[data.mealEntries.length - 1].nutrients.protein = data.xhrResponse.hints[0].food.nutrients.PROCNT;
-    data.mealEntries[data.mealEntries.length - 1].nutrients.fats = data.xhrResponse.hints[0].food.nutrients.FAT;
-    data.mealEntries[data.mealEntries.length - 1].nutrients.carbohydrates = data.xhrResponse.hints[0].food.nutrients.CHOCDF;
+    data.mealEntries[data.mealEntries.length - 1].nutrients.calories = Math.round(data.xhrResponse.hints[0].food.nutrients.ENERC_KCAL);
+    data.mealEntries[data.mealEntries.length - 1].nutrients.protein = Math.round(data.xhrResponse.hints[0].food.nutrients.PROCNT);
+    data.mealEntries[data.mealEntries.length - 1].nutrients.fats = Math.round(data.xhrResponse.hints[0].food.nutrients.FAT);
+    data.mealEntries[data.mealEntries.length - 1].nutrients.carbohydrates = Math.round(data.xhrResponse.hints[0].food.nutrients.CHOCDF);
 
-    data.dailyTotals.calories += data.xhrResponse.hints[0].food.nutrients.ENERC_KCAL;
-    data.dailyTotals.protein += data.xhrResponse.hints[0].food.nutrients.PROCNT;
-    data.dailyTotals.fats += data.xhrResponse.hints[0].food.nutrients.FAT;
-    data.dailyTotals.carbohydrates += data.xhrResponse.hints[0].food.nutrients.CHOCDF;
+    data.dailyTotals.calories += Math.round(data.xhrResponse.hints[0].food.nutrients.ENERC_KCAL);
+    data.dailyTotals.protein += Math.round(data.xhrResponse.hints[0].food.nutrients.PROCNT);
+    data.dailyTotals.fats += Math.round(data.xhrResponse.hints[0].food.nutrients.FAT);
+    data.dailyTotals.carbohydrates += Math.round(data.xhrResponse.hints[0].food.nutrients.CHOCDF);
 
     if (data.targets.calories !== 0) {
       updateProgress();
@@ -453,22 +453,22 @@ function addFoodItem(entry) {
 
   var tdCaloriesValue = document.createElement('td');
   tdCaloriesValue.setAttribute('class', 'flex-basis-15');
-  tdCaloriesValue.textContent = data.xhrResponse.hints[0].food.nutrients.ENERC_KCAL;
+  tdCaloriesValue.textContent = Math.round(data.xhrResponse.hints[0].food.nutrients.ENERC_KCAL);
   tableBodyRow.append(tdCaloriesValue);
 
   var tdProteinValue = document.createElement('td');
   tdProteinValue.setAttribute('class', 'flex-basis-15');
-  tdProteinValue.textContent = data.xhrResponse.hints[0].food.nutrients.PROCNT;
+  tdProteinValue.textContent = Math.round(data.xhrResponse.hints[0].food.nutrients.PROCNT);
   tableBodyRow.append(tdProteinValue);
 
   var tdFatsValue = document.createElement('td');
   tdFatsValue.setAttribute('class', 'flex-basis-15');
-  tdFatsValue.textContent = data.xhrResponse.hints[0].food.nutrients.FAT;
+  tdFatsValue.textContent = Math.round(data.xhrResponse.hints[0].food.nutrients.FAT);
   tableBodyRow.append(tdFatsValue);
 
   var tdCarbohydratesValue = document.createElement('td');
   tdCarbohydratesValue.setAttribute('class', 'flex-basis-15');
-  tdCarbohydratesValue.textContent = data.xhrResponse.hints[0].food.nutrients.CHOCDF;
+  tdCarbohydratesValue.textContent = Math.round(data.xhrResponse.hints[0].food.nutrients.CHOCDF);
   tableBodyRow.append(tdCarbohydratesValue);
 
   data.mealEntries[data.mealEntries.length - 1].foodEntryId += 1;
@@ -501,10 +501,10 @@ function addNextFoodItem() {
     data.xhrResponse = xhr.response;
     eventTarget.closest('tbody').append(addFoodItem(data.xhrResponse));
 
-    data.dailyTotals.calories += data.xhrResponse.hints[0].food.nutrients.ENERC_KCAL;
-    data.dailyTotals.protein += data.xhrResponse.hints[0].food.nutrients.PROCNT;
-    data.dailyTotals.fats += data.xhrResponse.hints[0].food.nutrients.FAT;
-    data.dailyTotals.carbohydrates += data.xhrResponse.hints[0].food.nutrients.CHOCDF;
+    data.dailyTotals.calories += Math.round(data.xhrResponse.hints[0].food.nutrients.ENERC_KCAL);
+    data.dailyTotals.protein += Math.round(data.xhrResponse.hints[0].food.nutrients.PROCNT);
+    data.dailyTotals.fats += Math.round(data.xhrResponse.hints[0].food.nutrients.FAT);
+    data.dailyTotals.carbohydrates += Math.round(data.xhrResponse.hints[0].food.nutrients.CHOCDF);
 
     updateProgress();
   });
