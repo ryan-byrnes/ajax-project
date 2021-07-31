@@ -35,6 +35,8 @@ function submitTargets() {
   var dataViewDiv = document.querySelector('div[data-view = daily-targets]');
   trackTargetProgress(dataViewDiv);
   switchViews();
+  var currentMealView = document.querySelector('div[data-view="current-day-meals"');
+  currentMealView.classList.remove('hidden');
 
 }
 
@@ -95,6 +97,15 @@ function submitNewMeal() {
     data.mealEntries[data.mealEntries.length - 1].nutrients.protein = data.xhrResponse.hints[0].food.nutrients.PROCNT;
     data.mealEntries[data.mealEntries.length - 1].nutrients.fats = data.xhrResponse.hints[0].food.nutrients.FAT;
     data.mealEntries[data.mealEntries.length - 1].nutrients.carbohydrates = data.xhrResponse.hints[0].food.nutrients.CHOCDF;
+
+    data.dailyTotals.calories += data.xhrResponse.hints[0].food.nutrients.ENERC_KCAL;
+    data.dailyTotals.protein += data.xhrResponse.hints[0].food.nutrients.PROCNT;
+    data.dailyTotals.fats += data.xhrResponse.hints[0].food.nutrients.FAT;
+    data.dailyTotals.carbohydrates += data.xhrResponse.hints[0].food.nutrients.CHOCDF;
+
+    if (data.targets.calories !== 0) {
+      updateProgress();
+    }
   });
   xhr.send();
 
@@ -170,6 +181,7 @@ function trackTargetProgress(element) {
   calorieRow.appendChild(calorieColumnThird);
 
   var calorieP = document.createElement('p');
+  calorieP.setAttribute('class', 'calorie-numbers');
   calorieP.textContent = 'Calories: ' + data.dailyTotals.calories + '/' + data.targets.calories + ' kcal';
   calorieColumnThird.appendChild(calorieP);
 
@@ -187,7 +199,7 @@ function trackTargetProgress(element) {
   progressBarDiv.appendChild(progressFillDiv);
 
   var progressFillText = document.createElement('p');
-  progressFillText.setAttribute('class', 'margin-top-0 color-white font-weight-bold');
+  progressFillText.setAttribute('class', 'margin-top-0 color-white font-weight-bold calories-text');
   progressFillText.textContent = progressFillDiv.style.width;
   progressFillDiv.appendChild(progressFillText);
 
@@ -202,6 +214,7 @@ function trackTargetProgress(element) {
   proteinRow.appendChild(proteinColumnThird);
 
   var proteinP = document.createElement('p');
+  proteinP.setAttribute('class', 'protein-numbers');
   proteinP.textContent = 'Protein: ' + data.dailyTotals.protein + '/' + data.targets.protein + ' g';
   proteinColumnThird.appendChild(proteinP);
 
@@ -219,7 +232,7 @@ function trackTargetProgress(element) {
   proteinProgressBarDiv.appendChild(proteinProgressFillDiv);
 
   var proteinProgressFillText = document.createElement('p');
-  proteinProgressFillText.setAttribute('class', 'margin-top-0 color-white font-weight-bold');
+  proteinProgressFillText.setAttribute('class', 'margin-top-0 color-white font-weight-bold protein-progress-text');
   proteinProgressFillText.textContent = proteinProgressFillDiv.style.width;
   proteinProgressFillDiv.appendChild(proteinProgressFillText);
 
@@ -234,6 +247,7 @@ function trackTargetProgress(element) {
   fatsRow.appendChild(fatsColumnThird);
 
   var fatsP = document.createElement('p');
+  fatsP.setAttribute('class', 'fats-numbers');
   fatsP.textContent = 'Fats: ' + data.dailyTotals.fats + '/' + data.targets.fats + ' g';
   fatsColumnThird.appendChild(fatsP);
 
@@ -251,7 +265,7 @@ function trackTargetProgress(element) {
   fatsProgressBarDiv.appendChild(fatsProgressFillDiv);
 
   var fatsProgressFillText = document.createElement('p');
-  fatsProgressFillText.setAttribute('class', 'margin-top-0 color-white font-weight-bold');
+  fatsProgressFillText.setAttribute('class', 'margin-top-0 color-white font-weight-bold fats-progress-text');
   fatsProgressFillText.textContent = fatsProgressFillDiv.style.width;
   fatsProgressFillDiv.appendChild(fatsProgressFillText);
 
@@ -266,6 +280,7 @@ function trackTargetProgress(element) {
   carbohydratesRow.appendChild(carbohydratesColumnThird);
 
   var carbohydratesP = document.createElement('p');
+  carbohydratesP.setAttribute('class', 'carbohydrates-numbers');
   carbohydratesP.textContent = 'Carbs: ' + data.dailyTotals.carbohydrates + '/' + data.targets.carbohydrates + ' g';
   carbohydratesColumnThird.appendChild(carbohydratesP);
 
@@ -283,7 +298,7 @@ function trackTargetProgress(element) {
   carbohydratesProgressBarDiv.appendChild(carbohydratesProgressFillDiv);
 
   var carbohydratesProgressFillText = document.createElement('p');
-  carbohydratesProgressFillText.setAttribute('class', 'margin-top-0 color-white font-weight-bold');
+  carbohydratesProgressFillText.setAttribute('class', 'margin-top-0 color-white font-weight-bold carbohydrates-progress-text');
   carbohydratesProgressFillText.textContent = carbohydratesProgressFillDiv.style.width;
   carbohydratesProgressFillDiv.appendChild(carbohydratesProgressFillText);
 
@@ -293,7 +308,6 @@ function trackTargetProgress(element) {
 
 function switchViews() {
   var dataViewElements = document.querySelectorAll('div[data-view]');
-
   for (var i = 0; i < dataViewElements.length; i++) {
     if (data.view === dataViewElements[i].getAttribute('data-view')) {
       dataViewElements[i].classList.toggle('hidden');
@@ -473,6 +487,7 @@ document.addEventListener('click', function openAddFoodItemModal() {
 });
 var addNewItemButton = document.querySelector('.add-next-food-item');
 addNewItemButton.addEventListener('click', addNextFoodItem);
+
 function addNextFoodItem() {
   event.preventDefault();
   var inputForm = document.querySelector('.next-item-modal-form');
@@ -485,6 +500,13 @@ function addNextFoodItem() {
     console.log(xhr.response);
     data.xhrResponse = xhr.response;
     eventTarget.closest('tbody').append(addFoodItem(data.xhrResponse));
+
+    data.dailyTotals.calories += data.xhrResponse.hints[0].food.nutrients.ENERC_KCAL;
+    data.dailyTotals.protein += data.xhrResponse.hints[0].food.nutrients.PROCNT;
+    data.dailyTotals.fats += data.xhrResponse.hints[0].food.nutrients.FAT;
+    data.dailyTotals.carbohydrates += data.xhrResponse.hints[0].food.nutrients.CHOCDF;
+
+    updateProgress();
   });
   xhr.send();
   inputForm.reset();
@@ -514,3 +536,41 @@ function showTodaysMeals() {
   }
 }
 window.addEventListener('DOMContentLoaded', showTodaysMeals);
+
+function updateProgress() {
+  var calorieP = document.querySelector('.calorie-numbers');
+  calorieP.textContent = 'Calories: ' + data.dailyTotals.calories + '/' + data.targets.calories + ' kcal';
+
+  var fillProgressCalories = document.querySelector('.fill-progress-calories');
+  fillProgressCalories.style.width = data.dailyTotals.calories / data.targets.calories * 100 + '%';
+
+  var caloriesText = document.querySelector('.calories-text');
+  caloriesText.textContent = fillProgressCalories.style.width;
+
+  var proteinP = document.querySelector('.protein-numbers');
+  proteinP.textContent = 'Protein: ' + data.dailyTotals.protein + '/' + data.targets.protein + ' g';
+
+  var fillProgressProtein = document.querySelector('.fill-progress-protein');
+  fillProgressProtein.style.width = data.dailyTotals.protein / data.targets.protein * 100 + '%';
+
+  var proteinText = document.querySelector('.protein-progress-text');
+  proteinText.textContent = fillProgressProtein.style.width;
+
+  var fatsP = document.querySelector('.fats-numbers');
+  fatsP.textContent = 'Fats: ' + data.dailyTotals.fats + '/' + data.targets.fats + ' g';
+
+  var fillProgressFats = document.querySelector('.fill-progress-fats');
+  fillProgressFats.style.width = data.dailyTotals.fats / data.targets.fats * 100 + '%';
+
+  var fatsText = document.querySelector('.fats-progress-text');
+  fatsText.textContent = fillProgressFats.style.width;
+
+  var carbohydratesP = document.querySelector('.carbohydrates-numbers');
+  carbohydratesP.textContent = 'Carbs: ' + data.dailyTotals.fats + '/' + data.targets.fats + ' g';
+
+  var fillProgressCarbohydrates = document.querySelector('.fill-progress-carbohydrates');
+  fillProgressCarbohydrates.style.width = data.dailyTotals.carbohydrates / data.targets.carbohydrates * 100 + '%';
+
+  var carbohydratesText = document.querySelector('.carbohydrates-progress-text');
+  carbohydratesText.textContent = fillProgressCarbohydrates.style.width;
+}
