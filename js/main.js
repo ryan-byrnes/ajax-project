@@ -566,7 +566,7 @@ function updateProgress() {
   fatsText.textContent = fillProgressFats.style.width;
 
   var carbohydratesP = document.querySelector('.carbohydrates-numbers');
-  carbohydratesP.textContent = 'Carbs: ' + data.dailyTotals.fats + '/' + data.targets.fats + ' g';
+  carbohydratesP.textContent = 'Carbs: ' + data.dailyTotals.carbohydrates + '/' + data.targets.carbohydrates + ' g';
 
   var fillProgressCarbohydrates = document.querySelector('.fill-progress-carbohydrates');
   fillProgressCarbohydrates.style.width = data.dailyTotals.carbohydrates / data.targets.carbohydrates * 100 + '%';
