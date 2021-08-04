@@ -1,6 +1,3 @@
-/* need function to update daily totals
-    Add food item modal and submit form
-    */
 
 var date = new Date();
 var month = date.getUTCMonth() + 1;
@@ -414,8 +411,6 @@ function createNewMealEntry(entry) {
 
 }
 
-// Add a food entry to day
-
 function addFoodItem(entry) {
   var tableBodyRow = document.createElement('tr');
   tableBodyRow.setAttribute('class', 'row');
@@ -479,7 +474,7 @@ function addNextFoodItem() {
     data.dailyTotals.carbohydrates += Math.round(data.xhrResponse.hints[0].food.nutrients.CHOCDF);
 
     for (var i = 0; i < data.mealEntries.length; i++) {
-      // debugger;
+
       if (data.mealEntries[i].mealName === eventTarget.closest('table').firstChild.firstChild.firstChild.textContent) {
         data.mealEntries[i].foodItem.push({
           name: data.xhrResponse.text,
@@ -576,10 +571,6 @@ function showTodaysMeals(entry) {
   tdAddFoodItem.textContent = 'Add Food Item';
   tableBodyRow2.append(tdAddFoodItem);
 
-  // var tableBodyRow = document.createElement('tr');
-  // tableBodyRow.setAttribute('class', 'row');
-  // tableBody.append(tableBodyRow);
-
   function createFoodItem() {
 
     var tableBodyRow = document.createElement('tr');
@@ -621,50 +612,6 @@ function showTodaysMeals(entry) {
     }
   }
 
-  // var tdCaloriesValue = document.createElement('td');
-  // tdCaloriesValue.setAttribute('class', 'flex-basis-15');
-  // for (i = 0; i < data.mealEntries.length; i++) {
-  //   if (data.mealEntries[i].entryId === entry.entryId) {
-  //     for (item = 0; item < data.mealEntries[i].foodItem.length; item++) {
-  //       tdCaloriesValue.textContent = data.mealEntries[i].foodItem[item].calories;
-  //     }
-  //   }
-  // }
-  // tableBodyRow.append(tdCaloriesValue);
-
-  // var tdProteinValue = document.createElement('td');
-  // tdProteinValue.setAttribute('class', 'flex-basis-15');
-  // for (i = 0; i < data.mealEntries.length; i++) {
-  //   if (data.mealEntries[i].entryId === entry.entryId) {
-  //     for (item = 0; item < data.mealEntries[i].foodItem.length; item++) {
-  //       tdProteinValue.textContent = data.mealEntries[i].foodItem[item].protein;
-  //     }
-  //   }
-  // }
-  // tableBodyRow.append(tdProteinValue);
-
-  // var tdFatsValue = document.createElement('td');
-  // tdFatsValue.setAttribute('class', 'flex-basis-15');
-  // for (i = 0; i < data.mealEntries.length; i++) {
-  //   if (data.mealEntries[i].entryId === entry.entryId) {
-  //     for (item = 0; item < data.mealEntries[i].foodItem.length; item++) {
-  //       tdFatsValue.textContent = data.mealEntries[i].foodItem[item].fats;
-  //     }
-  //   }
-  // }
-  // tableBodyRow.append(tdFatsValue);
-
-  // var tdCarbohydratesValue = document.createElement('td');
-  // tdCarbohydratesValue.setAttribute('class', 'flex-basis-15');
-  // for (i = 0; i < data.mealEntries.length; i++) {
-  //   if (data.mealEntries[i].entryId === entry.entryId) {
-  //     for (item = 0; item < data.mealEntries[i].foodItem.length; item++) {
-  //       tdCarbohydratesValue.textContent = data.mealEntries[i].foodItem[item].carbohydrates;
-  //     }
-  //   }
-  // }
-  // tableBodyRow.append(tdCarbohydratesValue);
-
   return tableDiv;
 }
 
@@ -672,7 +619,7 @@ window.addEventListener('DOMContentLoaded', function () {
   var formDataView = document.querySelector('div[data-view = target-input-form]');
   var trackingView = document.querySelector('div[data-view = daily-targets]');
 
-  if (data.targets.calories !== 0) {
+  if (data.targets.calories !== 0 && data.mealEntries[data.mealEntries.length - 1].date === data.date) {
     trackTargetProgress(trackingView);
     formDataView.classList.add('hidden');
     trackingView.classList.remove('hidden');
