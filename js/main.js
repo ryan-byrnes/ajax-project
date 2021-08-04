@@ -669,6 +669,15 @@ function showTodaysMeals(entry) {
 }
 
 window.addEventListener('DOMContentLoaded', function () {
+  var formDataView = document.querySelector('div[data-view = target-input-form]');
+  var trackingView = document.querySelector('div[data-view = daily-targets]');
+
+  if (data.targets.calories !== 0) {
+    trackTargetProgress(trackingView);
+    formDataView.classList.add('hidden');
+    trackingView.classList.remove('hidden');
+
+  }
   var dataViewDiv = document.querySelector('div[data-view = current-day-meals');
   for (var i = 0; i < data.mealEntries.length; i++) {
     dataViewDiv.append(showTodaysMeals(data.mealEntries[i]));
