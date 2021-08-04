@@ -13,8 +13,6 @@ data.date = dateToday;
 var dateText = document.querySelector('.todays-date');
 dateText.textContent = dateToday;
 
-console.log(dateToday);
-
 var targetSubmitButton = document.querySelector('.daily-target-submit');
 targetSubmitButton.addEventListener('click', submitTargets);
 
@@ -57,13 +55,7 @@ function submitNewMeal() {
   data.mealEntries.push({
     date: '',
     mealName: '',
-    foodItem: [],
-    nutrients: {
-      calories: 0,
-      protein: 0,
-      fats: 0,
-      carbohydrates: 0
-    },
+    foodItem: [{}],
     foodEntryId: 1,
     entryId: ''
   });
@@ -74,7 +66,7 @@ function submitNewMeal() {
   var inputValue = inputForm.elements;
 
   data.mealEntries[data.nextMealEntryId - 1].mealName = inputValue['meal-name'].value;
-  data.mealEntries[data.nextMealEntryId - 1].foodItem[data.nextMealEntryId - 1] = inputValue['food-item'].value;
+  data.mealEntries[data.nextMealEntryId - 1].foodItem[0].name = inputValue['food-item'].value;
   data.mealEntries[data.nextMealEntryId - 1].entryId = data.nextMealEntryId;
 
   var xhr = new XMLHttpRequest();
@@ -82,8 +74,7 @@ function submitNewMeal() {
   xhr.open('GET', 'https://api.edamam.com/api/food-database/v2/parser?app_id=c2713387&app_key=4ef3b4c8226f2708aa7e3b8b470ed40e&ingr=' + encodeURI(inputValue['food-item'].value) + '&nutrition-type=cooking');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    console.log(xhr.status);
-    console.log(xhr.response);
+
     data.xhrResponse = xhr.response;
     var tableBody = document.querySelectorAll('tbody');
 
@@ -93,10 +84,10 @@ function submitNewMeal() {
       tableBody[tableBody.length - 1].append(addFoodItem(data.xhrResponse));
     }
 
-    data.mealEntries[data.mealEntries.length - 1].nutrients.calories = Math.round(data.xhrResponse.hints[0].food.nutrients.ENERC_KCAL);
-    data.mealEntries[data.mealEntries.length - 1].nutrients.protein = Math.round(data.xhrResponse.hints[0].food.nutrients.PROCNT);
-    data.mealEntries[data.mealEntries.length - 1].nutrients.fats = Math.round(data.xhrResponse.hints[0].food.nutrients.FAT);
-    data.mealEntries[data.mealEntries.length - 1].nutrients.carbohydrates = Math.round(data.xhrResponse.hints[0].food.nutrients.CHOCDF);
+    data.mealEntries[data.mealEntries.length - 1].foodItem[0].calories = Math.round(data.xhrResponse.hints[0].food.nutrients.ENERC_KCAL);
+    data.mealEntries[data.mealEntries.length - 1].foodItem[0].protein = Math.round(data.xhrResponse.hints[0].food.nutrients.PROCNT);
+    data.mealEntries[data.mealEntries.length - 1].foodItem[0].fats = Math.round(data.xhrResponse.hints[0].food.nutrients.FAT);
+    data.mealEntries[data.mealEntries.length - 1].foodItem[0].carbohydrates = Math.round(data.xhrResponse.hints[0].food.nutrients.CHOCDF);
 
     data.dailyTotals.calories += Math.round(data.xhrResponse.hints[0].food.nutrients.ENERC_KCAL);
     data.dailyTotals.protein += Math.round(data.xhrResponse.hints[0].food.nutrients.PROCNT);
@@ -106,6 +97,7 @@ function submitNewMeal() {
     if (data.targets.calories !== 0) {
       updateProgress();
     }
+    data.nextMealEntryId += 1;
   });
   xhr.send();
 
@@ -113,7 +105,6 @@ function submitNewMeal() {
   dataViewDiv.append(createNewMealEntry(data.mealEntries[data.mealEntries.entryId - 1]));
 
   inputForm.reset();
-  data.nextMealEntryId += 1;
 
   var modalDiv = document.querySelector('div[data-view=new-meal-modal');
   modalDiv.classList.toggle('hidden');
@@ -363,9 +354,6 @@ function createNewMealEntry(entry) {
     if (i === data.mealEntries[i].entryId - 1) {
       addMealName.textContent = data.mealEntries[i].mealName;
     }
-    // if (data.mealEntries[i].entryId === entry.entryId) {
-    //   addMealName.textContent = data.mealEntries[i].mealName;
-    // }
   }
   tableHeadRow.appendChild(addMealName);
 
@@ -434,20 +422,6 @@ function addFoodItem(entry) {
 
   var tdFoodItemName = document.createElement('td');
   tdFoodItemName.setAttribute('class', 'flex-basis-40');
-  // var mealNameText = document.querySelectorAll('.meal-name-td');
-  // for (var i = 0; i < data.mealEntries.length; i++) {
-  //   for (i = 0; i < mealNameText.length; i++) {
-
-  //     if (data.mealEntries[i].mealName === mealNameText[i].textContent && data.mealEntries.foodItem) {
-  //       for (i = 0; i < data.mealEntries.foodItem.length; i++) {
-  //         mealNameText[i].closest(tableBodyRow).append(tdFoodItemName);
-  //       }
-  //     }
-
-  //   }
-  // }
-  // data.mealEntries[data.mealEntries.length - 1].foodItem[data.mealEntries[data.mealEntries.length - 1].foodItem.length - 1]
-
   tdFoodItemName.textContent = data.xhrResponse.text;
   tableBodyRow.append(tdFoodItemName);
 
@@ -482,7 +456,6 @@ document.addEventListener('click', function openAddFoodItemModal() {
     eventTarget = event.target;
     var showModal = document.querySelector('.add-food-item-modal');
     showModal.classList.toggle('hidden');
-    console.log('click');
   }
 });
 var addNewItemButton = document.querySelector('.add-next-food-item');
@@ -496,8 +469,7 @@ function addNextFoodItem() {
   xhr.open('GET', 'https://api.edamam.com/api/food-database/v2/parser?app_id=c2713387&app_key=4ef3b4c8226f2708aa7e3b8b470ed40e&ingr=' + encodeURI(inputValue['new-food-item'].value) + '&nutrition-type=cooking');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    console.log(xhr.status);
-    console.log(xhr.response);
+
     data.xhrResponse = xhr.response;
     eventTarget.closest('tbody').append(addFoodItem(data.xhrResponse));
 
@@ -505,6 +477,19 @@ function addNextFoodItem() {
     data.dailyTotals.protein += Math.round(data.xhrResponse.hints[0].food.nutrients.PROCNT);
     data.dailyTotals.fats += Math.round(data.xhrResponse.hints[0].food.nutrients.FAT);
     data.dailyTotals.carbohydrates += Math.round(data.xhrResponse.hints[0].food.nutrients.CHOCDF);
+
+    for (var i = 0; i < data.mealEntries.length; i++) {
+      // debugger;
+      if (data.mealEntries[i].mealName === eventTarget.closest('table').firstChild.firstChild.firstChild.textContent) {
+        data.mealEntries[i].foodItem.push({
+          name: data.xhrResponse.text,
+          calories: Math.round(data.xhrResponse.hints[0].food.nutrients.ENERC_KCAL),
+          protein: Math.round(data.xhrResponse.hints[0].food.nutrients.PROCNT),
+          fats: Math.round(data.xhrResponse.hints[0].food.nutrients.FAT),
+          carbohydrates: Math.round(data.xhrResponse.hints[0].food.nutrients.CHOCDF)
+        });
+      }
+    }
 
     updateProgress();
   });
@@ -514,28 +499,181 @@ function addNextFoodItem() {
   showModal.classList.toggle('hidden');
 }
 
-function showTodaysMeals() {
-  var dataViewDiv = document.querySelector('div[data-view = current-day-meals');
-  var mealNameText = document.querySelectorAll('.meal-name-td');
-  var tableBody = document.querySelector('tbody');
+function showTodaysMeals(entry) {
 
+  var tableDiv = document.createElement('div');
+  tableDiv.setAttribute('class', 'table');
+
+  var table = document.createElement('table');
+  tableDiv.append(table);
+
+  var tableHead = document.createElement('thead');
+  table.append(tableHead);
+
+  var tableHeadRow = document.createElement('tr');
+  tableHeadRow.setAttribute('class', 'margin-top-50 padding-left-20 padding-right form-header row justify-content-space-between background-color-navy margin-top-50 align-items-center color-white font-weight-bold');
+  tableHead.append(tableHeadRow);
+
+  var addMealName = document.createElement('td');
+  addMealName.setAttribute('class', 'meal-name-td');
   for (var i = 0; i < data.mealEntries.length; i++) {
-    if (dateToday === data.mealEntries[i].date) {
-      dataViewDiv.append(createNewMealEntry(data.mealEntries[i]));
+    if (data.mealEntries[i].entryId === entry.entryId) {
+      addMealName.textContent = data.mealEntries[i].mealName;
     }
-    // for (i = 0; i < data.mealEntries.length; i++) {
-    //   for (i = 0; i < mealNameText.length; i++) {
-
-    //     if (data.mealEntries[i].mealName === mealNameText[i].textContent) {
-    //       for (i = 0; i < data.mealEntries.foodItem.length; i++) {
-    //         mealNameText[i].closest(tableBody).append(data.mealEntries.foodItem[i]);
-    //       }
-    //     }
-    //   }
-    // }
   }
+  tableHeadRow.appendChild(addMealName);
+
+  var dateDiv = document.createElement('div');
+  tableHeadRow.append(dateDiv);
+
+  var tdDate = document.createElement('td');
+  for (i = 0; i < data.mealEntries.length; i++) {
+    if (i === data.mealEntries[i].entryId - 1) {
+      tdDate.textContent = data.mealEntries[i].date;
+    }
+  }
+  tableHeadRow.append(tdDate);
+
+  var tableHeadRow2 = document.createElement('tr');
+  tableHeadRow2.setAttribute('class', 'heading-row row font-weight-bold');
+  tableHead.append(tableHeadRow2);
+
+  var tdFoodItem = document.createElement('td');
+  tdFoodItem.setAttribute('class', 'flex-basis-40');
+  tdFoodItem.textContent = 'Food Item';
+  tableHeadRow2.append(tdFoodItem);
+
+  var tdCalories = document.createElement('td');
+  tdCalories.setAttribute('class', 'flex-basis-15');
+  tdCalories.textContent = 'Calories';
+  tableHeadRow2.append(tdCalories);
+
+  var tdProtein = document.createElement('td');
+  tdProtein.setAttribute('class', 'flex-basis-15');
+  tdProtein.textContent = 'Protein';
+  tableHeadRow2.append(tdProtein);
+
+  var tdFats = document.createElement('td');
+  tdFats.setAttribute('class', 'flex-basis-15');
+  tdFats.textContent = 'Fats';
+  tableHeadRow2.append(tdFats);
+
+  var tdCarbohydrates = document.createElement('td');
+  tdCarbohydrates.setAttribute('class', 'flex-basis-15');
+  tdCarbohydrates.textContent = 'Carbs';
+  tableHeadRow2.append(tdCarbohydrates);
+
+  var tableBody = document.createElement('tbody');
+  tableBody.setAttribute('class', 'table-body-append');
+  table.append(tableBody);
+
+  var tableBodyRow2 = document.createElement('tr');
+  tableBody.append(tableBodyRow2);
+
+  var tdAddFoodItem = document.createElement('td');
+  tdAddFoodItem.setAttribute('class', 'font-weight-bold add-new-food-item color-navy');
+  tdAddFoodItem.setAttribute('id', 'add-new-food-item');
+  tdAddFoodItem.textContent = 'Add Food Item';
+  tableBodyRow2.append(tdAddFoodItem);
+
+  // var tableBodyRow = document.createElement('tr');
+  // tableBodyRow.setAttribute('class', 'row');
+  // tableBody.append(tableBodyRow);
+
+  function createFoodItem() {
+
+    var tableBodyRow = document.createElement('tr');
+    tableBodyRow.setAttribute('class', 'row');
+    tableBody.append(tableBodyRow);
+
+    var tdFoodItemName = document.createElement('td');
+    tdFoodItemName.setAttribute('class', 'flex-basis-40');
+    tdFoodItemName.textContent = data.mealEntries[i].foodItem[item].name;
+    tableBodyRow.append(tdFoodItemName);
+
+    var tdCaloriesValue = document.createElement('td');
+    tdCaloriesValue.setAttribute('class', 'flex-basis-15');
+    tdCaloriesValue.textContent = data.mealEntries[i].foodItem[item].calories;
+    tableBodyRow.append(tdCaloriesValue);
+
+    var tdProteinValue = document.createElement('td');
+    tdProteinValue.setAttribute('class', 'flex-basis-15');
+    tdProteinValue.textContent = data.mealEntries[i].foodItem[item].protein;
+    tableBodyRow.append(tdProteinValue);
+
+    var tdFatsValue = document.createElement('td');
+    tdFatsValue.setAttribute('class', 'flex-basis-15');
+    tdFatsValue.textContent = data.mealEntries[i].foodItem[item].fats;
+    tableBodyRow.append(tdFatsValue);
+
+    var tdCarbohydratesValue = document.createElement('td');
+    tdCarbohydratesValue.setAttribute('class', 'flex-basis-15');
+    tdCarbohydratesValue.textContent = data.mealEntries[i].foodItem[item].carbohydrates;
+    tableBodyRow.append(tdCarbohydratesValue);
+
+  }
+
+  for (i = 0; i < data.mealEntries.length; i++) {
+    if (data.mealEntries[i].entryId === entry.entryId) {
+      for (var item = 0; item < data.mealEntries[i].foodItem.length; item++) {
+        createFoodItem();
+      }
+    }
+  }
+
+  // var tdCaloriesValue = document.createElement('td');
+  // tdCaloriesValue.setAttribute('class', 'flex-basis-15');
+  // for (i = 0; i < data.mealEntries.length; i++) {
+  //   if (data.mealEntries[i].entryId === entry.entryId) {
+  //     for (item = 0; item < data.mealEntries[i].foodItem.length; item++) {
+  //       tdCaloriesValue.textContent = data.mealEntries[i].foodItem[item].calories;
+  //     }
+  //   }
+  // }
+  // tableBodyRow.append(tdCaloriesValue);
+
+  // var tdProteinValue = document.createElement('td');
+  // tdProteinValue.setAttribute('class', 'flex-basis-15');
+  // for (i = 0; i < data.mealEntries.length; i++) {
+  //   if (data.mealEntries[i].entryId === entry.entryId) {
+  //     for (item = 0; item < data.mealEntries[i].foodItem.length; item++) {
+  //       tdProteinValue.textContent = data.mealEntries[i].foodItem[item].protein;
+  //     }
+  //   }
+  // }
+  // tableBodyRow.append(tdProteinValue);
+
+  // var tdFatsValue = document.createElement('td');
+  // tdFatsValue.setAttribute('class', 'flex-basis-15');
+  // for (i = 0; i < data.mealEntries.length; i++) {
+  //   if (data.mealEntries[i].entryId === entry.entryId) {
+  //     for (item = 0; item < data.mealEntries[i].foodItem.length; item++) {
+  //       tdFatsValue.textContent = data.mealEntries[i].foodItem[item].fats;
+  //     }
+  //   }
+  // }
+  // tableBodyRow.append(tdFatsValue);
+
+  // var tdCarbohydratesValue = document.createElement('td');
+  // tdCarbohydratesValue.setAttribute('class', 'flex-basis-15');
+  // for (i = 0; i < data.mealEntries.length; i++) {
+  //   if (data.mealEntries[i].entryId === entry.entryId) {
+  //     for (item = 0; item < data.mealEntries[i].foodItem.length; item++) {
+  //       tdCarbohydratesValue.textContent = data.mealEntries[i].foodItem[item].carbohydrates;
+  //     }
+  //   }
+  // }
+  // tableBodyRow.append(tdCarbohydratesValue);
+
+  return tableDiv;
 }
-window.addEventListener('DOMContentLoaded', showTodaysMeals);
+
+window.addEventListener('DOMContentLoaded', function () {
+  var dataViewDiv = document.querySelector('div[data-view = current-day-meals');
+  for (var i = 0; i < data.mealEntries.length; i++) {
+    dataViewDiv.append(showTodaysMeals(data.mealEntries[i]));
+  }
+});
 
 function updateProgress() {
   var calorieP = document.querySelector('.calorie-numbers');
