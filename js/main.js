@@ -194,7 +194,7 @@ function trackTargetProgress(element) {
   calorieTwoThirds.appendChild(progressBarDiv);
 
   var progressFillDiv = document.createElement('div');
-  progressFillDiv.setAttribute('style', 'width: ' + data.dailyTotals.calories / data.targets.calories * 100 + '%');
+  progressFillDiv.setAttribute('style', 'width: ' + Math.round(data.dailyTotals.calories / data.targets.calories * 100) + '%');
   progressFillDiv.setAttribute('class', 'fill-progress-calories progress text-align-center padding-top-3');
   progressBarDiv.appendChild(progressFillDiv);
 
@@ -227,7 +227,7 @@ function trackTargetProgress(element) {
   proteinTwoThirds.appendChild(proteinProgressBarDiv);
 
   var proteinProgressFillDiv = document.createElement('div');
-  proteinProgressFillDiv.setAttribute('style', 'width: ' + (data.dailyTotals.protein / data.targets.protein * 100) + '%');
+  proteinProgressFillDiv.setAttribute('style', 'width: ' + Math.round(data.dailyTotals.protein / data.targets.protein * 100) + '%');
   proteinProgressFillDiv.setAttribute('class', 'fill-progress-protein progress text-align-center padding-top-3');
   proteinProgressBarDiv.appendChild(proteinProgressFillDiv);
 
@@ -260,7 +260,7 @@ function trackTargetProgress(element) {
   fatsTwoThirds.appendChild(fatsProgressBarDiv);
 
   var fatsProgressFillDiv = document.createElement('div');
-  fatsProgressFillDiv.setAttribute('style', 'width: ' + data.dailyTotals.fats / data.targets.fats * 100 + '%');
+  fatsProgressFillDiv.setAttribute('style', 'width: ' + Math.round(data.dailyTotals.fats / data.targets.fats * 100) + '%');
   fatsProgressFillDiv.setAttribute('class', 'fill-progress-fats progress text-align-center padding-top-3');
   fatsProgressBarDiv.appendChild(fatsProgressFillDiv);
 
@@ -293,7 +293,7 @@ function trackTargetProgress(element) {
   carbohydratesTwoThirds.appendChild(carbohydratesProgressBarDiv);
 
   var carbohydratesProgressFillDiv = document.createElement('div');
-  carbohydratesProgressFillDiv.setAttribute('style', 'width: ' + (data.dailyTotals.carbohydrates / data.targets.carbohydrates * 100) + '%');
+  carbohydratesProgressFillDiv.setAttribute('style', 'width: ' + Math.round(data.dailyTotals.carbohydrates / data.targets.carbohydrates * 100) + '%');
   carbohydratesProgressFillDiv.setAttribute('class', 'fill-progress-carbohydrates progress text-align-center padding-top-3');
   carbohydratesProgressBarDiv.appendChild(carbohydratesProgressFillDiv);
 
@@ -542,7 +542,7 @@ function updateProgress() {
   calorieP.textContent = 'Calories: ' + data.dailyTotals.calories + '/' + data.targets.calories + ' kcal';
 
   var fillProgressCalories = document.querySelector('.fill-progress-calories');
-  fillProgressCalories.style.width = data.dailyTotals.calories / data.targets.calories * 100 + '%';
+  fillProgressCalories.style.width = Math.round(data.dailyTotals.calories / data.targets.calories * 100) + '%';
 
   var caloriesText = document.querySelector('.calories-text');
   caloriesText.textContent = fillProgressCalories.style.width;
@@ -551,7 +551,7 @@ function updateProgress() {
   proteinP.textContent = 'Protein: ' + data.dailyTotals.protein + '/' + data.targets.protein + ' g';
 
   var fillProgressProtein = document.querySelector('.fill-progress-protein');
-  fillProgressProtein.style.width = data.dailyTotals.protein / data.targets.protein * 100 + '%';
+  fillProgressProtein.style.width = Math.round(data.dailyTotals.protein / data.targets.protein * 100) + '%';
 
   var proteinText = document.querySelector('.protein-progress-text');
   proteinText.textContent = fillProgressProtein.style.width;
@@ -560,7 +560,7 @@ function updateProgress() {
   fatsP.textContent = 'Fats: ' + data.dailyTotals.fats + '/' + data.targets.fats + ' g';
 
   var fillProgressFats = document.querySelector('.fill-progress-fats');
-  fillProgressFats.style.width = data.dailyTotals.fats / data.targets.fats * 100 + '%';
+  fillProgressFats.style.width = Math.round(data.dailyTotals.fats / data.targets.fats * 100) + '%';
 
   var fatsText = document.querySelector('.fats-progress-text');
   fatsText.textContent = fillProgressFats.style.width;
@@ -569,7 +569,7 @@ function updateProgress() {
   carbohydratesP.textContent = 'Carbs: ' + data.dailyTotals.carbohydrates + '/' + data.targets.carbohydrates + ' g';
 
   var fillProgressCarbohydrates = document.querySelector('.fill-progress-carbohydrates');
-  fillProgressCarbohydrates.style.width = data.dailyTotals.carbohydrates / data.targets.carbohydrates * 100 + '%';
+  fillProgressCarbohydrates.style.width = Math.round(data.dailyTotals.carbohydrates / data.targets.carbohydrates * 100) + '%';
 
   var carbohydratesText = document.querySelector('.carbohydrates-progress-text');
   carbohydratesText.textContent = fillProgressCarbohydrates.style.width;
