@@ -307,7 +307,10 @@ function switchViews() {
 
 function createNewMealEntry(entry) {
 
-  /*  <div class="table">
+  /*  <div id="entry-date">
+      <h3>Date</h3>
+      </div>
+      <div class="table">
         <table>
           <thead>
             <tr class=" margin-top-50 padding-left-20 padding-right form-header row justify-content-space-between background-color-navy margin-top-50 align-items-center color-white font-weight-bold">
@@ -627,7 +630,9 @@ window.addEventListener('DOMContentLoaded', function () {
   }
   var dataViewDiv = document.querySelector('div[data-view = current-day-meals');
   for (var i = 0; i < data.mealEntries.length; i++) {
-    dataViewDiv.append(showTodaysMeals(data.mealEntries[i]));
+    if (data.mealEntries[i].date === data.date) {
+      dataViewDiv.append(showTodaysMeals(data.mealEntries[i]));
+    }
   }
 });
 
