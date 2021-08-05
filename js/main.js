@@ -506,10 +506,6 @@ function addNextFoodItem() {
 
 function showTodaysMeals(entry) {
 
-  // <div class="margin-top-50">
-  //   <h3 class="log-date">Date</h3>
-  // </div>
-
   var tableDiv = document.createElement('div');
   tableDiv.setAttribute('class', 'table');
 
