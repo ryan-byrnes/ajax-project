@@ -492,7 +492,7 @@ function addNextFoodItem() {
         });
       }
     }
-    if (data.view === 'meal-log' && data.mealEntries[i].date === data.date) {
+    if (data.view === 'meal-log' && eventTarget.closest('table').firstChild.firstChild.firstChild.nextSibling.nextSibling.textContent === data.date) {
       updateProgress();
     } else if (data.view !== 'meal-log') {
       updateProgress();
@@ -706,7 +706,9 @@ window.addEventListener('DOMContentLoaded', function () {
     var mealButton = document.querySelector('.meal-button');
     mealButton.classList.add('hidden');
   }
-
+  if (data.targets.calories > 0) {
+    updateProgress();
+  }
 });
 
 function updateProgress() {
@@ -715,6 +717,10 @@ function updateProgress() {
 
   var fillProgressCalories = document.querySelector('.fill-progress-calories');
   fillProgressCalories.style.width = Math.round(data.dailyTotals.calories / data.targets.calories * 100) + '%';
+  var calorieLimit = Math.round(data.dailyTotals.calories / data.targets.calories * 100);
+  if (calorieLimit > 100) {
+    fillProgressCalories.style.backgroundColor = 'red';
+  }
 
   var caloriesText = document.querySelector('.calories-text');
   caloriesText.textContent = fillProgressCalories.style.width;
@@ -724,6 +730,10 @@ function updateProgress() {
 
   var fillProgressProtein = document.querySelector('.fill-progress-protein');
   fillProgressProtein.style.width = Math.round(data.dailyTotals.protein / data.targets.protein * 100) + '%';
+  var proteinLimit = Math.round(data.dailyTotals.protein / data.targets.protein * 100);
+  if (proteinLimit > 100) {
+    fillProgressProtein.style.backgroundColor = 'red';
+  }
 
   var proteinText = document.querySelector('.protein-progress-text');
   proteinText.textContent = fillProgressProtein.style.width;
@@ -733,6 +743,10 @@ function updateProgress() {
 
   var fillProgressFats = document.querySelector('.fill-progress-fats');
   fillProgressFats.style.width = Math.round(data.dailyTotals.fats / data.targets.fats * 100) + '%';
+  var fatsLimit = Math.round(data.dailyTotals.fats / data.targets.fats * 100);
+  if (fatsLimit > 100) {
+    fillProgressFats.style.backgroundColor = 'red';
+  }
 
   var fatsText = document.querySelector('.fats-progress-text');
   fatsText.textContent = fillProgressFats.style.width;
@@ -742,6 +756,10 @@ function updateProgress() {
 
   var fillProgressCarbohydrates = document.querySelector('.fill-progress-carbohydrates');
   fillProgressCarbohydrates.style.width = Math.round(data.dailyTotals.carbohydrates / data.targets.carbohydrates * 100) + '%';
+  var carbohydratesLimit = Math.round(data.dailyTotals.carbohydrates / data.targets.carbohydrates * 100);
+  if (carbohydratesLimit > 100) {
+    fillProgressCarbohydrates.style.backgroundColor = 'red';
+  }
 
   var carbohydratesText = document.querySelector('.carbohydrates-progress-text');
   carbohydratesText.textContent = fillProgressCarbohydrates.style.width;
