@@ -295,10 +295,11 @@ function trackTargetProgress(element) {
 }
 
 function switchViews() {
+  // debugger;
   var dataViewElements = document.querySelectorAll('div[data-view]');
   for (var i = 0; i < dataViewElements.length; i++) {
     if (data.view === dataViewElements[i].getAttribute('data-view')) {
-      dataViewElements[i].classList.toggle('hidden');
+      dataViewElements[i].classList.remove('hidden');
     } else {
       dataViewElements[i].classList.add('hidden');
     }
@@ -306,6 +307,9 @@ function switchViews() {
 }
 
 function createNewMealEntry(entry) {
+
+  var showMeal = document.querySelector('div[data-view="current-day-meals"]');
+  showMeal.classList.remove('hidden');
 
   /*  <div id="entry-date">
       <h3>Date</h3>
@@ -488,8 +492,11 @@ function addNextFoodItem() {
         });
       }
     }
-
-    updateProgress();
+    if (data.view === 'meal-log' && data.mealEntries[i].date === data.date) {
+      updateProgress();
+    } else if (data.view !== 'meal-log') {
+      updateProgress();
+    }
   });
   xhr.send();
   inputForm.reset();
@@ -498,6 +505,10 @@ function addNextFoodItem() {
 }
 
 function showTodaysMeals(entry) {
+
+  // <div class="margin-top-50">
+  //   <h3 class="log-date">Date</h3>
+  // </div>
 
   var tableDiv = document.createElement('div');
   tableDiv.setAttribute('class', 'table');
@@ -615,14 +626,66 @@ function showTodaysMeals(entry) {
     }
   }
 
+  // if (data.view === 'meal-log') {
+  //   var dateLabelDiv = document.createElement('div');
+  //   dateLabelDiv.setAttribute('class', 'margin-top-50');
+
+  //   var dateLabelText = document.createElement('h3');
+  //   dateLabelText.setAttribute('class', 'log-date');
+  //   dateLabelText.textContent = entry.date;
+  //   dateLabelDiv.append(dateLabelText);
+
+  //   dateLabelDiv.append(tableDiv);
+
+  //   return dateLabelDiv;
+  // }
+
   return tableDiv;
 }
+
+var mealLog = document.querySelector('.meal-log-view');
+
+mealLog.addEventListener('click', function () {
+  var dataMealLog = document.querySelector('div[data-view="meal-log"]');
+  data.view = 'meal-log';
+  for (var i = data.mealEntries.length - 1; i >= 0; i--) {
+    dataMealLog.append(showTodaysMeals(data.mealEntries[i]));
+  }
+  switchViews();
+
+  var dailySummary = document.querySelector('.daily-summary-heading');
+  dailySummary.classList.add('hidden');
+  var mealButton = document.querySelector('.meal-button');
+  mealButton.classList.add('hidden');
+});
+
+var homePageView = document.querySelector('.home-page-view');
+
+homePageView.addEventListener('click', function () {
+  if (data.targets.calories === 0) {
+    data.view = 'target-input-form';
+  } else {
+    data.view = 'daily-targets';
+  }
+
+  var dailySummary = document.querySelector('.daily-summary-heading');
+  dailySummary.classList.add('hidden');
+  var mealButton = document.querySelector('.meal-button');
+  mealButton.classList.add('hidden');
+
+  switchViews();
+
+  var currentMeals = document.querySelector('div[data-view="current-day-meals"]');
+  currentMeals.classList.remove('hidden');
+});
 
 window.addEventListener('DOMContentLoaded', function () {
   var formDataView = document.querySelector('div[data-view = target-input-form]');
   var trackingView = document.querySelector('div[data-view = daily-targets]');
 
-  if (data.targets.calories !== 0 && data.mealEntries[data.mealEntries.length - 1].date === data.date) {
+  switchViews();
+
+  if (data.targets.calories !== 0 && data.mealEntries[data.mealEntries.length - 1].date === data.date && data.view !== 'meal-log') {
     trackTargetProgress(trackingView);
     formDataView.classList.add('hidden');
     trackingView.classList.remove('hidden');
@@ -630,10 +693,24 @@ window.addEventListener('DOMContentLoaded', function () {
   }
   var dataViewDiv = document.querySelector('div[data-view = current-day-meals');
   for (var i = 0; i < data.mealEntries.length; i++) {
-    if (data.mealEntries[i].date === data.date) {
+    if (data.mealEntries[i].date === data.date && data.view !== 'meal-log') {
       dataViewDiv.append(showTodaysMeals(data.mealEntries[i]));
+      dataViewDiv.classList.remove('hidden');
     }
   }
+
+  var dataMealLog = document.querySelector('div[data-view="meal-log"]');
+  if (data.view === 'meal-log') {
+    for (i = data.mealEntries.length - 1; i >= 0; i--) {
+
+      dataMealLog.append(showTodaysMeals(data.mealEntries[i]));
+    }
+    var dailySummary = document.querySelector('.daily-summary-heading');
+    dailySummary.classList.add('hidden');
+    var mealButton = document.querySelector('.meal-button');
+    mealButton.classList.add('hidden');
+  }
+
 });
 
 function updateProgress() {

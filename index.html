@@ -14,8 +14,8 @@
   <header class="background-color-navy">
     <nav>
       <div class="row">
-        <a href=""><h2>Daily Summary</h2></a>
-        <a href=""><h2>Log</h2></a>
+        <a class="home-page-view" href=""><h2>Daily Summary</h2></a>
+        <a class="meal-log-view" href=""><h2>Log</h2></a>
         <a href=""><h2>Recipes</h2></a>
         <a href=""><h2>Favorite Recipes</h2></a>
       </div>
@@ -23,7 +23,7 @@
   </header>
   <main>
     <div class="container">
-      <div class="padding-left-20 padding-right form-header row justify-content-space-between background-color-navy margin-top-50 align-items-center">
+      <div class="daily-summary-heading padding-left-20 padding-right form-header row justify-content-space-between background-color-navy margin-top-50 align-items-center">
         <h3>Your Daily Summary</h3>
         <div>
           <h3 class="todays-date">Date</h3>
@@ -80,33 +80,35 @@
         <button class="add-meal-button">Add Meal</button>
       </div>
 
-      <div id="entry-date" class="margin-top-50">
-        <h3 class="log-date">Date</h3>
-      </div>
-      <div class="table">
-        <table>
-          <thead>
-            <tr
-              class=" margin-top-10 padding-left-20 padding-right form-header row justify-content-space-between background-color-navy margin-top-50 align-items-center color-white font-weight-bold">
-              <td>Your Daily Summary</td>
-              <div>
-                <td class="todays-date">Date</td>
-              </div>
-            </tr>
-            <tr class="heading-row row font-weight-bold">
-              <td class="flex-basis-40">Food Item</td>
-              <td class="flex-basis-15">Calories</td>
-              <td class="flex-basis-15">Protein</td>
-              <td class="flex-basis-15">Fats</td>
-              <td class="flex-basis-15">Carbs</td>
-            </tr>
-          </thead>
-          <tbody class="space-under">
-            <tr>
-              <td class="font-weight-bold"><a class="color-navy" href="">Add Food Item</a></td>
-            </tr>
-          </tbody>
-        </table>
+      <div data-view="meal-log" class="">
+        <!-- <div class="margin-top-50">
+          <h3 class="log-date">Date</h3>
+        </div>
+        <div class="table">
+          <table>
+            <thead>
+              <tr
+                class=" margin-top-10 padding-left-20 padding-right form-header row justify-content-space-between background-color-navy margin-top-50 align-items-center color-white font-weight-bold">
+                <td>Your Daily Summary</td>
+                <div>
+                  <td class="todays-date">Date</td>
+                </div>
+              </tr>
+              <tr class="heading-row row font-weight-bold">
+                <td class="flex-basis-40">Food Item</td>
+                <td class="flex-basis-15">Calories</td>
+                <td class="flex-basis-15">Protein</td>
+                <td class="flex-basis-15">Fats</td>
+                <td class="flex-basis-15">Carbs</td>
+              </tr>
+            </thead>
+            <tbody class="space-under">
+              <tr>
+                <td class="font-weight-bold"><a class="color-navy" href="">Add Food Item</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div> -->
       </div>
 
     </div>

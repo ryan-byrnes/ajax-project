@@ -14,7 +14,7 @@ var data = {
     carbohydrates: 0
   },
   mealEntries: [],
-  veiw: 'target-input-form',
+  view: 'target-input-form',
   date: '',
   nextMealEntryId: 1,
   xhrResponse: ''
