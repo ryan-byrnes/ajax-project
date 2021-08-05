@@ -261,16 +261,10 @@ tr.heading-row {
 }
 
 .log-date {
-  border-bottom: 1px solid black;
-  width: 100vw;
+  border-bottom: 5px solid black;
 }
 
 #edamam-badge {
   width: 200px;
   text-align: right;
-}
-
-#entry-date {
-  width: 1000px;
-  text-align: left;
 }
