@@ -447,6 +447,10 @@ function addFoodItem(entry) {
   tdCarbohydratesValue.textContent = Math.round(data.xhrResponse.hints[0].food.nutrients.CHOCDF);
   tableBodyRow.append(tdCarbohydratesValue);
 
+  var deleteIcon = document.createElement('i');
+  deleteIcon.setAttribute('class', 'fas fa-minus-circle');
+  tableBodyRow.append(deleteIcon);
+
   data.mealEntries[data.mealEntries.length - 1].foodEntryId += 1;
 
   return tableBodyRow;
