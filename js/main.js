@@ -448,7 +448,7 @@ function addFoodItem(entry) {
   tableBodyRow.append(tdCarbohydratesValue);
 
   var deleteIcon = document.createElement('i');
-  deleteIcon.setAttribute('class', 'fas fa-minus-circle padding-left-45');
+  deleteIcon.setAttribute('class', 'fas fa-minus-circle padding-left-45 delete-icon');
   tdCarbohydratesValue.append(deleteIcon);
 
   data.mealEntries[data.mealEntries.length - 1].foodEntryId += 1;
@@ -617,7 +617,7 @@ function showTodaysMeals(entry) {
     tableBodyRow.append(tdCarbohydratesValue);
 
     var deleteIcon = document.createElement('i');
-    deleteIcon.setAttribute('class', 'fas fa-minus-circle padding-left-45');
+    deleteIcon.setAttribute('class', 'fas fa-minus-circle padding-left-45 delete-icon');
     tdCarbohydratesValue.append(deleteIcon);
 
   }
@@ -771,4 +771,23 @@ function updateProgress() {
 
   var carbohydratesText = document.querySelector('.carbohydrates-progress-text');
   carbohydratesText.textContent = fillProgressCarbohydrates.style.width;
+}
+
+var deleteIconListener = document.querySelector('body');
+
+// deleteIconButton.addEventListener('click', showDeleteModal);
+
+// function showDeleteModal() {
+//   var deleteModal = document.querySelector('.delete-food-item-modal');
+//   deleteModal.classList.remove('hidden');
+//   console.log('click');
+// }
+
+deleteIconListener.addEventListener('click', showDeleteModal);
+
+function showDeleteModal() {
+  if (event.target.tagName === 'I') {
+    var deleteModal = document.querySelector('.delete-food-item-modal');
+    deleteModal.classList.remove('hidden');
+  }
 }
