@@ -8,11 +8,23 @@ var data = {
     carbohydrates: 0
   },
   dailyTotals: {
-    calories: 100,
-    protein: 50,
-    fats: 10,
-    carbohydrates: 150
+    calories: 0,
+    protein: 0,
+    fats: 0,
+    carbohydrates: 0
   },
-  veiw: 'target-input-form',
-  date: ''
+  mealEntries: [],
+  view: 'target-input-form',
+  date: '',
+  nextMealEntryId: 1,
+  xhrResponse: ''
 };
+
+window.addEventListener('beforeunload', function () {
+  localStorage.setItem('meal-data', JSON.stringify(data));
+});
+
+var previousInput = localStorage.getItem('meal-data');
+if (previousInput !== null) {
+  data = JSON.parse(previousInput);
+}
