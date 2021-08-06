@@ -266,3 +266,7 @@ tr.heading-row {
   width: 200px;
   text-align: right;
 }
+
+.padding-left-45 {
+  padding-left: 45px;
+}

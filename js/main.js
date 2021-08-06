@@ -448,8 +448,8 @@ function addFoodItem(entry) {
   tableBodyRow.append(tdCarbohydratesValue);
 
   var deleteIcon = document.createElement('i');
-  deleteIcon.setAttribute('class', 'fas fa-minus-circle');
-  tableBodyRow.append(deleteIcon);
+  deleteIcon.setAttribute('class', 'fas fa-minus-circle padding-left-45');
+  tdCarbohydratesValue.append(deleteIcon);
 
   data.mealEntries[data.mealEntries.length - 1].foodEntryId += 1;
 
@@ -615,6 +615,10 @@ function showTodaysMeals(entry) {
     tdCarbohydratesValue.setAttribute('class', 'flex-basis-15');
     tdCarbohydratesValue.textContent = data.mealEntries[i].foodItem[item].carbohydrates;
     tableBodyRow.append(tdCarbohydratesValue);
+
+    var deleteIcon = document.createElement('i');
+    deleteIcon.setAttribute('class', 'fas fa-minus-circle padding-left-45');
+    tdCarbohydratesValue.append(deleteIcon);
 
   }
 
