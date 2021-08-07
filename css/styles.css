@@ -57,6 +57,10 @@ tr.heading-row {
   height: 225px;
 }
 
+.height-160 {
+  height: 160px;
+}
+
 .margin-left {
   margin-left: 40px;
 }
@@ -241,6 +245,14 @@ tr.heading-row {
   margin-left: 10px;
 }
 
+.margin-left-100 {
+  margin-left: 100px;
+}
+
+.margin-right-100 {
+  margin-right: 100px;
+}
+
 .position-fixed {
   position: fixed;
   top: 0;
@@ -265,4 +277,26 @@ tr.heading-row {
 #edamam-badge {
   width: 200px;
   text-align: right;
+}
+
+.padding-left-35 {
+  padding-left: 35px;
+}
+
+.delete-button {
+  color: white;
+  background-color: rgb(235, 33, 33);
+  border: none;
+  border-radius: 5px;
+  height: 25px;
+  width: 23%;
+}
+
+.cancel-delete-button {
+  color: white;
+  background-color: rgb(10, 82, 130);
+  border: none;
+  border-radius: 5px;
+  height: 25px;
+  width: 23%;
 }

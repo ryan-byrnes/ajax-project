@@ -447,6 +447,10 @@ function addFoodItem(entry) {
   tdCarbohydratesValue.textContent = Math.round(data.xhrResponse.hints[0].food.nutrients.CHOCDF);
   tableBodyRow.append(tdCarbohydratesValue);
 
+  var deleteIcon = document.createElement('i');
+  deleteIcon.setAttribute('class', 'fas fa-minus-circle padding-left-35 delete-icon');
+  tdCarbohydratesValue.append(deleteIcon);
+
   data.mealEntries[data.mealEntries.length - 1].foodEntryId += 1;
 
   return tableBodyRow;
@@ -612,6 +616,10 @@ function showTodaysMeals(entry) {
     tdCarbohydratesValue.textContent = data.mealEntries[i].foodItem[item].carbohydrates;
     tableBodyRow.append(tdCarbohydratesValue);
 
+    var deleteIcon = document.createElement('i');
+    deleteIcon.setAttribute('class', 'fas fa-minus-circle padding-left-35 delete-icon');
+    tdCarbohydratesValue.append(deleteIcon);
+
   }
 
   for (i = 0; i < data.mealEntries.length; i++) {
@@ -763,4 +771,47 @@ function updateProgress() {
 
   var carbohydratesText = document.querySelector('.carbohydrates-progress-text');
   carbohydratesText.textContent = fillProgressCarbohydrates.style.width;
+}
+
+var deleteIconListener = document.querySelector('body');
+
+// deleteIconButton.addEventListener('click', showDeleteModal);
+
+// function showDeleteModal() {
+//   var deleteModal = document.querySelector('.delete-food-item-modal');
+//   deleteModal.classList.remove('hidden');
+//   console.log('click');
+// }
+
+deleteIconListener.addEventListener('click', showDeleteModal);
+
+var deleteTargetElement;
+
+function showDeleteModal() {
+  if (event.target.tagName === 'I') {
+    var deleteModal = document.querySelector('.delete-food-item-modal');
+    deleteModal.classList.remove('hidden');
+    deleteTargetElement = event.target;
+  }
+}
+
+var confirmDeleteButton = document.querySelector('.delete-button');
+
+confirmDeleteButton.addEventListener('click', deleteFoodItem);
+
+function deleteFoodItem() {
+
+  // debugger;
+  for (var i = 0; i < data.mealEntries.length; i++) {
+    if (deleteTargetElement.closest('table').firstChild.firstChild.firstChild.nextSibling.nextSibling.textContent === data.mealEntries[i].date && deleteTargetElement.closest('table').firstChild.firstChild.firstChild.textContent === data.mealEntries[i].mealName) {
+      for (var k = 0; k < data.mealEntries[i].foodItem.length; k++) {
+        if (deleteTargetElement.closest('tr').firstChild.textContent === data.mealEntries[i].foodItem[k].name) {
+          data.mealEntries[i].foodItem.splice(k, 1);
+          var deleteModal = document.querySelector('.delete-food-item-modal');
+          deleteModal.classList.add('hidden');
+        }
+      }
+    }
+  }
+  location.reload();
 }
