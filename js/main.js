@@ -511,7 +511,7 @@ function addNextFoodItem() {
 function showTodaysMeals(entry) {
 
   var tableDiv = document.createElement('div');
-  tableDiv.setAttribute('class', 'table-div');
+  tableDiv.setAttribute('class', 'table');
 
   var table = document.createElement('table');
   tableDiv.append(table);
