@@ -70,6 +70,7 @@ function submitNewMeal() {
 
   xhr.open('GET', 'https://api.edamam.com/api/food-database/v2/parser?app_id=c2713387&app_key=4ef3b4c8226f2708aa7e3b8b470ed40e&ingr=' + encodeURI(inputValue['food-item'].value) + '&nutrition-type=cooking');
   xhr.responseType = 'json';
+  document.querySelector('.spinner').toggle('hidden');
   xhr.addEventListener('load', function () {
 
     data.xhrResponse = xhr.response;
@@ -95,6 +96,7 @@ function submitNewMeal() {
       updateProgress();
     }
     data.nextMealEntryId += 1;
+    document.querySelector('.spinner').toggle('hidden');
   });
   xhr.send();
 
@@ -165,11 +167,11 @@ function trackTargetProgress(element) {
   element.appendChild(calorieRow);
 
   var calorieColumnThird = document.createElement('div');
-  calorieColumnThird.setAttribute('class', 'column-33');
+  calorieColumnThird.setAttribute('class', 'flex-basis-40 flex-media');
   calorieRow.appendChild(calorieColumnThird);
 
   var calorieP = document.createElement('p');
-  calorieP.setAttribute('class', 'calorie-numbers');
+  calorieP.setAttribute('class', 'calorie-numbers font-size-h');
   calorieP.textContent = 'Calories: ' + data.dailyTotals.calories + '/' + data.targets.calories + ' kcal';
   calorieColumnThird.appendChild(calorieP);
 
@@ -198,11 +200,11 @@ function trackTargetProgress(element) {
   element.appendChild(proteinRow);
 
   var proteinColumnThird = document.createElement('div');
-  proteinColumnThird.setAttribute('class', 'column-33');
+  proteinColumnThird.setAttribute('class', 'flex-basis-40 flex-media');
   proteinRow.appendChild(proteinColumnThird);
 
   var proteinP = document.createElement('p');
-  proteinP.setAttribute('class', 'protein-numbers');
+  proteinP.setAttribute('class', 'protein-numbers font-size-h');
   proteinP.textContent = 'Protein: ' + data.dailyTotals.protein + '/' + data.targets.protein + ' g';
   proteinColumnThird.appendChild(proteinP);
 
@@ -231,11 +233,11 @@ function trackTargetProgress(element) {
   element.appendChild(fatsRow);
 
   var fatsColumnThird = document.createElement('div');
-  fatsColumnThird.setAttribute('class', 'column-33');
+  fatsColumnThird.setAttribute('class', 'flex-basis-40 flex-media');
   fatsRow.appendChild(fatsColumnThird);
 
   var fatsP = document.createElement('p');
-  fatsP.setAttribute('class', 'fats-numbers');
+  fatsP.setAttribute('class', 'fats-numbers font-size-h');
   fatsP.textContent = 'Fats: ' + data.dailyTotals.fats + '/' + data.targets.fats + ' g';
   fatsColumnThird.appendChild(fatsP);
 
@@ -264,11 +266,11 @@ function trackTargetProgress(element) {
   element.appendChild(carbohydratesRow);
 
   var carbohydratesColumnThird = document.createElement('div');
-  carbohydratesColumnThird.setAttribute('class', 'column-33');
+  carbohydratesColumnThird.setAttribute('class', 'flex-basis-40 flex-media');
   carbohydratesRow.appendChild(carbohydratesColumnThird);
 
   var carbohydratesP = document.createElement('p');
-  carbohydratesP.setAttribute('class', 'carbohydrates-numbers');
+  carbohydratesP.setAttribute('class', 'carbohydrates-numbers font-size-h');
   carbohydratesP.textContent = 'Carbs: ' + data.dailyTotals.carbohydrates + '/' + data.targets.carbohydrates + ' g';
   carbohydratesColumnThird.appendChild(carbohydratesP);
 
@@ -474,6 +476,7 @@ function addNextFoodItem() {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.edamam.com/api/food-database/v2/parser?app_id=c2713387&app_key=4ef3b4c8226f2708aa7e3b8b470ed40e&ingr=' + encodeURI(inputValue['new-food-item'].value) + '&nutrition-type=cooking');
   xhr.responseType = 'json';
+  document.querySelector('.spinner').toggle('hidden');
   xhr.addEventListener('load', function () {
 
     data.xhrResponse = xhr.response;
@@ -501,6 +504,7 @@ function addNextFoodItem() {
     } else if (data.view !== 'meal-log') {
       updateProgress();
     }
+    document.querySelector('.spinner').toggle('hidden');
   });
   xhr.send();
   inputForm.reset();

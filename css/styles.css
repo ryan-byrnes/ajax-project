@@ -414,6 +414,18 @@ tr.heading-row {
   cursor: pointer;
 }
 
+.spinner {
+  position: fixed;
+  top: 45%;
+  left: 45%;
+}
+
+@media only screen and (max-width: 586px) {
+  .flex-media {
+    flex-basis: 57%;
+  }
+}
+
 @media only screen and (max-width: 375px) {
   nav h2 {
     color: white;
@@ -455,9 +467,6 @@ tr.heading-row {
     flex-basis: 15%;
   }
 
-  .flex-basis-40 {
-  }
-
   .font-size-p {
     font-size: 8px;
   }
@@ -480,5 +489,9 @@ tr.heading-row {
 
   .font-size-head {
     font-size: 11px;
+  }
+
+  .flex-media {
+    flex-basis: 65%;
   }
 }
