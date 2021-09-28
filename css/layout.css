@@ -13,6 +13,14 @@ body {
   display: flex;
 }
 
+.justify-content-center {
+  justify-content: center;
+}
+
+.table-div {
+  width: 100%;
+}
+
 .container {
   margin: 0 auto;
   width: 500px;

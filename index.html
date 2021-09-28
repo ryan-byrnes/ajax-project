@@ -18,9 +18,7 @@
     <nav>
       <div class="row">
         <a class="home-page-view" href=""><h2>Daily Summary</h2></a>
-        <a class="meal-log-view" href=""><h2>Log</h2></a>
-        <a href=""><h2>Recipes</h2></a>
-        <a href=""><h2>Favorite Recipes</h2></a>
+        <a class="meal-log-view margin-left-10" href=""><h2>Log</h2></a>
       </div>
     </nav>
   </header>
@@ -75,7 +73,26 @@
       <div data-view="daily-targets" class="hidden form-body background-color-gray padding-left-20">
 
       </div>
-      <div data-view="current-day-meals">
+      <div data-view="current-day-meals" class="row-media flex-direction-column align-items-center">
+
+      </div>
+
+      <div class="spinner hidden">
+
+        <div class="lds-spinner">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
 
       </div>
 
@@ -116,7 +133,6 @@
 
     </div>
 
-
   </main>
 
   <footer class="background-color-navy">
@@ -137,21 +153,21 @@
           </div>
         </div>
         <div class="row align-items-center">
-          <h3 class="margin-top-30 padding-left-20">Meal Name</h3>
-          <p class="padding-left-20 margin-top-30">(ie. Meal 1, Breakfast, Snack 1, etc.)</p>
+          <h3 class="font-size-h margin-top-30 padding-left-20">Meal Name</h3>
+          <p class="padding-left-20 margin-top-30 font-size-p">(ie. Meal 1, Breakfast, Snack 1, etc.)</p>
         </div>
         <label class="" name="meal-name">
           <input class="width-90 margin-left-10" type="text" id="meal-name">
         </label>
         <div class="row align-items-center">
-          <h3 class="margin-top-30 padding-left-20">Add Food Item</h3>
-          <p class="padding-left-20 margin-top-30">(ie. 4oz chicken breast, 1 large egg, etc.)</p>
+          <h3 class="margin-top-30 padding-left-20 font-size-h">Add Food Item</h3>
+          <p class="padding-left-20 margin-top-30 font-size-p">(ie. 4oz chicken breast, 1 large egg, etc.)</p>
         </div>
         <label name="food-item">
           <input class="width-90 margin-left-10" type="text" id="food-item">
         </label>
         <div class="modal-add-meal text-align-right margin-top-10">
-          <button class="add-meal-submit daily-target-submit margin-right margin-top-10">Add Meal</button>
+          <button class="font-size-p add-meal-submit daily-target-submit margin-right margin-top-10">Add Meal</button>
         </div>
       </fieldset>
     </form>
@@ -165,14 +181,14 @@
           <h3>Add Food Item</h3>
         </div>
         <div class="row align-items-center">
-          <h3 class="margin-top-30 padding-left-20">Add Food Item</h3>
-          <p class="padding-left-20 margin-top-30">(ie. 4oz chicken breast, 1 large egg, etc.)</p>
+          <h3 class="margin-top-30 padding-left-20 font-size-h">Add Food Item</h3>
+          <p class="padding-left-20 margin-top-30 font-size-p">(ie. 4oz chicken breast, 1 large egg, etc.)</p>
         </div>
         <label name="new-food-item">
           <input class="width-90 margin-left-10" type="text" id="new-food-item">
         </label>
         <div class="modal-add-meal text-align-right margin-top-10">
-          <button class="add-next-food-item daily-target-submit margin-right margin-top-10">Add Item</button>
+          <button class="add-next-food-item daily-target-submit margin-right margin-top-10 font-size-p">Add Item</button>
         </div>
       </fieldset>
     </form>
@@ -182,7 +198,7 @@
       <fieldset class="height-160">
         <div
           class="padding-left-20 padding-right modal-header row justify-content-space-between background-color-navy align-items-center">
-          <h3>Are you sure you want to delete this food item?</h3>
+          <h3 class="font-size-head">Are you sure you want to delete this food item?</h3>
         </div>
         <div class="row align-items-center">
 
