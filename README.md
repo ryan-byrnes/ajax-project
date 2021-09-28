@@ -29,7 +29,7 @@ https://user-images.githubusercontent.com/20606439/135173988-c166e52e-c186-480b-
     git clone https://github.com/ryan-byrnes/smart-cut.git
     cd smart-cut
     ```
-2. Insall all the dependencies with NPM.
+2. Install all the dependencies with NPM.
     ```shell
     npm install
     ```
