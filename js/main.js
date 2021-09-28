@@ -70,7 +70,8 @@ function submitNewMeal() {
 
   xhr.open('GET', 'https://api.edamam.com/api/food-database/v2/parser?app_id=c2713387&app_key=4ef3b4c8226f2708aa7e3b8b470ed40e&ingr=' + encodeURI(inputValue['food-item'].value) + '&nutrition-type=cooking');
   xhr.responseType = 'json';
-  document.querySelector('.spinner').toggle('hidden');
+  const spinner = document.querySelector('.spinner');
+  spinner.classList.toggle('hidden');
   xhr.addEventListener('load', function () {
 
     data.xhrResponse = xhr.response;
@@ -96,7 +97,8 @@ function submitNewMeal() {
       updateProgress();
     }
     data.nextMealEntryId += 1;
-    document.querySelector('.spinner').toggle('hidden');
+    const spinner = document.querySelector('.spinner');
+    spinner.classList.toggle('hidden');
   });
   xhr.send();
 
@@ -476,7 +478,8 @@ function addNextFoodItem() {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.edamam.com/api/food-database/v2/parser?app_id=c2713387&app_key=4ef3b4c8226f2708aa7e3b8b470ed40e&ingr=' + encodeURI(inputValue['new-food-item'].value) + '&nutrition-type=cooking');
   xhr.responseType = 'json';
-  document.querySelector('.spinner').toggle('hidden');
+  const spinner = document.querySelector('.spinner');
+  spinner.classList.toggle('hidden');
   xhr.addEventListener('load', function () {
 
     data.xhrResponse = xhr.response;
@@ -504,7 +507,8 @@ function addNextFoodItem() {
     } else if (data.view !== 'meal-log') {
       updateProgress();
     }
-    document.querySelector('.spinner').toggle('hidden');
+    const spinner = document.querySelector('.spinner');
+    spinner.classList.toggle('hidden');
   });
   xhr.send();
   inputForm.reset();
