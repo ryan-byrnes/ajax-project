@@ -714,57 +714,59 @@ window.addEventListener('DOMContentLoaded', function () {
 });
 
 function updateProgress() {
-  var calorieP = document.querySelector('.calorie-numbers');
-  calorieP.textContent = 'Calories: ' + data.dailyTotals.calories + '/' + data.targets.calories + ' kcal';
+  if (data.view === 'current-day-meals') {
+    var calorieP = document.querySelector('.calorie-numbers');
+    calorieP.textContent = 'Calories: ' + data.dailyTotals.calories + '/' + data.targets.calories + ' kcal';
 
-  var fillProgressCalories = document.querySelector('.fill-progress-calories');
-  fillProgressCalories.style.width = Math.round(data.dailyTotals.calories / data.targets.calories * 100) + '%';
-  var calorieLimit = Math.round(data.dailyTotals.calories / data.targets.calories * 100);
-  if (calorieLimit > 100) {
-    fillProgressCalories.style.backgroundColor = 'red';
+    var fillProgressCalories = document.querySelector('.fill-progress-calories');
+    fillProgressCalories.style.width = Math.round(data.dailyTotals.calories / data.targets.calories * 100) + '%';
+    var calorieLimit = Math.round(data.dailyTotals.calories / data.targets.calories * 100);
+    if (calorieLimit > 100) {
+      fillProgressCalories.style.backgroundColor = 'red';
+    }
+
+    var caloriesText = document.querySelector('.calories-text');
+    caloriesText.textContent = fillProgressCalories.style.width;
+
+    var proteinP = document.querySelector('.protein-numbers');
+    proteinP.textContent = 'Protein: ' + data.dailyTotals.protein + '/' + data.targets.protein + ' g';
+
+    var fillProgressProtein = document.querySelector('.fill-progress-protein');
+    fillProgressProtein.style.width = Math.round(data.dailyTotals.protein / data.targets.protein * 100) + '%';
+    var proteinLimit = Math.round(data.dailyTotals.protein / data.targets.protein * 100);
+    if (proteinLimit > 100) {
+      fillProgressProtein.style.backgroundColor = 'red';
+    }
+
+    var proteinText = document.querySelector('.protein-progress-text');
+    proteinText.textContent = fillProgressProtein.style.width;
+
+    var fatsP = document.querySelector('.fats-numbers');
+    fatsP.textContent = 'Fats: ' + data.dailyTotals.fats + '/' + data.targets.fats + ' g';
+
+    var fillProgressFats = document.querySelector('.fill-progress-fats');
+    fillProgressFats.style.width = Math.round(data.dailyTotals.fats / data.targets.fats * 100) + '%';
+    var fatsLimit = Math.round(data.dailyTotals.fats / data.targets.fats * 100);
+    if (fatsLimit > 100) {
+      fillProgressFats.style.backgroundColor = 'red';
+    }
+
+    var fatsText = document.querySelector('.fats-progress-text');
+    fatsText.textContent = fillProgressFats.style.width;
+
+    var carbohydratesP = document.querySelector('.carbohydrates-numbers');
+    carbohydratesP.textContent = 'Carbs: ' + data.dailyTotals.carbohydrates + '/' + data.targets.carbohydrates + ' g';
+
+    var fillProgressCarbohydrates = document.querySelector('.fill-progress-carbohydrates');
+    fillProgressCarbohydrates.style.width = Math.round(data.dailyTotals.carbohydrates / data.targets.carbohydrates * 100) + '%';
+    var carbohydratesLimit = Math.round(data.dailyTotals.carbohydrates / data.targets.carbohydrates * 100);
+    if (carbohydratesLimit > 100) {
+      fillProgressCarbohydrates.style.backgroundColor = 'red';
+    }
+
+    var carbohydratesText = document.querySelector('.carbohydrates-progress-text');
+    carbohydratesText.textContent = fillProgressCarbohydrates.style.width;
   }
-
-  var caloriesText = document.querySelector('.calories-text');
-  caloriesText.textContent = fillProgressCalories.style.width;
-
-  var proteinP = document.querySelector('.protein-numbers');
-  proteinP.textContent = 'Protein: ' + data.dailyTotals.protein + '/' + data.targets.protein + ' g';
-
-  var fillProgressProtein = document.querySelector('.fill-progress-protein');
-  fillProgressProtein.style.width = Math.round(data.dailyTotals.protein / data.targets.protein * 100) + '%';
-  var proteinLimit = Math.round(data.dailyTotals.protein / data.targets.protein * 100);
-  if (proteinLimit > 100) {
-    fillProgressProtein.style.backgroundColor = 'red';
-  }
-
-  var proteinText = document.querySelector('.protein-progress-text');
-  proteinText.textContent = fillProgressProtein.style.width;
-
-  var fatsP = document.querySelector('.fats-numbers');
-  fatsP.textContent = 'Fats: ' + data.dailyTotals.fats + '/' + data.targets.fats + ' g';
-
-  var fillProgressFats = document.querySelector('.fill-progress-fats');
-  fillProgressFats.style.width = Math.round(data.dailyTotals.fats / data.targets.fats * 100) + '%';
-  var fatsLimit = Math.round(data.dailyTotals.fats / data.targets.fats * 100);
-  if (fatsLimit > 100) {
-    fillProgressFats.style.backgroundColor = 'red';
-  }
-
-  var fatsText = document.querySelector('.fats-progress-text');
-  fatsText.textContent = fillProgressFats.style.width;
-
-  var carbohydratesP = document.querySelector('.carbohydrates-numbers');
-  carbohydratesP.textContent = 'Carbs: ' + data.dailyTotals.carbohydrates + '/' + data.targets.carbohydrates + ' g';
-
-  var fillProgressCarbohydrates = document.querySelector('.fill-progress-carbohydrates');
-  fillProgressCarbohydrates.style.width = Math.round(data.dailyTotals.carbohydrates / data.targets.carbohydrates * 100) + '%';
-  var carbohydratesLimit = Math.round(data.dailyTotals.carbohydrates / data.targets.carbohydrates * 100);
-  if (carbohydratesLimit > 100) {
-    fillProgressCarbohydrates.style.backgroundColor = 'red';
-  }
-
-  var carbohydratesText = document.querySelector('.carbohydrates-progress-text');
-  carbohydratesText.textContent = fillProgressCarbohydrates.style.width;
 }
 
 var deleteIconListener = document.querySelector('body');
