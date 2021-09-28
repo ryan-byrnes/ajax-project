@@ -21,7 +21,7 @@ Try the application at: https://ryan-byrnes.github.io/ajax-project/
 
 ## Preview!
 
-![ajax-demonstration] https://user-images.githubusercontent.com/20606439/135173988-c166e52e-c186-480b-a261-acc8e811e0bd.mov
+https://user-images.githubusercontent.com/20606439/135173988-c166e52e-c186-480b-a261-acc8e811e0bd.mov
 
 ## Getting Started
 1. Clone the repository.
