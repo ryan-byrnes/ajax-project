@@ -113,57 +113,6 @@ function submitNewMeal() {
 
 function trackTargetProgress(element) {
 
-  /*
-        <div class="row align-items-center">
-          <div class="column-33">
-            <p class="daily-target-calories">Calories: 0/0 kcal</p>
-          </div>
-          <div class="column-66 padding-right">
-            <div class="progress-bar background-color-white row align-items-center">
-              <div style="width: 100%;" class="fill-progress-calories progress text-align-center padding-top-3">
-                <p class="text-progress-calories margin-top-0 color-white font-weight-bold">100%</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row align-items-center">
-          <div class="column-33">
-            <p class="daily-target-protein">Protein: 0/0g</p>
-          </div>
-          <div class="column-66 padding-right">
-            <div class="progress-bar background-color-white row align-items-center">
-              <div style="width: 75%;" class="fill-progress-protein progress text-align-center padding-top-3">
-                <p class="text-progress-protein margin-top-0 color-white font-weight-bold">75%</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row align-items-center">
-          <div class="column-33">
-            <p class="daily-target-fats">Fats: 0/0g</p>
-          </div>
-          <div class="column-66 padding-right">
-            <div class="progress-bar background-color-white row align-items-center">
-              <div style="width: 50%;" class="fill-progress-fats progress text-align-center padding-top-3">
-                <p class="text-progress-fats margin-top-0 color-white font-weight-bold">50%</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row align-items-center">
-          <div class="column-33">
-            <p class="daily-target-carbohydrates">Carbohydrates: 0/0g</p>
-          </div>
-          <div class="column-66 padding-right">
-            <div class="progress-bar background-color-white row align-items-center">
-              <div style="width: 25%;" class="fill-progress-carbohydrates progress text-align-center padding-top-3">
-                <p class="text-progress-carbohydrates margin-top-0 color-white font-weight-bold">25%</p>
-              </div>
-            </div>
-          </div>
-        </div>
-*/
-
   var calorieRow = document.createElement('div');
   calorieRow.setAttribute('class', 'row align-items-center');
   element.appendChild(calorieRow);
@@ -308,34 +257,6 @@ function createNewMealEntry(entry) {
   var showMeal = document.querySelector('div[data-view="current-day-meals"]');
   showMeal.classList.remove('hidden');
 
-  /*  <div id="entry-date">
-      <h3>Date</h3>
-      </div>
-      <div class="table">
-        <table>
-          <thead>
-            <tr class=" margin-top-50 padding-left-20 padding-right form-header row justify-content-space-between background-color-navy margin-top-50 align-items-center color-white font-weight-bold">
-              <td>Your Daily Summary</td>
-              <div>
-                <td class="todays-date">Date</td>
-              </div>
-            </tr>
-            <tr class="heading-row row font-weight-bold">
-              <td class="flex-basis-40">Food Item</td>
-              <td class="flex-basis-15">Calories</td>
-              <td class="flex-basis-15">Protein</td>
-              <td class="flex-basis-15">Fats</td>
-              <td class="flex-basis-15">Carbs</td>
-            </tr>
-          </thead>
-          <tbody class="space-under">
-            <tr>
-              <td class="font-weight-bold"><a class="color-navy" href="">Add Food Item</a></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-*/
   var tableDiv = document.createElement('div');
   tableDiv.setAttribute('class', 'table-div row justify-content-center');
 
@@ -693,6 +614,12 @@ window.addEventListener('DOMContentLoaded', function () {
 
   var dataMealLog = document.querySelector('div[data-view="meal-log"]');
   if (data.view === 'meal-log') {
+
+    if (data.mealEntries.length < 1) {
+      const noEntries = document.querySelector('.no-entries');
+      noEntries.classList.toggle('hidden');
+    }
+
     for (i = data.mealEntries.length - 1; i >= 0; i--) {
 
       dataMealLog.append(showTodaysMeals(data.mealEntries[i]));

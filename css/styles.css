@@ -53,6 +53,14 @@ tr.heading-row {
   height: 225px;
 }
 
+.font-style-italic {
+  font-style: italic;
+}
+
+.color-lightgray {
+  color: rgb(159, 159, 159);
+}
+
 .height-160 {
   height: 160px;
 }
