@@ -43,7 +43,7 @@ addMealButton.addEventListener('click', function () {
 
 var newMealButton = document.querySelector('.add-meal-submit');
 
-newMealButton.addEventListener('click', submitNewMeal);
+newMealButton.addEventListener('submit', submitNewMeal);
 
 function submitNewMeal() {
 
@@ -469,7 +469,7 @@ document.addEventListener('click', function openAddFoodItemModal() {
   }
 });
 var addNewItemButton = document.querySelector('.add-next-food-item');
-addNewItemButton.addEventListener('click', addNextFoodItem);
+addNewItemButton.addEventListener('submit', addNextFoodItem);
 
 function addNextFoodItem() {
   event.preventDefault();
@@ -789,7 +789,6 @@ confirmDeleteButton.addEventListener('click', deleteFoodItem);
 
 function deleteFoodItem() {
 
-  // debugger;
   for (var i = 0; i < data.mealEntries.length; i++) {
     if (deleteTargetElement.closest('table').firstChild.firstChild.firstChild.nextSibling.nextSibling.textContent === data.mealEntries[i].date && deleteTargetElement.closest('table').firstChild.firstChild.firstChild.textContent === data.mealEntries[i].mealName) {
       for (var k = 0; k < data.mealEntries[i].foodItem.length; k++) {
