@@ -714,7 +714,7 @@ window.addEventListener('DOMContentLoaded', function () {
 });
 
 function updateProgress() {
-  if (data.view === 'current-day-meals') {
+  if (data.view === 'daily-targets') {
     var calorieP = document.querySelector('.calorie-numbers');
     calorieP.textContent = 'Calories: ' + data.dailyTotals.calories + '/' + data.targets.calories + ' kcal';
 
