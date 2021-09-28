@@ -69,24 +69,12 @@ tr.heading-row {
   margin-bottom: 50px;
 }
 
-.width-900 {
-  width: 900px;
-}
-
 .form-header h3 {
   color: white;
 }
 
 .background-color-navy {
   background-color: rgb(10, 82, 130);
-}
-
-.column-third {
-  flex-basis: calc(100 / 3);
-}
-
-.column-two-thirds {
-  flex-basis: calc(100 * (2 / 3));
 }
 
 .text-align-right {
@@ -113,11 +101,7 @@ tr.heading-row {
   align-items: center;
 }
 
-.align-content-center {
-  align-content: center;
-}
-
-.padding-left-20 {
+.padding-left-10 {
   padding-left: 10px;
 }
 
@@ -125,16 +109,8 @@ tr.heading-row {
   height: 250px;
 }
 
-.padding-top-20 {
-  padding-top: 20px;
-}
-
 .margin-top-10 {
   margin-top: 10px;
-}
-
-.display-inline {
-  display: inline;
 }
 
 .column-33 {
@@ -143,10 +119,6 @@ tr.heading-row {
 
 .column-66 {
   flex-basis: calc(100% * (2 / 3));
-}
-
-.width-80 {
-  width: 80%;
 }
 
 .padding-right {
@@ -229,7 +201,7 @@ tr.heading-row {
   flex-basis: 15%;
 }
 
-.width-90 {
+.width-95 {
   width: 95%;
 }
 
@@ -268,10 +240,6 @@ tr.heading-row {
 
 .modal-header {
   color: white;
-}
-
-.log-date {
-  border-bottom: 5px solid black;
 }
 
 #edamam-badge {

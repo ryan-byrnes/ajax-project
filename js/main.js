@@ -353,7 +353,7 @@ function createNewMealEntry(entry) {
   table.append(tableHead);
 
   var tableHeadRow = document.createElement('tr');
-  tableHeadRow.setAttribute('class', 'margin-top-50 padding-left-20 padding-right form-header row justify-content-space-between background-color-navy margin-top-50 align-items-center color-white font-weight-bold');
+  tableHeadRow.setAttribute('class', 'margin-top-50 padding-left-10 padding-right form-header row justify-content-space-between background-color-navy margin-top-50 align-items-center color-white font-weight-bold');
   tableHead.append(tableHeadRow);
 
   var addMealName = document.createElement('td');
@@ -528,7 +528,7 @@ function showTodaysMeals(entry) {
   table.append(tableHead);
 
   var tableHeadRow = document.createElement('tr');
-  tableHeadRow.setAttribute('class', 'margin-top-50 padding-left-20 padding-right form-header row justify-content-space-between background-color-navy margin-top-50 align-items-center color-white font-weight-bold');
+  tableHeadRow.setAttribute('class', 'margin-top-50 padding-left-10 padding-right form-header row justify-content-space-between background-color-navy margin-top-50 align-items-center color-white font-weight-bold');
   tableHead.append(tableHeadRow);
 
   var addMealName = document.createElement('td');
@@ -552,7 +552,7 @@ function showTodaysMeals(entry) {
   tableHeadRow.append(tdDate);
 
   var tableHeadRow2 = document.createElement('tr');
-  tableHeadRow2.setAttribute('class', 'heading-row row width-90 font-weight-bold');
+  tableHeadRow2.setAttribute('class', 'heading-row row width-95 font-weight-bold');
   tableHead.append(tableHeadRow2);
 
   var tdFoodItem = document.createElement('td');
