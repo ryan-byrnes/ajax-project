@@ -195,8 +195,6 @@ function trackTargetProgress(element) {
   progressFillText.textContent = progressFillDiv.style.width;
   progressFillDiv.appendChild(progressFillText);
 
-  // Protein
-
   var proteinRow = document.createElement('div');
   proteinRow.setAttribute('class', 'row align-items-center');
   element.appendChild(proteinRow);
@@ -228,8 +226,6 @@ function trackTargetProgress(element) {
   proteinProgressFillText.textContent = proteinProgressFillDiv.style.width;
   proteinProgressFillDiv.appendChild(proteinProgressFillText);
 
-  // Fats
-
   var fatsRow = document.createElement('div');
   fatsRow.setAttribute('class', 'row align-items-center');
   element.appendChild(fatsRow);
@@ -260,8 +256,6 @@ function trackTargetProgress(element) {
   fatsProgressFillText.setAttribute('class', 'margin-top-0 color-white font-weight-bold fats-progress-text');
   fatsProgressFillText.textContent = fatsProgressFillDiv.style.width;
   fatsProgressFillDiv.appendChild(fatsProgressFillText);
-
-  // Carbs
 
   var carbohydratesRow = document.createElement('div');
   carbohydratesRow.setAttribute('class', 'row align-items-center');
