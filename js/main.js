@@ -12,6 +12,11 @@ dateText.textContent = dateToday;
 var targetSubmitButton = document.querySelector('.daily-target-submit');
 targetSubmitButton.addEventListener('click', submitTargets);
 
+if (data.targets.date !== data.date) {
+  data.view = 'target-input-form';
+  switchViews();
+}
+
 function submitTargets() {
   event.preventDefault();
 
@@ -22,6 +27,7 @@ function submitTargets() {
   data.targets.protein = inputValue.protein.value;
   data.targets.fats = inputValue.fats.value;
   data.targets.carbohydrates = inputValue.carbohydrates.value;
+  data.targets.date = data.date;
 
   data.view = 'daily-targets';
   inputForm.reset();
