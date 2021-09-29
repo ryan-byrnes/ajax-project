@@ -1,4 +1,3 @@
-
 var date = new Date();
 var month = date.getUTCMonth() + 1;
 var day = date.getUTCDate();
@@ -32,6 +31,7 @@ function submitTargets() {
   switchViews();
   var currentMealView = document.querySelector('div[data-view="current-day-meals"');
   currentMealView.classList.remove('hidden');
+  updateProgress();
 
 }
 
@@ -43,7 +43,7 @@ addMealButton.addEventListener('click', function () {
 
 var newMealButton = document.querySelector('.add-meal-submit');
 
-newMealButton.addEventListener('click', submitNewMeal);
+newMealButton.addEventListener('submit', submitNewMeal);
 
 function submitNewMeal() {
 
@@ -113,57 +113,6 @@ function submitNewMeal() {
 
 function trackTargetProgress(element) {
 
-  /*
-        <div class="row align-items-center">
-          <div class="column-33">
-            <p class="daily-target-calories">Calories: 0/0 kcal</p>
-          </div>
-          <div class="column-66 padding-right">
-            <div class="progress-bar background-color-white row align-items-center">
-              <div style="width: 100%;" class="fill-progress-calories progress text-align-center padding-top-3">
-                <p class="text-progress-calories margin-top-0 color-white font-weight-bold">100%</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row align-items-center">
-          <div class="column-33">
-            <p class="daily-target-protein">Protein: 0/0g</p>
-          </div>
-          <div class="column-66 padding-right">
-            <div class="progress-bar background-color-white row align-items-center">
-              <div style="width: 75%;" class="fill-progress-protein progress text-align-center padding-top-3">
-                <p class="text-progress-protein margin-top-0 color-white font-weight-bold">75%</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row align-items-center">
-          <div class="column-33">
-            <p class="daily-target-fats">Fats: 0/0g</p>
-          </div>
-          <div class="column-66 padding-right">
-            <div class="progress-bar background-color-white row align-items-center">
-              <div style="width: 50%;" class="fill-progress-fats progress text-align-center padding-top-3">
-                <p class="text-progress-fats margin-top-0 color-white font-weight-bold">50%</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row align-items-center">
-          <div class="column-33">
-            <p class="daily-target-carbohydrates">Carbohydrates: 0/0g</p>
-          </div>
-          <div class="column-66 padding-right">
-            <div class="progress-bar background-color-white row align-items-center">
-              <div style="width: 25%;" class="fill-progress-carbohydrates progress text-align-center padding-top-3">
-                <p class="text-progress-carbohydrates margin-top-0 color-white font-weight-bold">25%</p>
-              </div>
-            </div>
-          </div>
-        </div>
-*/
-
   var calorieRow = document.createElement('div');
   calorieRow.setAttribute('class', 'row align-items-center');
   element.appendChild(calorieRow);
@@ -194,8 +143,6 @@ function trackTargetProgress(element) {
   progressFillText.setAttribute('class', 'margin-top-0 color-white font-weight-bold calories-text');
   progressFillText.textContent = progressFillDiv.style.width;
   progressFillDiv.appendChild(progressFillText);
-
-  // Protein
 
   var proteinRow = document.createElement('div');
   proteinRow.setAttribute('class', 'row align-items-center');
@@ -228,8 +175,6 @@ function trackTargetProgress(element) {
   proteinProgressFillText.textContent = proteinProgressFillDiv.style.width;
   proteinProgressFillDiv.appendChild(proteinProgressFillText);
 
-  // Fats
-
   var fatsRow = document.createElement('div');
   fatsRow.setAttribute('class', 'row align-items-center');
   element.appendChild(fatsRow);
@@ -260,8 +205,6 @@ function trackTargetProgress(element) {
   fatsProgressFillText.setAttribute('class', 'margin-top-0 color-white font-weight-bold fats-progress-text');
   fatsProgressFillText.textContent = fatsProgressFillDiv.style.width;
   fatsProgressFillDiv.appendChild(fatsProgressFillText);
-
-  // Carbs
 
   var carbohydratesRow = document.createElement('div');
   carbohydratesRow.setAttribute('class', 'row align-items-center');
@@ -314,34 +257,6 @@ function createNewMealEntry(entry) {
   var showMeal = document.querySelector('div[data-view="current-day-meals"]');
   showMeal.classList.remove('hidden');
 
-  /*  <div id="entry-date">
-      <h3>Date</h3>
-      </div>
-      <div class="table">
-        <table>
-          <thead>
-            <tr class=" margin-top-50 padding-left-20 padding-right form-header row justify-content-space-between background-color-navy margin-top-50 align-items-center color-white font-weight-bold">
-              <td>Your Daily Summary</td>
-              <div>
-                <td class="todays-date">Date</td>
-              </div>
-            </tr>
-            <tr class="heading-row row font-weight-bold">
-              <td class="flex-basis-40">Food Item</td>
-              <td class="flex-basis-15">Calories</td>
-              <td class="flex-basis-15">Protein</td>
-              <td class="flex-basis-15">Fats</td>
-              <td class="flex-basis-15">Carbs</td>
-            </tr>
-          </thead>
-          <tbody class="space-under">
-            <tr>
-              <td class="font-weight-bold"><a class="color-navy" href="">Add Food Item</a></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-*/
   var tableDiv = document.createElement('div');
   tableDiv.setAttribute('class', 'table-div row justify-content-center');
 
@@ -353,7 +268,7 @@ function createNewMealEntry(entry) {
   table.append(tableHead);
 
   var tableHeadRow = document.createElement('tr');
-  tableHeadRow.setAttribute('class', 'margin-top-50 padding-left-20 padding-right form-header row justify-content-space-between background-color-navy margin-top-50 align-items-center color-white font-weight-bold');
+  tableHeadRow.setAttribute('class', 'margin-top-50 padding-left-10 padding-right form-header row justify-content-space-between background-color-navy margin-top-50 align-items-center color-white font-weight-bold');
   tableHead.append(tableHeadRow);
 
   var addMealName = document.createElement('td');
@@ -366,9 +281,11 @@ function createNewMealEntry(entry) {
   tableHeadRow.appendChild(addMealName);
 
   var dateDiv = document.createElement('div');
+  dateDiv.setAttribute('class', 'meal-date-td');
   tableHeadRow.append(dateDiv);
 
   var tdDate = document.createElement('td');
+  tdDate.setAttribute('class', 'meal-date-td');
   for (i = 0; i < data.mealEntries.length; i++) {
     if (i === data.mealEntries[i].entryId - 1) {
       tdDate.textContent = data.mealEntries[i].date;
@@ -469,7 +386,7 @@ document.addEventListener('click', function openAddFoodItemModal() {
   }
 });
 var addNewItemButton = document.querySelector('.add-next-food-item');
-addNewItemButton.addEventListener('click', addNextFoodItem);
+addNewItemButton.addEventListener('submit', addNextFoodItem);
 
 function addNextFoodItem() {
   event.preventDefault();
@@ -492,7 +409,7 @@ function addNextFoodItem() {
 
     for (var i = 0; i < data.mealEntries.length; i++) {
 
-      if (data.mealEntries[i].mealName === eventTarget.closest('table').firstChild.firstChild.firstChild.textContent) {
+      if (data.mealEntries[i].mealName === eventTarget.closest('table').querySelector('.meal-name-td').textContent) {
         data.mealEntries[i].foodItem.push({
           name: data.xhrResponse.text,
           calories: Math.round(data.xhrResponse.hints[0].food.nutrients.ENERC_KCAL),
@@ -502,7 +419,7 @@ function addNextFoodItem() {
         });
       }
     }
-    if (data.view === 'meal-log' && eventTarget.closest('table').firstChild.firstChild.firstChild.nextSibling.nextSibling.textContent === data.date) {
+    if (data.view === 'meal-log' && eventTarget.closest('table').querySelector('.meal-name-td').nextSibling.nextSibling.textContent === data.date) {
       updateProgress();
     } else if (data.view !== 'meal-log') {
       updateProgress();
@@ -528,7 +445,7 @@ function showTodaysMeals(entry) {
   table.append(tableHead);
 
   var tableHeadRow = document.createElement('tr');
-  tableHeadRow.setAttribute('class', 'margin-top-50 padding-left-20 padding-right form-header row justify-content-space-between background-color-navy margin-top-50 align-items-center color-white font-weight-bold');
+  tableHeadRow.setAttribute('class', 'margin-top-50 padding-left-10 padding-right form-header row justify-content-space-between background-color-navy margin-top-50 align-items-center color-white font-weight-bold');
   tableHead.append(tableHeadRow);
 
   var addMealName = document.createElement('td');
@@ -552,7 +469,7 @@ function showTodaysMeals(entry) {
   tableHeadRow.append(tdDate);
 
   var tableHeadRow2 = document.createElement('tr');
-  tableHeadRow2.setAttribute('class', 'heading-row row width-90 font-weight-bold');
+  tableHeadRow2.setAttribute('class', 'heading-row row width-95 font-weight-bold');
   tableHead.append(tableHeadRow2);
 
   var tdFoodItem = document.createElement('td');
@@ -699,6 +616,12 @@ window.addEventListener('DOMContentLoaded', function () {
 
   var dataMealLog = document.querySelector('div[data-view="meal-log"]');
   if (data.view === 'meal-log') {
+
+    if (data.mealEntries.length < 1) {
+      const noEntries = document.querySelector('.no-entries');
+      noEntries.classList.toggle('hidden');
+    }
+
     for (i = data.mealEntries.length - 1; i >= 0; i--) {
 
       dataMealLog.append(showTodaysMeals(data.mealEntries[i]));
@@ -789,7 +712,6 @@ confirmDeleteButton.addEventListener('click', deleteFoodItem);
 
 function deleteFoodItem() {
 
-  // debugger;
   for (var i = 0; i < data.mealEntries.length; i++) {
     if (deleteTargetElement.closest('table').firstChild.firstChild.firstChild.nextSibling.nextSibling.textContent === data.mealEntries[i].date && deleteTargetElement.closest('table').firstChild.firstChild.firstChild.textContent === data.mealEntries[i].mealName) {
       for (var k = 0; k < data.mealEntries[i].foodItem.length; k++) {
