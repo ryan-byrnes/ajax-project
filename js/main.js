@@ -1,4 +1,3 @@
-
 var date = new Date();
 var month = date.getUTCMonth() + 1;
 var day = date.getUTCDate();
@@ -407,7 +406,7 @@ function addNextFoodItem() {
 
     for (var i = 0; i < data.mealEntries.length; i++) {
 
-      if (data.mealEntries[i].mealName === eventTarget.closest('table').firstChild.firstChild.firstChild.textContent) {
+      if (data.mealEntries[i].mealName === eventTarget.closest('table').querySelector('.meal-name-td').textContent) {
         data.mealEntries[i].foodItem.push({
           name: data.xhrResponse.text,
           calories: Math.round(data.xhrResponse.hints[0].food.nutrients.ENERC_KCAL),
