@@ -31,6 +31,7 @@ function submitTargets() {
   switchViews();
   var currentMealView = document.querySelector('div[data-view="current-day-meals"');
   currentMealView.classList.remove('hidden');
+  updateProgress();
 
 }
 
@@ -280,9 +281,11 @@ function createNewMealEntry(entry) {
   tableHeadRow.appendChild(addMealName);
 
   var dateDiv = document.createElement('div');
+  dateDiv.setAttribute('class', 'meal-date-td');
   tableHeadRow.append(dateDiv);
 
   var tdDate = document.createElement('td');
+  tdDate.setAttribute('class', 'meal-date-td');
   for (i = 0; i < data.mealEntries.length; i++) {
     if (i === data.mealEntries[i].entryId - 1) {
       tdDate.textContent = data.mealEntries[i].date;
@@ -416,7 +419,7 @@ function addNextFoodItem() {
         });
       }
     }
-    if (data.view === 'meal-log' && eventTarget.closest('table').firstChild.firstChild.firstChild.nextSibling.nextSibling.textContent === data.date) {
+    if (data.view === 'meal-log' && eventTarget.closest('table').querySelector('.meal-name-td').nextSibling.nextSibling.textContent === data.date) {
       updateProgress();
     } else if (data.view !== 'meal-log') {
       updateProgress();
