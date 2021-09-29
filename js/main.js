@@ -600,8 +600,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
   switchViews();
 
-  if (data.targets.calories !== 0 && data.mealEntries[data.mealEntries.length - 1].date === data.date && data.view !== 'meal-log') {
+  if (data.targets.calories !== 0 && data.mealEntries.length > 0 && data.mealEntries[data.mealEntries.length - 1].date === data.date && data.view !== 'meal-log') {
     trackTargetProgress(trackingView);
+    updateProgress();
     formDataView.classList.add('hidden');
     trackingView.classList.remove('hidden');
 
@@ -630,9 +631,6 @@ window.addEventListener('DOMContentLoaded', function () {
     dailySummary.classList.add('hidden');
     var mealButton = document.querySelector('.meal-button');
     mealButton.classList.add('hidden');
-  }
-  if (data.targets.calories > 0) {
-    updateProgress();
   }
 });
 
