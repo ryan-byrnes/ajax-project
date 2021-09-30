@@ -1,3 +1,6 @@
+// add a daily meal entries property in data that holds daily entries that can be deleted on each new day, but meal entries stay
+// line 628, use todays meal entries prop
+
 var date = new Date();
 var month = date.getUTCMonth() + 1;
 var day = date.getUTCDate();
@@ -14,6 +17,13 @@ targetSubmitButton.addEventListener('click', submitTargets);
 
 if (data.targets.date !== data.date) {
   data.view = 'target-input-form';
+  data.targets = {
+    calories: 0,
+    protein: 0,
+    fats: 0,
+    carbohydrates: 0,
+    date: data.date
+  };
   switchViews();
 }
 
