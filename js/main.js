@@ -24,6 +24,12 @@ if (data.targets.date !== data.date) {
     carbohydrates: 0,
     date: data.date
   };
+  data.dailyTotals = {
+    calories: 0,
+    protein: 0,
+    fats: 0,
+    carbohydrates: 0
+  };
   switchViews();
 }
 
