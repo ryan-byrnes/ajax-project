@@ -1,12 +1,12 @@
-var date = new Date();
+const date = new Date();
 
-var dateToday = date.toLocaleDateString();
+const dateToday = date.toLocaleDateString();
 
 data.date = dateToday;
-var dateText = document.querySelector('.todays-date');
+const dateText = document.querySelector('.todays-date');
 dateText.textContent = dateToday;
 
-var targetSubmitButton = document.querySelector('.daily-target-submit');
+const targetSubmitButton = document.querySelector('.daily-target-submit');
 targetSubmitButton.addEventListener('click', submitTargets);
 
 if (data.targets.date !== data.date) {
@@ -30,8 +30,8 @@ if (data.targets.date !== data.date) {
 function submitTargets() {
   event.preventDefault();
 
-  var inputForm = document.querySelector('.target-input-form');
-  var inputValue = inputForm.elements;
+  const inputForm = document.querySelector('.target-input-form');
+  const inputValue = inputForm.elements;
 
   data.targets.calories = inputValue.calories.value;
   data.targets.protein = inputValue.protein.value;
@@ -42,22 +42,22 @@ function submitTargets() {
   data.view = 'daily-targets';
   inputForm.reset();
 
-  var dataViewDiv = document.querySelector('div[data-view = daily-targets]');
+  const dataViewDiv = document.querySelector('div[data-view = daily-targets]');
   trackTargetProgress(dataViewDiv);
   switchViews();
-  var currentMealView = document.querySelector('div[data-view="current-day-meals"');
+  const currentMealView = document.querySelector('div[data-view="current-day-meals"');
   currentMealView.classList.remove('hidden');
   updateProgress();
 
 }
 
-var addMealButton = document.querySelector('.add-meal-button');
+const addMealButton = document.querySelector('.add-meal-button');
 addMealButton.addEventListener('click', function () {
-  var modalDiv = document.querySelector('div[data-view=new-meal-modal');
+  const modalDiv = document.querySelector('div[data-view=new-meal-modal');
   modalDiv.classList.toggle('hidden');
 });
 
-var newMealButton = document.querySelector('.add-meal-submit');
+const newMealButton = document.querySelector('.add-meal-submit');
 
 newMealButton.addEventListener('submit', submitNewMeal);
 
@@ -75,14 +75,14 @@ function submitNewMeal() {
 
   data.mealEntries[data.nextMealEntryId - 1].date = dateToday;
 
-  var inputForm = document.querySelector('.new-meal-modal-form');
-  var inputValue = inputForm.elements;
+  const inputForm = document.querySelector('.new-meal-modal-form');
+  const inputValue = inputForm.elements;
 
   data.mealEntries[data.nextMealEntryId - 1].mealName = inputValue['meal-name'].value;
   data.mealEntries[data.nextMealEntryId - 1].foodItem[0].name = inputValue['food-item'].value;
   data.mealEntries[data.nextMealEntryId - 1].entryId = data.nextMealEntryId;
 
-  var xhr = new XMLHttpRequest();
+  const xhr = new XMLHttpRequest();
 
   xhr.open('GET', 'https://api.edamam.com/api/food-database/v2/parser?app_id=c2713387&app_key=4ef3b4c8226f2708aa7e3b8b470ed40e&ingr=' + encodeURI(inputValue['food-item'].value) + '&nutrition-type=cooking');
   xhr.responseType = 'json';
@@ -91,7 +91,7 @@ function submitNewMeal() {
   xhr.addEventListener('load', function () {
 
     data.xhrResponse = xhr.response;
-    var tableBody = document.querySelectorAll('tbody');
+    const tableBody = document.querySelectorAll('tbody');
 
     if (tableBody.length === 1) {
       tableBody[0].append(addFoodItem(data.xhrResponse));
@@ -118,137 +118,137 @@ function submitNewMeal() {
   });
   xhr.send();
 
-  var dataViewDiv = document.querySelector('div[data-view = current-day-meals');
+  const dataViewDiv = document.querySelector('div[data-view = current-day-meals');
   dataViewDiv.append(createNewMealEntry(data.mealEntries[data.mealEntries.entryId - 1]));
 
   inputForm.reset();
 
-  var modalDiv = document.querySelector('div[data-view=new-meal-modal');
+  const modalDiv = document.querySelector('div[data-view=new-meal-modal');
   modalDiv.classList.toggle('hidden');
 }
 
 function trackTargetProgress(element) {
 
-  var calorieRow = document.createElement('div');
+  const calorieRow = document.createElement('div');
   calorieRow.setAttribute('class', 'row align-items-center');
   element.appendChild(calorieRow);
 
-  var calorieColumnThird = document.createElement('div');
+  const calorieColumnThird = document.createElement('div');
   calorieColumnThird.setAttribute('class', 'flex-basis-40 flex-media');
   calorieRow.appendChild(calorieColumnThird);
 
-  var calorieP = document.createElement('p');
+  const calorieP = document.createElement('p');
   calorieP.setAttribute('class', 'calorie-numbers font-size-h');
   calorieP.textContent = 'Calories: ' + data.dailyTotals.calories + '/' + data.targets.calories + ' kcal';
   calorieColumnThird.appendChild(calorieP);
 
-  var calorieTwoThirds = document.createElement('div');
+  const calorieTwoThirds = document.createElement('div');
   calorieTwoThirds.setAttribute('class', 'column-66 padding-right');
   calorieRow.appendChild(calorieTwoThirds);
 
-  var progressBarDiv = document.createElement('div');
+  const progressBarDiv = document.createElement('div');
   progressBarDiv.setAttribute('class', 'progress-bar background-color-white row align-items-center');
   calorieTwoThirds.appendChild(progressBarDiv);
 
-  var progressFillDiv = document.createElement('div');
+  const progressFillDiv = document.createElement('div');
   progressFillDiv.setAttribute('style', 'width: ' + Math.round(data.dailyTotals.calories / data.targets.calories * 100) + '%');
   progressFillDiv.setAttribute('class', 'fill-progress-calories progress text-align-center padding-top-3');
   progressBarDiv.appendChild(progressFillDiv);
 
-  var progressFillText = document.createElement('p');
+  const progressFillText = document.createElement('p');
   progressFillText.setAttribute('class', 'margin-top-0 color-white font-weight-bold calories-text');
   progressFillText.textContent = progressFillDiv.style.width;
   progressFillDiv.appendChild(progressFillText);
 
-  var proteinRow = document.createElement('div');
+  const proteinRow = document.createElement('div');
   proteinRow.setAttribute('class', 'row align-items-center');
   element.appendChild(proteinRow);
 
-  var proteinColumnThird = document.createElement('div');
+  const proteinColumnThird = document.createElement('div');
   proteinColumnThird.setAttribute('class', 'flex-basis-40 flex-media');
   proteinRow.appendChild(proteinColumnThird);
 
-  var proteinP = document.createElement('p');
+  const proteinP = document.createElement('p');
   proteinP.setAttribute('class', 'protein-numbers font-size-h');
   proteinP.textContent = 'Protein: ' + data.dailyTotals.protein + '/' + data.targets.protein + ' g';
   proteinColumnThird.appendChild(proteinP);
 
-  var proteinTwoThirds = document.createElement('div');
+  const proteinTwoThirds = document.createElement('div');
   proteinTwoThirds.setAttribute('class', 'column-66 padding-right');
   proteinRow.appendChild(proteinTwoThirds);
 
-  var proteinProgressBarDiv = document.createElement('div');
+  const proteinProgressBarDiv = document.createElement('div');
   proteinProgressBarDiv.setAttribute('class', 'progress-bar background-color-white row align-items-center');
   proteinTwoThirds.appendChild(proteinProgressBarDiv);
 
-  var proteinProgressFillDiv = document.createElement('div');
+  const proteinProgressFillDiv = document.createElement('div');
   proteinProgressFillDiv.setAttribute('style', 'width: ' + Math.round(data.dailyTotals.protein / data.targets.protein * 100) + '%');
   proteinProgressFillDiv.setAttribute('class', 'fill-progress-protein progress text-align-center padding-top-3');
   proteinProgressBarDiv.appendChild(proteinProgressFillDiv);
 
-  var proteinProgressFillText = document.createElement('p');
+  const proteinProgressFillText = document.createElement('p');
   proteinProgressFillText.setAttribute('class', 'margin-top-0 color-white font-weight-bold protein-progress-text');
   proteinProgressFillText.textContent = proteinProgressFillDiv.style.width;
   proteinProgressFillDiv.appendChild(proteinProgressFillText);
 
-  var fatsRow = document.createElement('div');
+  const fatsRow = document.createElement('div');
   fatsRow.setAttribute('class', 'row align-items-center');
   element.appendChild(fatsRow);
 
-  var fatsColumnThird = document.createElement('div');
+  const fatsColumnThird = document.createElement('div');
   fatsColumnThird.setAttribute('class', 'flex-basis-40 flex-media');
   fatsRow.appendChild(fatsColumnThird);
 
-  var fatsP = document.createElement('p');
+  const fatsP = document.createElement('p');
   fatsP.setAttribute('class', 'fats-numbers font-size-h');
   fatsP.textContent = 'Fats: ' + data.dailyTotals.fats + '/' + data.targets.fats + ' g';
   fatsColumnThird.appendChild(fatsP);
 
-  var fatsTwoThirds = document.createElement('div');
+  const fatsTwoThirds = document.createElement('div');
   fatsTwoThirds.setAttribute('class', 'column-66 padding-right');
   fatsRow.appendChild(fatsTwoThirds);
 
-  var fatsProgressBarDiv = document.createElement('div');
+  const fatsProgressBarDiv = document.createElement('div');
   fatsProgressBarDiv.setAttribute('class', 'progress-bar background-color-white row align-items-center');
   fatsTwoThirds.appendChild(fatsProgressBarDiv);
 
-  var fatsProgressFillDiv = document.createElement('div');
+  const fatsProgressFillDiv = document.createElement('div');
   fatsProgressFillDiv.setAttribute('style', 'width: ' + Math.round(data.dailyTotals.fats / data.targets.fats * 100) + '%');
   fatsProgressFillDiv.setAttribute('class', 'fill-progress-fats progress text-align-center padding-top-3');
   fatsProgressBarDiv.appendChild(fatsProgressFillDiv);
 
-  var fatsProgressFillText = document.createElement('p');
+  const fatsProgressFillText = document.createElement('p');
   fatsProgressFillText.setAttribute('class', 'margin-top-0 color-white font-weight-bold fats-progress-text');
   fatsProgressFillText.textContent = fatsProgressFillDiv.style.width;
   fatsProgressFillDiv.appendChild(fatsProgressFillText);
 
-  var carbohydratesRow = document.createElement('div');
+  const carbohydratesRow = document.createElement('div');
   carbohydratesRow.setAttribute('class', 'row align-items-center');
   element.appendChild(carbohydratesRow);
 
-  var carbohydratesColumnThird = document.createElement('div');
+  const carbohydratesColumnThird = document.createElement('div');
   carbohydratesColumnThird.setAttribute('class', 'flex-basis-40 flex-media');
   carbohydratesRow.appendChild(carbohydratesColumnThird);
 
-  var carbohydratesP = document.createElement('p');
+  const carbohydratesP = document.createElement('p');
   carbohydratesP.setAttribute('class', 'carbohydrates-numbers font-size-h');
   carbohydratesP.textContent = 'Carbs: ' + data.dailyTotals.carbohydrates + '/' + data.targets.carbohydrates + ' g';
   carbohydratesColumnThird.appendChild(carbohydratesP);
 
-  var carbohydratesTwoThirds = document.createElement('div');
+  const carbohydratesTwoThirds = document.createElement('div');
   carbohydratesTwoThirds.setAttribute('class', 'column-66 padding-right');
   carbohydratesRow.appendChild(carbohydratesTwoThirds);
 
-  var carbohydratesProgressBarDiv = document.createElement('div');
+  const carbohydratesProgressBarDiv = document.createElement('div');
   carbohydratesProgressBarDiv.setAttribute('class', 'progress-bar background-color-white row align-items-center');
   carbohydratesTwoThirds.appendChild(carbohydratesProgressBarDiv);
 
-  var carbohydratesProgressFillDiv = document.createElement('div');
+  const carbohydratesProgressFillDiv = document.createElement('div');
   carbohydratesProgressFillDiv.setAttribute('style', 'width: ' + Math.round(data.dailyTotals.carbohydrates / data.targets.carbohydrates * 100) + '%');
   carbohydratesProgressFillDiv.setAttribute('class', 'fill-progress-carbohydrates progress text-align-center padding-top-3');
   carbohydratesProgressBarDiv.appendChild(carbohydratesProgressFillDiv);
 
-  var carbohydratesProgressFillText = document.createElement('p');
+  const carbohydratesProgressFillText = document.createElement('p');
   carbohydratesProgressFillText.setAttribute('class', 'margin-top-0 color-white font-weight-bold carbohydrates-progress-text');
   carbohydratesProgressFillText.textContent = carbohydratesProgressFillDiv.style.width;
   carbohydratesProgressFillDiv.appendChild(carbohydratesProgressFillText);
@@ -258,8 +258,8 @@ function trackTargetProgress(element) {
 }
 
 function switchViews() {
-  var dataViewElements = document.querySelectorAll('div[data-view]');
-  for (var i = 0; i < dataViewElements.length; i++) {
+  const dataViewElements = document.querySelectorAll('div[data-view]');
+  for (let i = 0; i < dataViewElements.length; i++) {
     if (data.view === dataViewElements[i].getAttribute('data-view')) {
       dataViewElements[i].classList.remove('hidden');
     } else {
@@ -270,82 +270,82 @@ function switchViews() {
 
 function createNewMealEntry(entry) {
 
-  var showMeal = document.querySelector('div[data-view="current-day-meals"]');
+  const showMeal = document.querySelector('div[data-view="current-day-meals"]');
   showMeal.classList.remove('hidden');
 
-  var tableDiv = document.createElement('div');
+  const tableDiv = document.createElement('div');
   tableDiv.setAttribute('class', 'table-div row justify-content-center');
 
-  var table = document.createElement('table');
+  const table = document.createElement('table');
   table.setAttribute('class', 'table');
   tableDiv.append(table);
 
-  var tableHead = document.createElement('thead');
+  const tableHead = document.createElement('thead');
   table.append(tableHead);
 
-  var tableHeadRow = document.createElement('tr');
+  const tableHeadRow = document.createElement('tr');
   tableHeadRow.setAttribute('class', 'margin-top-50 padding-left-10 padding-right form-header row justify-content-space-between background-color-navy margin-top-50 align-items-center color-white font-weight-bold');
   tableHead.append(tableHeadRow);
 
-  var addMealName = document.createElement('td');
+  const addMealName = document.createElement('td');
   addMealName.setAttribute('class', 'meal-name-td');
-  for (var i = 0; i < data.mealEntries.length; i++) {
+  for (let i = 0; i < data.mealEntries.length; i++) {
     if (i === data.mealEntries[i].entryId - 1) {
       addMealName.textContent = data.mealEntries[i].mealName;
     }
   }
   tableHeadRow.appendChild(addMealName);
 
-  var dateDiv = document.createElement('div');
+  const dateDiv = document.createElement('div');
   dateDiv.setAttribute('class', 'meal-date-td');
   tableHeadRow.append(dateDiv);
 
-  var tdDate = document.createElement('td');
+  const tdDate = document.createElement('td');
   tdDate.setAttribute('class', 'meal-date-td');
-  for (i = 0; i < data.mealEntries.length; i++) {
+  for (let i = 0; i < data.mealEntries.length; i++) {
     if (i === data.mealEntries[i].entryId - 1) {
       tdDate.textContent = data.mealEntries[i].date;
     }
   }
   tableHeadRow.append(tdDate);
 
-  var tableHeadRow2 = document.createElement('tr');
+  const tableHeadRow2 = document.createElement('tr');
   tableHeadRow2.setAttribute('class', 'heading-row row font-weight-bold');
   tableHead.append(tableHeadRow2);
 
-  var tdFoodItem = document.createElement('td');
+  const tdFoodItem = document.createElement('td');
   tdFoodItem.setAttribute('class', 'flex-basis-40');
   tdFoodItem.textContent = 'Food Item';
   tableHeadRow2.append(tdFoodItem);
 
-  var tdCalories = document.createElement('td');
+  const tdCalories = document.createElement('td');
   tdCalories.setAttribute('class', 'flex-basis-15');
   tdCalories.textContent = 'Calories';
   tableHeadRow2.append(tdCalories);
 
-  var tdProtein = document.createElement('td');
+  const tdProtein = document.createElement('td');
   tdProtein.setAttribute('class', 'flex-basis-15');
   tdProtein.textContent = 'Protein';
   tableHeadRow2.append(tdProtein);
 
-  var tdFats = document.createElement('td');
+  const tdFats = document.createElement('td');
   tdFats.setAttribute('class', 'flex-basis-15');
   tdFats.textContent = 'Fats';
   tableHeadRow2.append(tdFats);
 
-  var tdCarbohydrates = document.createElement('td');
+  const tdCarbohydrates = document.createElement('td');
   tdCarbohydrates.setAttribute('class', 'flex-basis-15');
   tdCarbohydrates.textContent = 'Carbs';
   tableHeadRow2.append(tdCarbohydrates);
 
-  var tableBody = document.createElement('tbody');
+  const tableBody = document.createElement('tbody');
   tableBody.setAttribute('class', 'table-body-append');
   table.append(tableBody);
 
-  var tableBodyRow2 = document.createElement('tr');
+  const tableBodyRow2 = document.createElement('tr');
   tableBody.append(tableBodyRow2);
 
-  var tdAddFoodItem = document.createElement('td');
+  const tdAddFoodItem = document.createElement('td');
   tdAddFoodItem.setAttribute('class', 'font-weight-bold add-new-food-item color-navy');
   tdAddFoodItem.setAttribute('id', 'add-new-food-item');
   tdAddFoodItem.textContent = 'Add Food Item';
@@ -356,35 +356,35 @@ function createNewMealEntry(entry) {
 }
 
 function addFoodItem(entry) {
-  var tableBodyRow = document.createElement('tr');
+  const tableBodyRow = document.createElement('tr');
   tableBodyRow.setAttribute('class', 'row');
 
-  var tdFoodItemName = document.createElement('td');
+  const tdFoodItemName = document.createElement('td');
   tdFoodItemName.setAttribute('class', 'flex-basis-40');
   tdFoodItemName.textContent = data.xhrResponse.text;
   tableBodyRow.append(tdFoodItemName);
 
-  var tdCaloriesValue = document.createElement('td');
+  const tdCaloriesValue = document.createElement('td');
   tdCaloriesValue.setAttribute('class', 'flex-basis-15');
   tdCaloriesValue.textContent = Math.round(data.xhrResponse.hints[0].food.nutrients.ENERC_KCAL);
   tableBodyRow.append(tdCaloriesValue);
 
-  var tdProteinValue = document.createElement('td');
+  const tdProteinValue = document.createElement('td');
   tdProteinValue.setAttribute('class', 'flex-basis-15');
   tdProteinValue.textContent = Math.round(data.xhrResponse.hints[0].food.nutrients.PROCNT);
   tableBodyRow.append(tdProteinValue);
 
-  var tdFatsValue = document.createElement('td');
+  const tdFatsValue = document.createElement('td');
   tdFatsValue.setAttribute('class', 'flex-basis-15');
   tdFatsValue.textContent = Math.round(data.xhrResponse.hints[0].food.nutrients.FAT);
   tableBodyRow.append(tdFatsValue);
 
-  var tdCarbohydratesValue = document.createElement('td');
+  const tdCarbohydratesValue = document.createElement('td');
   tdCarbohydratesValue.setAttribute('class', 'flex-basis-15');
   tdCarbohydratesValue.textContent = Math.round(data.xhrResponse.hints[0].food.nutrients.CHOCDF);
   tableBodyRow.append(tdCarbohydratesValue);
 
-  var deleteIcon = document.createElement('i');
+  const deleteIcon = document.createElement('i');
   deleteIcon.setAttribute('class', 'fas fa-minus-circle padding-left-35 delete-icon');
   tdCarbohydratesValue.append(deleteIcon);
 
@@ -393,22 +393,22 @@ function addFoodItem(entry) {
   return tableBodyRow;
 
 }
-var eventTarget;
+let eventTarget;
 document.addEventListener('click', function openAddFoodItemModal() {
   if (event.target.id === 'add-new-food-item') {
     eventTarget = event.target;
-    var showModal = document.querySelector('.add-food-item-modal');
+    const showModal = document.querySelector('.add-food-item-modal');
     showModal.classList.toggle('hidden');
   }
 });
-var addNewItemButton = document.querySelector('.add-next-food-item');
+const addNewItemButton = document.querySelector('.add-next-food-item');
 addNewItemButton.addEventListener('submit', addNextFoodItem);
 
 function addNextFoodItem() {
   event.preventDefault();
-  var inputForm = document.querySelector('.next-item-modal-form');
-  var inputValue = inputForm.elements;
-  var xhr = new XMLHttpRequest();
+  const inputForm = document.querySelector('.next-item-modal-form');
+  const inputValue = inputForm.elements;
+  const xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.edamam.com/api/food-database/v2/parser?app_id=c2713387&app_key=4ef3b4c8226f2708aa7e3b8b470ed40e&ingr=' + encodeURI(inputValue['new-food-item'].value) + '&nutrition-type=cooking');
   xhr.responseType = 'json';
   const spinner = document.querySelector('.spinner');
@@ -423,7 +423,7 @@ function addNextFoodItem() {
     data.dailyTotals.fats += Math.round(data.xhrResponse.hints[0].food.nutrients.FAT);
     data.dailyTotals.carbohydrates += Math.round(data.xhrResponse.hints[0].food.nutrients.CHOCDF);
 
-    for (var i = 0; i < data.mealEntries.length; i++) {
+    for (let i = 0; i < data.mealEntries.length; i++) {
 
       if (data.mealEntries[i].mealName === eventTarget.closest('table').querySelector('.meal-name-td').textContent) {
         data.mealEntries[i].foodItem.push({
@@ -445,26 +445,26 @@ function addNextFoodItem() {
   });
   xhr.send();
   inputForm.reset();
-  var showModal = document.querySelector('.add-food-item-modal');
+  const showModal = document.querySelector('.add-food-item-modal');
   showModal.classList.toggle('hidden');
 }
 
 function showTodaysMeals(entry) {
 
-  var tableDiv = document.createElement('div');
+  const tableDiv = document.createElement('div');
   tableDiv.setAttribute('class', 'table');
 
-  var table = document.createElement('table');
+  const table = document.createElement('table');
   tableDiv.append(table);
 
-  var tableHead = document.createElement('thead');
+  const tableHead = document.createElement('thead');
   table.append(tableHead);
 
-  var tableHeadRow = document.createElement('tr');
+  const tableHeadRow = document.createElement('tr');
   tableHeadRow.setAttribute('class', 'margin-top-50 padding-left-10 padding-right form-header row justify-content-space-between background-color-navy margin-top-50 align-items-center color-white font-weight-bold');
   tableHead.append(tableHeadRow);
 
-  var addMealName = document.createElement('td');
+  const addMealName = document.createElement('td');
   addMealName.setAttribute('class', 'meal-name-td');
   for (var i = 0; i < data.mealEntries.length; i++) {
     if (data.mealEntries[i].entryId === entry.entryId) {
@@ -473,10 +473,10 @@ function showTodaysMeals(entry) {
   }
   tableHeadRow.appendChild(addMealName);
 
-  var dateDiv = document.createElement('div');
+  const dateDiv = document.createElement('div');
   tableHeadRow.append(dateDiv);
 
-  var tdDate = document.createElement('td');
+  const tdDate = document.createElement('td');
   tdDate.setAttribute('class', 'td-date');
   for (i = 0; i < data.mealEntries.length; i++) {
     if (data.mealEntries[i].entryId === entry.entryId) {
@@ -485,43 +485,43 @@ function showTodaysMeals(entry) {
   }
   tableHeadRow.append(tdDate);
 
-  var tableHeadRow2 = document.createElement('tr');
+  const tableHeadRow2 = document.createElement('tr');
   tableHeadRow2.setAttribute('class', 'heading-row row width-95 font-weight-bold');
   tableHead.append(tableHeadRow2);
 
-  var tdFoodItem = document.createElement('td');
+  const tdFoodItem = document.createElement('td');
   tdFoodItem.setAttribute('class', 'flex-basis-40 font-size-h');
   tdFoodItem.textContent = 'Food Item';
   tableHeadRow2.append(tdFoodItem);
 
-  var tdCalories = document.createElement('td');
+  const tdCalories = document.createElement('td');
   tdCalories.setAttribute('class', 'flex-basis-15 font-size-h');
   tdCalories.textContent = 'Calories';
   tableHeadRow2.append(tdCalories);
 
-  var tdProtein = document.createElement('td');
+  const tdProtein = document.createElement('td');
   tdProtein.setAttribute('class', 'flex-basis-15 font-size-h padding-left-media');
   tdProtein.textContent = 'Protein';
   tableHeadRow2.append(tdProtein);
 
-  var tdFats = document.createElement('td');
+  const tdFats = document.createElement('td');
   tdFats.setAttribute('class', 'flex-basis-15 font-size-h padding-left-media');
   tdFats.textContent = 'Fats';
   tableHeadRow2.append(tdFats);
 
-  var tdCarbohydrates = document.createElement('td');
+  const tdCarbohydrates = document.createElement('td');
   tdCarbohydrates.setAttribute('class', 'flex-basis-15 font-size-h padding-left-media');
   tdCarbohydrates.textContent = 'Carbs';
   tableHeadRow2.append(tdCarbohydrates);
 
-  var tableBody = document.createElement('tbody');
+  const tableBody = document.createElement('tbody');
   tableBody.setAttribute('class', 'table-body-append');
   table.append(tableBody);
 
-  var tableBodyRow2 = document.createElement('tr');
+  const tableBodyRow2 = document.createElement('tr');
   tableBody.append(tableBodyRow2);
 
-  var tdAddFoodItem = document.createElement('td');
+  const tdAddFoodItem = document.createElement('td');
   tdAddFoodItem.setAttribute('class', 'font-weight-bold add-new-food-item color-navy font-size-h');
   tdAddFoodItem.setAttribute('id', 'add-new-food-item');
   tdAddFoodItem.textContent = 'Add Food Item';
@@ -529,42 +529,42 @@ function showTodaysMeals(entry) {
 
   function createFoodItem() {
 
-    var tableBodyRow = document.createElement('tr');
+    const tableBodyRow = document.createElement('tr');
     tableBodyRow.setAttribute('class', 'row align-items-end');
     tableBody.append(tableBodyRow);
 
-    var tdFoodItemName = document.createElement('td');
+    const tdFoodItemName = document.createElement('td');
     tdFoodItemName.setAttribute('class', 'flex-basis-40 font-size-h');
     tdFoodItemName.textContent = data.mealEntries[i].foodItem[item].name;
     tableBodyRow.append(tdFoodItemName);
 
-    var tdCaloriesValue = document.createElement('td');
+    const tdCaloriesValue = document.createElement('td');
     tdCaloriesValue.setAttribute('class', 'flex-basis-15 font-size-h');
     tdCaloriesValue.textContent = data.mealEntries[i].foodItem[item].calories;
     tableBodyRow.append(tdCaloriesValue);
 
-    var tdProteinValue = document.createElement('td');
+    const tdProteinValue = document.createElement('td');
     tdProteinValue.setAttribute('class', 'flex-basis-15 font-size-h padding-left-media');
     tdProteinValue.textContent = data.mealEntries[i].foodItem[item].protein;
     tableBodyRow.append(tdProteinValue);
 
-    var tdFatsValue = document.createElement('td');
+    const tdFatsValue = document.createElement('td');
     tdFatsValue.setAttribute('class', 'flex-basis-15 font-size-h padding-left-media');
     tdFatsValue.textContent = data.mealEntries[i].foodItem[item].fats;
     tableBodyRow.append(tdFatsValue);
 
-    var tdCarbohydratesValue = document.createElement('td');
+    const tdCarbohydratesValue = document.createElement('td');
     tdCarbohydratesValue.setAttribute('class', 'flex-basis-15 font-size-h padding-left-media');
     tdCarbohydratesValue.textContent = data.mealEntries[i].foodItem[item].carbohydrates;
     tableBodyRow.append(tdCarbohydratesValue);
 
-    var deleteIcon = document.createElement('i');
+    const deleteIcon = document.createElement('i');
     deleteIcon.setAttribute('class', 'fas fa-minus-circle padding-left-35 delete-icon font-size-h flex-basis-15');
     tdCarbohydratesValue.append(deleteIcon);
 
   }
 
-  for (i = 0; i < data.mealEntries.length; i++) {
+  for (let i = 0; i < data.mealEntries.length; i++) {
     if (data.mealEntries[i].entryId === entry.entryId) {
       for (var item = 0; item < data.mealEntries[i].foodItem.length; item++) {
         createFoodItem();
@@ -575,23 +575,23 @@ function showTodaysMeals(entry) {
   return tableDiv;
 }
 
-var mealLog = document.querySelector('.meal-log-view');
+const mealLog = document.querySelector('.meal-log-view');
 
 mealLog.addEventListener('click', function () {
-  var dataMealLog = document.querySelector('div[data-view="meal-log"]');
+  const dataMealLog = document.querySelector('div[data-view="meal-log"]');
   data.view = 'meal-log';
-  for (var i = data.mealEntries.length - 1; i >= 0; i--) {
+  for (let i = data.mealEntries.length - 1; i >= 0; i--) {
     dataMealLog.append(showTodaysMeals(data.mealEntries[i]));
   }
   switchViews();
 
-  var dailySummary = document.querySelector('.daily-summary-heading');
+  const dailySummary = document.querySelector('.daily-summary-heading');
   dailySummary.classList.add('hidden');
-  var mealButton = document.querySelector('.meal-button');
+  const mealButton = document.querySelector('.meal-button');
   mealButton.classList.add('hidden');
 });
 
-var homePageView = document.querySelector('.home-page-view');
+const homePageView = document.querySelector('.home-page-view');
 
 homePageView.addEventListener('click', function () {
   if (data.targets.calories === 0) {
@@ -600,20 +600,20 @@ homePageView.addEventListener('click', function () {
     data.view = 'daily-targets';
   }
 
-  var dailySummary = document.querySelector('.daily-summary-heading');
+  const dailySummary = document.querySelector('.daily-summary-heading');
   dailySummary.classList.add('hidden');
-  var mealButton = document.querySelector('.meal-button');
+  const mealButton = document.querySelector('.meal-button');
   mealButton.classList.add('hidden');
 
   switchViews();
 
-  var currentMeals = document.querySelector('div[data-view="current-day-meals"]');
+  const currentMeals = document.querySelector('div[data-view="current-day-meals"]');
   currentMeals.classList.remove('hidden');
 });
 
 window.addEventListener('DOMContentLoaded', function () {
-  var formDataView = document.querySelector('div[data-view = target-input-form]');
-  var trackingView = document.querySelector('div[data-view = daily-targets]');
+  const formDataView = document.querySelector('div[data-view = target-input-form]');
+  const trackingView = document.querySelector('div[data-view = daily-targets]');
 
   switchViews();
 
@@ -624,15 +624,15 @@ window.addEventListener('DOMContentLoaded', function () {
     trackingView.classList.remove('hidden');
 
   }
-  var dataViewDiv = document.querySelector('div[data-view = current-day-meals');
-  for (var i = 0; i < data.mealEntries.length; i++) {
+  const dataViewDiv = document.querySelector('div[data-view = current-day-meals');
+  for (let i = 0; i < data.mealEntries.length; i++) {
     if (data.mealEntries[i].date === data.date && data.view !== 'meal-log') {
       dataViewDiv.append(showTodaysMeals(data.mealEntries[i]));
       dataViewDiv.classList.remove('hidden');
     }
   }
 
-  var dataMealLog = document.querySelector('div[data-view="meal-log"]');
+  const dataMealLog = document.querySelector('div[data-view="meal-log"]');
   if (data.view === 'meal-log') {
 
     if (data.mealEntries.length < 1) {
@@ -640,99 +640,99 @@ window.addEventListener('DOMContentLoaded', function () {
       noEntries.classList.toggle('hidden');
     }
 
-    for (i = data.mealEntries.length - 1; i >= 0; i--) {
+    for (let i = data.mealEntries.length - 1; i >= 0; i--) {
 
       dataMealLog.append(showTodaysMeals(data.mealEntries[i]));
     }
-    var dailySummary = document.querySelector('.daily-summary-heading');
+    const dailySummary = document.querySelector('.daily-summary-heading');
     dailySummary.classList.add('hidden');
-    var mealButton = document.querySelector('.meal-button');
+    const mealButton = document.querySelector('.meal-button');
     mealButton.classList.add('hidden');
   }
 });
 
 function updateProgress() {
   if (data.view === 'daily-targets') {
-    var calorieP = document.querySelector('.calorie-numbers');
+    const calorieP = document.querySelector('.calorie-numbers');
     calorieP.textContent = 'Calories: ' + data.dailyTotals.calories + '/' + data.targets.calories + ' kcal';
 
-    var fillProgressCalories = document.querySelector('.fill-progress-calories');
+    const fillProgressCalories = document.querySelector('.fill-progress-calories');
     fillProgressCalories.style.width = Math.round(data.dailyTotals.calories / data.targets.calories * 100) + '%';
-    var calorieLimit = Math.round(data.dailyTotals.calories / data.targets.calories * 100);
+    const calorieLimit = Math.round(data.dailyTotals.calories / data.targets.calories * 100);
     if (calorieLimit > 100) {
       fillProgressCalories.style.backgroundColor = 'red';
     }
 
-    var caloriesText = document.querySelector('.calories-text');
+    const caloriesText = document.querySelector('.calories-text');
     caloriesText.textContent = fillProgressCalories.style.width;
 
-    var proteinP = document.querySelector('.protein-numbers');
+    const proteinP = document.querySelector('.protein-numbers');
     proteinP.textContent = 'Protein: ' + data.dailyTotals.protein + '/' + data.targets.protein + ' g';
 
-    var fillProgressProtein = document.querySelector('.fill-progress-protein');
+    const fillProgressProtein = document.querySelector('.fill-progress-protein');
     fillProgressProtein.style.width = Math.round(data.dailyTotals.protein / data.targets.protein * 100) + '%';
-    var proteinLimit = Math.round(data.dailyTotals.protein / data.targets.protein * 100);
+    const proteinLimit = Math.round(data.dailyTotals.protein / data.targets.protein * 100);
     if (proteinLimit > 100) {
       fillProgressProtein.style.backgroundColor = 'red';
     }
 
-    var proteinText = document.querySelector('.protein-progress-text');
+    const proteinText = document.querySelector('.protein-progress-text');
     proteinText.textContent = fillProgressProtein.style.width;
 
-    var fatsP = document.querySelector('.fats-numbers');
+    const fatsP = document.querySelector('.fats-numbers');
     fatsP.textContent = 'Fats: ' + data.dailyTotals.fats + '/' + data.targets.fats + ' g';
 
-    var fillProgressFats = document.querySelector('.fill-progress-fats');
+    const fillProgressFats = document.querySelector('.fill-progress-fats');
     fillProgressFats.style.width = Math.round(data.dailyTotals.fats / data.targets.fats * 100) + '%';
-    var fatsLimit = Math.round(data.dailyTotals.fats / data.targets.fats * 100);
+    const fatsLimit = Math.round(data.dailyTotals.fats / data.targets.fats * 100);
     if (fatsLimit > 100) {
       fillProgressFats.style.backgroundColor = 'red';
     }
 
-    var fatsText = document.querySelector('.fats-progress-text');
+    const fatsText = document.querySelector('.fats-progress-text');
     fatsText.textContent = fillProgressFats.style.width;
 
-    var carbohydratesP = document.querySelector('.carbohydrates-numbers');
+    const carbohydratesP = document.querySelector('.carbohydrates-numbers');
     carbohydratesP.textContent = 'Carbs: ' + data.dailyTotals.carbohydrates + '/' + data.targets.carbohydrates + ' g';
 
-    var fillProgressCarbohydrates = document.querySelector('.fill-progress-carbohydrates');
+    const fillProgressCarbohydrates = document.querySelector('.fill-progress-carbohydrates');
     fillProgressCarbohydrates.style.width = Math.round(data.dailyTotals.carbohydrates / data.targets.carbohydrates * 100) + '%';
-    var carbohydratesLimit = Math.round(data.dailyTotals.carbohydrates / data.targets.carbohydrates * 100);
+    const carbohydratesLimit = Math.round(data.dailyTotals.carbohydrates / data.targets.carbohydrates * 100);
     if (carbohydratesLimit > 100) {
       fillProgressCarbohydrates.style.backgroundColor = 'red';
     }
 
-    var carbohydratesText = document.querySelector('.carbohydrates-progress-text');
+    const carbohydratesText = document.querySelector('.carbohydrates-progress-text');
     carbohydratesText.textContent = fillProgressCarbohydrates.style.width;
   }
 }
 
-var deleteIconListener = document.querySelector('body');
+const deleteIconListener = document.querySelector('body');
 
 deleteIconListener.addEventListener('click', showDeleteModal);
 
-var deleteTargetElement;
+let deleteTargetElement;
 
 function showDeleteModal() {
   if (event.target.tagName === 'I') {
-    var deleteModal = document.querySelector('.delete-food-item-modal');
+    const deleteModal = document.querySelector('.delete-food-item-modal');
     deleteModal.classList.remove('hidden');
     deleteTargetElement = event.target;
   }
 }
 
-var confirmDeleteButton = document.querySelector('.delete-button');
+const confirmDeleteButton = document.querySelector('.delete-button');
 
 confirmDeleteButton.addEventListener('click', deleteFoodItem);
 
 function deleteFoodItem() {
 
-  for (var i = 0; i < data.mealEntries.length; i++) {
+  for (let i = 0; i < data.mealEntries.length; i++) {
     if (deleteTargetElement.closest('table').firstChild.firstChild.firstChild.nextSibling.nextSibling.textContent === data.mealEntries[i].date && deleteTargetElement.closest('table').firstChild.firstChild.firstChild.textContent === data.mealEntries[i].mealName) {
-      for (var k = 0; k < data.mealEntries[i].foodItem.length; k++) {
+      for (let k = 0; k < data.mealEntries[i].foodItem.length; k++) {
         if (deleteTargetElement.closest('tr').firstChild.textContent === data.mealEntries[i].foodItem[k].name) {
           data.mealEntries[i].foodItem.splice(k, 1);
-          var deleteModal = document.querySelector('.delete-food-item-modal');
+          const deleteModal = document.querySelector('.delete-food-item-modal');
           deleteModal.classList.add('hidden');
         }
       }
