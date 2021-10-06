@@ -5,7 +5,8 @@ var data = {
     calories: 0,
     protein: 0,
     fats: 0,
-    carbohydrates: 0
+    carbohydrates: 0,
+    date: ''
   },
   dailyTotals: {
     calories: 0,

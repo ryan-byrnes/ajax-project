@@ -1,3 +1,6 @@
+// add a daily meal entries property in data that holds daily entries that can be deleted on each new day, but meal entries stay
+// line 628, use todays meal entries prop
+
 var date = new Date();
 var month = date.getUTCMonth() + 1;
 var day = date.getUTCDate();
@@ -12,6 +15,24 @@ dateText.textContent = dateToday;
 var targetSubmitButton = document.querySelector('.daily-target-submit');
 targetSubmitButton.addEventListener('click', submitTargets);
 
+if (data.targets.date !== data.date) {
+  data.view = 'target-input-form';
+  data.targets = {
+    calories: 0,
+    protein: 0,
+    fats: 0,
+    carbohydrates: 0,
+    date: data.date
+  };
+  data.dailyTotals = {
+    calories: 0,
+    protein: 0,
+    fats: 0,
+    carbohydrates: 0
+  };
+  switchViews();
+}
+
 function submitTargets() {
   event.preventDefault();
 
@@ -22,6 +43,7 @@ function submitTargets() {
   data.targets.protein = inputValue.protein.value;
   data.targets.fats = inputValue.fats.value;
   data.targets.carbohydrates = inputValue.carbohydrates.value;
+  data.targets.date = data.date;
 
   data.view = 'daily-targets';
   inputForm.reset();
@@ -600,8 +622,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
   switchViews();
 
-  if (data.targets.calories !== 0 && data.mealEntries[data.mealEntries.length - 1].date === data.date && data.view !== 'meal-log') {
+  if (data.targets.calories !== 0 && data.mealEntries.length > 0 && data.mealEntries[data.mealEntries.length - 1].date === data.date && data.view !== 'meal-log') {
     trackTargetProgress(trackingView);
+    updateProgress();
     formDataView.classList.add('hidden');
     trackingView.classList.remove('hidden');
 
@@ -630,9 +653,6 @@ window.addEventListener('DOMContentLoaded', function () {
     dailySummary.classList.add('hidden');
     var mealButton = document.querySelector('.meal-button');
     mealButton.classList.add('hidden');
-  }
-  if (data.targets.calories > 0) {
-    updateProgress();
   }
 });
 
