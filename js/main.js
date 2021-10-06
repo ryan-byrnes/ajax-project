@@ -1,6 +1,3 @@
-// add a daily meal entries property in data that holds daily entries that can be deleted on each new day, but meal entries stay
-// line 628, use todays meal entries prop
-
 var date = new Date();
 
 var dateToday = date.toLocaleDateString();
