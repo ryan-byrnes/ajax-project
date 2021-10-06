@@ -2,13 +2,8 @@
 // line 628, use todays meal entries prop
 
 var date = new Date();
-// var month = date.getUTCMonth() + 1;
-// var day = date.getUTCDate();
-// var year = date.getUTCFullYear();
 
 var dateToday = date.toLocaleDateString();
-
-// var dateToday = month + '/' + day + '/' + year;
 
 data.date = dateToday;
 var dateText = document.querySelector('.todays-date');
@@ -485,6 +480,7 @@ function showTodaysMeals(entry) {
   tableHeadRow.append(dateDiv);
 
   var tdDate = document.createElement('td');
+  tdDate.setAttribute('class', 'td-date');
   for (i = 0; i < data.mealEntries.length; i++) {
     if (i === data.mealEntries[i].entryId - 1) {
       tdDate.textContent = data.mealEntries[i].date;
