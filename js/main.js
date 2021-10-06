@@ -1,12 +1,6 @@
-// add a daily meal entries property in data that holds daily entries that can be deleted on each new day, but meal entries stay
-// line 628, use todays meal entries prop
-
 var date = new Date();
-var month = date.getUTCMonth() + 1;
-var day = date.getUTCDate();
-var year = date.getUTCFullYear();
 
-var dateToday = month + '/' + day + '/' + year;
+var dateToday = date.toLocaleDateString();
 
 data.date = dateToday;
 var dateText = document.querySelector('.todays-date');
@@ -92,7 +86,7 @@ function submitNewMeal() {
 
   xhr.open('GET', 'https://api.edamam.com/api/food-database/v2/parser?app_id=c2713387&app_key=4ef3b4c8226f2708aa7e3b8b470ed40e&ingr=' + encodeURI(inputValue['food-item'].value) + '&nutrition-type=cooking');
   xhr.responseType = 'json';
-  const spinner = document.querySelector('.spinner');
+  var spinner = document.querySelector('.spinner');
   spinner.classList.toggle('hidden');
   xhr.addEventListener('load', function () {
 
@@ -119,7 +113,7 @@ function submitNewMeal() {
       updateProgress();
     }
     data.nextMealEntryId += 1;
-    const spinner = document.querySelector('.spinner');
+    var spinner = document.querySelector('.spinner');
     spinner.classList.toggle('hidden');
   });
   xhr.send();
@@ -417,7 +411,7 @@ function addNextFoodItem() {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.edamam.com/api/food-database/v2/parser?app_id=c2713387&app_key=4ef3b4c8226f2708aa7e3b8b470ed40e&ingr=' + encodeURI(inputValue['new-food-item'].value) + '&nutrition-type=cooking');
   xhr.responseType = 'json';
-  const spinner = document.querySelector('.spinner');
+  var spinner = document.querySelector('.spinner');
   spinner.classList.toggle('hidden');
   xhr.addEventListener('load', function () {
 
@@ -446,7 +440,7 @@ function addNextFoodItem() {
     } else if (data.view !== 'meal-log') {
       updateProgress();
     }
-    const spinner = document.querySelector('.spinner');
+    var spinner = document.querySelector('.spinner');
     spinner.classList.toggle('hidden');
   });
   xhr.send();
@@ -483,8 +477,9 @@ function showTodaysMeals(entry) {
   tableHeadRow.append(dateDiv);
 
   var tdDate = document.createElement('td');
+  tdDate.setAttribute('class', 'td-date');
   for (i = 0; i < data.mealEntries.length; i++) {
-    if (i === data.mealEntries[i].entryId - 1) {
+    if (data.mealEntries[i].entryId === entry.entryId) {
       tdDate.textContent = data.mealEntries[i].date;
     }
   }
@@ -641,7 +636,7 @@ window.addEventListener('DOMContentLoaded', function () {
   if (data.view === 'meal-log') {
 
     if (data.mealEntries.length < 1) {
-      const noEntries = document.querySelector('.no-entries');
+      var noEntries = document.querySelector('.no-entries');
       noEntries.classList.toggle('hidden');
     }
 
