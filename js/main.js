@@ -482,7 +482,7 @@ function showTodaysMeals(entry) {
   var tdDate = document.createElement('td');
   tdDate.setAttribute('class', 'td-date');
   for (i = 0; i < data.mealEntries.length; i++) {
-    if (i === data.mealEntries[i].entryId - 1) {
+    if (data.mealEntries[i].entryId === entry.entryId) {
       tdDate.textContent = data.mealEntries[i].date;
     }
   }
