@@ -2,11 +2,13 @@
 // line 628, use todays meal entries prop
 
 var date = new Date();
-var month = date.getUTCMonth() + 1;
-var day = date.getUTCDate();
-var year = date.getUTCFullYear();
+// var month = date.getUTCMonth() + 1;
+// var day = date.getUTCDate();
+// var year = date.getUTCFullYear();
 
-var dateToday = month + '/' + day + '/' + year;
+var dateToday = date.toLocaleDateString();
+
+// var dateToday = month + '/' + day + '/' + year;
 
 data.date = dateToday;
 var dateText = document.querySelector('.todays-date');
