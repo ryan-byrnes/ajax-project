@@ -1,6 +1,8 @@
 // todays meals property would be the showTodaysMeals parameter on line 630
 // create new meal property that shows only todays meals
 // restructure mealEntries so that each element is an object for each date
+// check for date in meal entries, if no, push current meals
+// if yes, reploce index with current meals
 
 var date = new Date();
 
@@ -274,6 +276,8 @@ function switchViews() {
 
 function createNewMealEntry(entry) {
 
+  // add to current day property here
+
   var showMeal = document.querySelector('div[data-view="current-day-meals"]');
   showMeal.classList.remove('hidden');
 
@@ -426,6 +430,8 @@ function addNextFoodItem() {
     data.dailyTotals.protein += Math.round(data.xhrResponse.hints[0].food.nutrients.PROCNT);
     data.dailyTotals.fats += Math.round(data.xhrResponse.hints[0].food.nutrients.FAT);
     data.dailyTotals.carbohydrates += Math.round(data.xhrResponse.hints[0].food.nutrients.CHOCDF);
+
+    // add second for loop for current meals property
 
     for (var i = 0; i < data.mealEntries.length; i++) {
 
