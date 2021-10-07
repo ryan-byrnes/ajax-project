@@ -14,6 +14,7 @@ var data = {
     fats: 0,
     carbohydrates: 0
   },
+  currentDaysMeals: {},
   mealEntries: [],
   view: 'target-input-form',
   date: '',

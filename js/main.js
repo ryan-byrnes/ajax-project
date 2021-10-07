@@ -1,3 +1,7 @@
+// todays meals property would be the showTodaysMeals parameter on line 630
+// create new meal property that shows only todays meals
+// restructure mealEntries so that each element is an object for each date
+
 var date = new Date();
 
 var dateToday = date.toLocaleDateString();
