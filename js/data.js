@@ -14,6 +14,13 @@ var data = {
     fats: 0,
     carbohydrates: 0
   },
+  currentDaysMeals: [{
+    date: '',
+    mealName: '',
+    foodItem: [{}],
+    foodEntryId: 1,
+    entryId: ''
+  }],
   mealEntries: [],
   view: 'target-input-form',
   date: '',

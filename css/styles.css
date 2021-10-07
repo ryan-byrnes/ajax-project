@@ -45,8 +45,18 @@ button:hover {
   cursor: pointer;
 }
 
+tr {
+  border-radius: 5px;
+}
+
 tr.heading-row {
   padding-top: 0.5em;
+}
+
+div.daily-summary-heading,
+div.target-input-form,
+div.daily-targets {
+  border-radius: 5px;
 }
 
 .height-225 {
