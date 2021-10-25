@@ -36,13 +36,17 @@ if (data.targets.date !== data.date) {
 function submitTargets() {
   event.preventDefault();
 
-  var inputForm = document.querySelector('.target-input-form');
+  var inputForm = document.querySelector('#target-input-form');
   var inputValue = inputForm.elements;
+  var calorieInput = inputValue.calories;
+  var proteinInput = inputValue.protein;
+  var fatsInput = inputValue.fats;
+  var carbInput = inputValue.carbohydrates;
 
-  data.targets.calories = inputValue.calories.value;
-  data.targets.protein = inputValue.protein.value;
-  data.targets.fats = inputValue.fats.value;
-  data.targets.carbohydrates = inputValue.carbohydrates.value;
+  data.targets.calories = calorieInput.value;
+  data.targets.protein = proteinInput.value;
+  data.targets.fats = fatsInput.value;
+  data.targets.carbohydrates = carbInput.value;
   data.targets.date = data.date;
 
   data.view = 'daily-targets';
@@ -136,7 +140,7 @@ function submitNewMeal() {
 function trackTargetProgress(element) {
 
   var calorieRow = document.createElement('div');
-  calorieRow.setAttribute('class', 'row align-items-center');
+  calorieRow.setAttribute('class', 'row align-items-center padding-top-20');
   element.appendChild(calorieRow);
 
   var calorieColumnThird = document.createElement('div');
@@ -167,7 +171,7 @@ function trackTargetProgress(element) {
   progressFillDiv.appendChild(progressFillText);
 
   var proteinRow = document.createElement('div');
-  proteinRow.setAttribute('class', 'row align-items-center');
+  proteinRow.setAttribute('class', 'row align-items-center padding-top-30');
   element.appendChild(proteinRow);
 
   var proteinColumnThird = document.createElement('div');
@@ -198,7 +202,7 @@ function trackTargetProgress(element) {
   proteinProgressFillDiv.appendChild(proteinProgressFillText);
 
   var fatsRow = document.createElement('div');
-  fatsRow.setAttribute('class', 'row align-items-center');
+  fatsRow.setAttribute('class', 'row align-items-center padding-top-30');
   element.appendChild(fatsRow);
 
   var fatsColumnThird = document.createElement('div');
@@ -229,7 +233,7 @@ function trackTargetProgress(element) {
   fatsProgressFillDiv.appendChild(fatsProgressFillText);
 
   var carbohydratesRow = document.createElement('div');
-  carbohydratesRow.setAttribute('class', 'row align-items-center');
+  carbohydratesRow.setAttribute('class', 'row align-items-center padding-top-30');
   element.appendChild(carbohydratesRow);
 
   var carbohydratesColumnThird = document.createElement('div');
