@@ -30,6 +30,7 @@ fieldset {
   height: 350px;
   width: 500px;
   padding: 0;
+  border-radius: 5px;
 }
 
 main {
@@ -37,20 +38,21 @@ main {
   margin-bottom: 50px;
 }
 
+thead tr {
+  border-radius: 5px;
+}
+
 tbody > tr > td {
   padding-top: 1em;
 }
 
-tbody tr > td {
-  border-bottom: 1px solid black;
+tbody tr > td,
+tbody tr {
+  border-bottom: 1.5px solid black;
 }
 
 button:hover {
   cursor: pointer;
-}
-
-tr {
-  border-radius: 5px;
 }
 
 tr.heading-row {
@@ -73,6 +75,10 @@ div.daily-targets {
 
 .font-style-italic {
   font-style: italic;
+}
+
+.color-rod {
+  color: red;
 }
 
 .color-lightgray {
@@ -243,6 +249,10 @@ div.daily-targets {
   width: 95%;
 }
 
+.width-100 {
+  width: 100%;
+}
+
 .margin-right {
   margin-right: 15px;
 }
@@ -278,6 +288,9 @@ div.daily-targets {
 
 .modal-header {
   color: white;
+  height: 44px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 #edamam-badge {
