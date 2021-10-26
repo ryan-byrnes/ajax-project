@@ -470,6 +470,10 @@ div.daily-targets {
     width: 325px;
   }
 
+  .margin-right {
+    margin-right: 3px;
+  }
+
   .height-225 {
     height: 250px;
   }

@@ -12,6 +12,9 @@ data.date = dateToday;
 var dateText = document.querySelector('.todays-date');
 dateText.textContent = dateToday;
 
+var modalDate = document.querySelector('.todays-date-modal');
+modalDate.textContent = dateToday;
+
 var targetSubmitButton = document.querySelector('.daily-target-submit');
 targetSubmitButton.addEventListener('click', submitTargets);
 
