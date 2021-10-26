@@ -67,6 +67,14 @@ addMealButton.addEventListener('click', function () {
   modalDiv.classList.toggle('hidden');
 });
 
+var closeMealModalButton = document.querySelector('.add-meal-modal-window');
+closeMealModalButton.addEventListener('click', function closeModal(event) {
+  if (event.target === closeMealModalButton) {
+    var modalDiv = document.querySelector('div[data-view=new-meal-modal');
+    modalDiv.classList.toggle('hidden');
+  }
+});
+
 var newMealButton = document.querySelector('.add-meal-submit');
 
 newMealButton.addEventListener('submit', submitNewMeal);
@@ -459,6 +467,15 @@ document.addEventListener('click', function openAddFoodItemModal() {
     showModal.classList.toggle('hidden');
   }
 });
+
+var closeAddFoodButton = document.querySelector('.add-food-item-modal');
+closeAddFoodButton.addEventListener('click', function closeModal(event) {
+  if (event.target === closeAddFoodButton) {
+    var showModal = document.querySelector('.add-food-item-modal');
+    showModal.classList.toggle('hidden');
+  }
+});
+
 var addNewItemButton = document.querySelector('.add-next-food-item');
 addNewItemButton.addEventListener('submit', addNextFoodItem);
 
@@ -812,6 +829,15 @@ function updateProgress() {
     carbohydratesText.textContent = fillProgressCarbohydrates.style.width;
   }
 }
+
+var cancelDeleteButton = document.querySelector('.delete-food-item-modal');
+
+cancelDeleteButton.addEventListener('click', function cancelDelete(event) {
+  var cancelButton = document.querySelector('.cancel-delete-button');
+  if (event.target === cancelDeleteButton || event.target === cancelButton) {
+    cancelDeleteButton.classList.toggle('hidden');
+  }
+});
 
 var deleteIconListener = document.querySelector('body');
 
