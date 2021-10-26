@@ -834,7 +834,7 @@ confirmDeleteButton.addEventListener('click', deleteFoodItem);
 function deleteFoodItem() {
 
   for (var i = 0; i < data.mealEntries.length; i++) {
-    if (deleteTargetElement.closest('table').firstChild.firstChild.firstChild.nextSibling.nextSibling.textContent === data.mealEntries[i].date && deleteTargetElement.closest('table').firstChild.firstChild.firstChild.textContent === data.mealEntries[i].mealName) {
+    if (deleteTargetElement.closest('table').querySelector('.meal-name-td').nextSibling.nextSibling.textContent === data.mealEntries[i].date && deleteTargetElement.closest('table').querySelector('.meal-name-td').textContent === data.mealEntries[i].mealName) {
       for (var k = 0; k < data.mealEntries[i].foodItem.length; k++) {
         if (deleteTargetElement.closest('tr').firstChild.textContent === data.mealEntries[i].foodItem[k].name) {
           data.mealEntries[i].foodItem.splice(k, 1);
