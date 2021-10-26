@@ -67,6 +67,14 @@ addMealButton.addEventListener('click', function () {
   modalDiv.classList.toggle('hidden');
 });
 
+var closeMealModalButton = document.querySelector('.add-meal-modal-window');
+closeMealModalButton.addEventListener('click', function closeModal(event) {
+  if (event.target === closeMealModalButton) {
+    var modalDiv = document.querySelector('div[data-view=new-meal-modal');
+    modalDiv.classList.toggle('hidden');
+  }
+});
+
 var newMealButton = document.querySelector('.add-meal-submit');
 
 newMealButton.addEventListener('submit', submitNewMeal);
@@ -403,7 +411,7 @@ function addFoodItem(entry) {
   foodItemDiv.append(tdFoodItemName);
 
   var calorieDiv = document.createElement('div');
-  calorieDiv.setAttribute('class', 'row justify-content-center align-items-end flex-basis-15 margin-right');
+  calorieDiv.setAttribute('class', 'row justify-content-center calories align-items-end flex-basis-15 margin-right');
   tableBodyRow.append(calorieDiv);
 
   var tdCaloriesValue = document.createElement('td');
@@ -412,7 +420,7 @@ function addFoodItem(entry) {
   calorieDiv.append(tdCaloriesValue);
 
   var proteinDiv = document.createElement('div');
-  proteinDiv.setAttribute('class', 'row justify-content-center align-items-end flex-basis-15');
+  proteinDiv.setAttribute('class', 'row justify-content-center protein align-items-end flex-basis-15');
   tableBodyRow.append(proteinDiv);
 
   var tdProteinValue = document.createElement('td');
@@ -421,7 +429,7 @@ function addFoodItem(entry) {
   proteinDiv.append(tdProteinValue);
 
   var fatsDiv = document.createElement('div');
-  fatsDiv.setAttribute('class', 'row justify-content-center align-items-end flex-basis-15');
+  fatsDiv.setAttribute('class', 'row justify-content-center fats align-items-end flex-basis-15');
   tableBodyRow.append(fatsDiv);
 
   var tdFatsValue = document.createElement('td');
@@ -430,7 +438,7 @@ function addFoodItem(entry) {
   fatsDiv.append(tdFatsValue);
 
   var carbsDiv = document.createElement('div');
-  carbsDiv.setAttribute('class', 'row justify-content-center align-items-end flex-basis-15');
+  carbsDiv.setAttribute('class', 'row justify-content-center carbs align-items-end flex-basis-15');
   tableBodyRow.append(carbsDiv);
 
   var tdCarbohydratesValue = document.createElement('td');
@@ -459,6 +467,15 @@ document.addEventListener('click', function openAddFoodItemModal() {
     showModal.classList.toggle('hidden');
   }
 });
+
+var closeAddFoodButton = document.querySelector('.add-food-item-modal');
+closeAddFoodButton.addEventListener('click', function closeModal(event) {
+  if (event.target === closeAddFoodButton) {
+    var showModal = document.querySelector('.add-food-item-modal');
+    showModal.classList.toggle('hidden');
+  }
+});
+
 var addNewItemButton = document.querySelector('.add-next-food-item');
 addNewItemButton.addEventListener('submit', addNextFoodItem);
 
@@ -625,7 +642,7 @@ function showTodaysMeals(entry) {
     foodItemDiv.append(tdFoodItemName);
 
     var calorieDiv = document.createElement('div');
-    calorieDiv.setAttribute('class', 'row justify-content-center flex-basis-15 margin-right');
+    calorieDiv.setAttribute('class', 'calories row justify-content-center flex-basis-15 margin-right');
     tableBodyRow.append(calorieDiv);
 
     var tdCaloriesValue = document.createElement('td');
@@ -634,7 +651,7 @@ function showTodaysMeals(entry) {
     calorieDiv.append(tdCaloriesValue);
 
     var proteinDiv = document.createElement('div');
-    proteinDiv.setAttribute('class', 'row justify-content-center flex-basis-15');
+    proteinDiv.setAttribute('class', 'protein row justify-content-center flex-basis-15');
     tableBodyRow.append(proteinDiv);
 
     var tdProteinValue = document.createElement('td');
@@ -643,7 +660,7 @@ function showTodaysMeals(entry) {
     proteinDiv.append(tdProteinValue);
 
     var fatsDiv = document.createElement('div');
-    fatsDiv.setAttribute('class', 'row justify-content-center flex-basis-15');
+    fatsDiv.setAttribute('class', 'fats row justify-content-center flex-basis-15');
     tableBodyRow.append(fatsDiv);
 
     var tdFatsValue = document.createElement('td');
@@ -652,7 +669,7 @@ function showTodaysMeals(entry) {
     fatsDiv.append(tdFatsValue);
 
     var carbsDiv = document.createElement('div');
-    carbsDiv.setAttribute('class', 'row justify-content-center flex-basis-15');
+    carbsDiv.setAttribute('class', 'carbs row justify-content-center flex-basis-15');
     tableBodyRow.append(carbsDiv);
 
     var tdCarbohydratesValue = document.createElement('td');
@@ -813,6 +830,15 @@ function updateProgress() {
   }
 }
 
+var cancelDeleteButton = document.querySelector('.delete-food-item-modal');
+
+cancelDeleteButton.addEventListener('click', function cancelDelete(event) {
+  var cancelButton = document.querySelector('.cancel-delete-button');
+  if (event.target === cancelDeleteButton || event.target === cancelButton) {
+    cancelDeleteButton.classList.toggle('hidden');
+  }
+});
+
 var deleteIconListener = document.querySelector('body');
 
 deleteIconListener.addEventListener('click', showDeleteModal);
@@ -834,11 +860,18 @@ confirmDeleteButton.addEventListener('click', deleteFoodItem);
 function deleteFoodItem() {
 
   for (var i = 0; i < data.mealEntries.length; i++) {
-    if (deleteTargetElement.closest('table').firstChild.firstChild.firstChild.nextSibling.nextSibling.textContent === data.mealEntries[i].date && deleteTargetElement.closest('table').firstChild.firstChild.firstChild.textContent === data.mealEntries[i].mealName) {
+    if (deleteTargetElement.closest('table').querySelector('.meal-name-td').nextSibling.nextSibling.textContent === data.mealEntries[i].date && deleteTargetElement.closest('table').querySelector('.meal-name-td').textContent === data.mealEntries[i].mealName) {
       for (var k = 0; k < data.mealEntries[i].foodItem.length; k++) {
         if (deleteTargetElement.closest('tr').firstChild.textContent === data.mealEntries[i].foodItem[k].name) {
           data.mealEntries[i].foodItem.splice(k, 1);
           var deleteModal = document.querySelector('.delete-food-item-modal');
+          if (data.targets.date === deleteTargetElement.closest('table').querySelector('.meal-name-td').nextSibling.nextSibling.textContent) {
+            data.dailyTotals.calories -= parseInt(deleteTargetElement.closest('tr').querySelector('.calories').textContent);
+            data.dailyTotals.protein -= parseInt(deleteTargetElement.closest('tr').querySelector('.protein').textContent);
+            data.dailyTotals.carbohydrates -= parseInt(deleteTargetElement.closest('tr').querySelector('.carbs').textContent);
+            data.dailyTotals.fats -= parseInt(deleteTargetElement.closest('tr').querySelector('.fats').textContent);
+            updateProgress();
+          }
           deleteModal.classList.add('hidden');
         }
       }
