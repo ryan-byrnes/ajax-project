@@ -280,8 +280,6 @@ function switchViews() {
 
 function createNewMealEntry(entry) {
 
-  // add to current day property here
-
   var showMeal = document.querySelector('div[data-view="current-day-meals"]');
   showMeal.classList.remove('hidden');
 
@@ -325,30 +323,54 @@ function createNewMealEntry(entry) {
   tableHeadRow2.setAttribute('class', 'heading-row row font-weight-bold');
   tableHead.append(tableHeadRow2);
 
+  var foodItemDiv = document.createElement('div');
+  foodItemDiv.setAttribute('class', 'flex-basis-40');
+  tableHeadRow2.append(foodItemDiv);
+
   var tdFoodItem = document.createElement('td');
-  tdFoodItem.setAttribute('class', 'flex-basis-40');
+  tdFoodItem.setAttribute('class', 'font-size-h padding-left-10');
   tdFoodItem.textContent = 'Food Item';
-  tableHeadRow2.append(tdFoodItem);
+  foodItemDiv.append(tdFoodItem);
+
+  var calorieDiv = document.createElement('div');
+  calorieDiv.setAttribute('class', 'row justify-content-center flex-basis-15 margin-right');
+  tableHeadRow2.append(calorieDiv);
 
   var tdCalories = document.createElement('td');
-  tdCalories.setAttribute('class', 'flex-basis-15');
+  tdCalories.setAttribute('class', 'font-size-h');
   tdCalories.textContent = 'Calories';
-  tableHeadRow2.append(tdCalories);
+  calorieDiv.append(tdCalories);
+
+  var proteinDiv = document.createElement('div');
+  proteinDiv.setAttribute('class', 'row justify-content-center flex-basis-15');
+  tableHeadRow2.append(proteinDiv);
 
   var tdProtein = document.createElement('td');
-  tdProtein.setAttribute('class', 'flex-basis-15');
+  tdProtein.setAttribute('class', 'font-size-h padding-left-media');
   tdProtein.textContent = 'Protein';
-  tableHeadRow2.append(tdProtein);
+  proteinDiv.append(tdProtein);
+
+  var fatsDiv = document.createElement('div');
+  fatsDiv.setAttribute('class', 'row justify-content-center flex-basis-15');
+  tableHeadRow2.append(fatsDiv);
 
   var tdFats = document.createElement('td');
-  tdFats.setAttribute('class', 'flex-basis-15');
+  tdFats.setAttribute('class', 'font-size-h padding-left-media');
   tdFats.textContent = 'Fats';
-  tableHeadRow2.append(tdFats);
+  fatsDiv.append(tdFats);
+
+  var carbsDiv = document.createElement('div');
+  carbsDiv.setAttribute('class', 'row justify-content-center flex-basis-15');
+  tableHeadRow2.append(carbsDiv);
 
   var tdCarbohydrates = document.createElement('td');
-  tdCarbohydrates.setAttribute('class', 'flex-basis-15');
+  tdCarbohydrates.setAttribute('class', 'font-size-h padding-left-media');
   tdCarbohydrates.textContent = 'Carbs';
-  tableHeadRow2.append(tdCarbohydrates);
+  carbsDiv.append(tdCarbohydrates);
+
+  var spaceDiv = document.createElement('div');
+  spaceDiv.setAttribute('class', 'row justify-content-center flex-basis-15');
+  tableHeadRow2.append(spaceDiv);
 
   var tableBody = document.createElement('tbody');
   tableBody.setAttribute('class', 'table-body-append');
@@ -358,7 +380,7 @@ function createNewMealEntry(entry) {
   tableBody.append(tableBodyRow2);
 
   var tdAddFoodItem = document.createElement('td');
-  tdAddFoodItem.setAttribute('class', 'font-weight-bold add-new-food-item color-navy');
+  tdAddFoodItem.setAttribute('class', 'font-weight-bold add-new-food-item color-navy padding-left-10');
   tdAddFoodItem.setAttribute('id', 'add-new-food-item');
   tdAddFoodItem.textContent = 'Add Food Item';
   tableBodyRow2.append(tdAddFoodItem);
@@ -381,7 +403,7 @@ function addFoodItem(entry) {
   foodItemDiv.append(tdFoodItemName);
 
   var calorieDiv = document.createElement('div');
-  calorieDiv.setAttribute('class', 'row justify-content-center flex-basis-15 margin-right');
+  calorieDiv.setAttribute('class', 'row justify-content-center align-items-end flex-basis-15 margin-right');
   tableBodyRow.append(calorieDiv);
 
   var tdCaloriesValue = document.createElement('td');
@@ -390,7 +412,7 @@ function addFoodItem(entry) {
   calorieDiv.append(tdCaloriesValue);
 
   var proteinDiv = document.createElement('div');
-  proteinDiv.setAttribute('class', 'row justify-content-center flex-basis-15');
+  proteinDiv.setAttribute('class', 'row justify-content-center align-items-end flex-basis-15');
   tableBodyRow.append(proteinDiv);
 
   var tdProteinValue = document.createElement('td');
@@ -399,7 +421,7 @@ function addFoodItem(entry) {
   proteinDiv.append(tdProteinValue);
 
   var fatsDiv = document.createElement('div');
-  fatsDiv.setAttribute('class', 'row justify-content-center flex-basis-15');
+  fatsDiv.setAttribute('class', 'row justify-content-center align-items-end flex-basis-15');
   tableBodyRow.append(fatsDiv);
 
   var tdFatsValue = document.createElement('td');
@@ -408,7 +430,7 @@ function addFoodItem(entry) {
   fatsDiv.append(tdFatsValue);
 
   var carbsDiv = document.createElement('div');
-  carbsDiv.setAttribute('class', 'row justify-content-center flex-basis-15');
+  carbsDiv.setAttribute('class', 'row justify-content-center align-items-end flex-basis-15');
   tableBodyRow.append(carbsDiv);
 
   var tdCarbohydratesValue = document.createElement('td');
@@ -417,11 +439,11 @@ function addFoodItem(entry) {
   carbsDiv.append(tdCarbohydratesValue);
 
   var deleteDiv = document.createElement('div');
-  deleteDiv.setAttribute('class', 'row justify-content-flex-end flex-basis-15');
+  deleteDiv.setAttribute('class', 'row justify-content-flex-end align-items-end flex-basis-15');
   tableBodyRow.append(deleteDiv);
 
   var deleteIcon = document.createElement('i');
-  deleteIcon.setAttribute('class', 'fas fa-minus-circle color-red delete-icon font-size-h padding-right');
+  deleteIcon.setAttribute('class', 'fas fa-minus-circle delete-icon font-size-h padding-right');
   deleteDiv.append(deleteIcon);
 
   data.mealEntries[data.mealEntries.length - 1].foodEntryId += 1;
@@ -566,7 +588,7 @@ function showTodaysMeals(entry) {
   tableHeadRow2.append(carbsDiv);
 
   var tdCarbohydrates = document.createElement('td');
-  tdCarbohydrates.setAttribute('class', 'flex-basis-15 font-size-h padding-left-media');
+  tdCarbohydrates.setAttribute('class', 'font-size-h padding-left-media');
   tdCarbohydrates.textContent = 'Carbs';
   carbsDiv.append(tdCarbohydrates);
 
