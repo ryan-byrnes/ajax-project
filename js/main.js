@@ -30,6 +30,18 @@ if (data.targets.date !== data.date) {
   switchViews();
 }
 
+function requiredFields() {
+  var errorDiv = document.createElement('div');
+  errorDiv.setAttribute('class', 'row width-100 padding-right margin-top-10');
+
+  var errorText = document.createElement('p');
+  errorText.setAttribute('class', 'color-red font-size-error');
+  errorText.textContent = 'Positive integer values required for Calories, Protein, Fats, and Carbs fields.';
+  errorDiv.append(errorText);
+
+  return errorDiv;
+}
+
 function submitTargets() {
   event.preventDefault();
 
@@ -39,6 +51,14 @@ function submitTargets() {
   var proteinInput = inputValue.protein;
   var fatsInput = inputValue.fats;
   var carbInput = inputValue.carbohydrates;
+
+  if (parseInt(calorieInput.value) < 0 || parseInt(proteinInput.value) < 0 || parseInt(fatsInput.value) < 0 || parseInt(carbInput.value) < 0 || !Number.isInteger(parseInt(calorieInput.value)) || !Number.isInteger(parseInt(proteinInput.value)) || !Number.isInteger(parseInt(fatsInput.value)) || !Number.isInteger(parseInt(carbInput.value)) || !calorieInput.value || !proteinInput.value || !fatsInput.value || !carbInput.value) {
+    const submitButton = document.querySelector('.error-message');
+    if (!document.querySelector('.error-message').firstElementChild) {
+      submitButton.append(requiredFields());
+    }
+    return;
+  }
 
   data.targets.calories = calorieInput.value;
   data.targets.protein = proteinInput.value;
