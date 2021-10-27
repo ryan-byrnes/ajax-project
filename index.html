@@ -43,7 +43,7 @@
               <label name="calories"> Calories (kcal)</label>
             </div>
             <div class="column-66 padding-right">
-              <input type="text" id="calories">
+              <input type="text submit" id="calories" required/>
             </div>
           </div>
           <div class="margin-top-10 row align-items-center">
@@ -51,7 +51,7 @@
               <label name="protein">Protein (g)</label>
             </div>
             <div class="column-66 padding-right">
-              <input type="text" id="protein">
+              <input type="text" required id="protein"/>
             </div>
           </div>
           <div class="margin-top-10 row align-items-center">
@@ -59,7 +59,7 @@
               <label name="fats">Fats (g)</label>
             </div>
             <div class="column-66 padding-right">
-              <input type="text" id="fats">
+              <input type="text" required id="fats"/>
             </div>
           </div>
           <div class="margin-top-10 row align-items-center">
@@ -67,11 +67,14 @@
               <label name="carbohydrates">Carbs (g)</label>
             </div>
             <div class="column-66 padding-right">
-              <input type="text" id="carbohydrates">
+              <input type="text" required id="carbohydrates"/>
             </div>
           </div>
           <div class="submit-button margin-top-10 text-align-right padding-right">
-            <button class="daily-target-submit">Submit</button>
+            <button type="submit" class="daily-target-submit">Submit</button>
+          </div>
+          <div class="error-message">
+
           </div>
         </form>
       </div>

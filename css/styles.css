@@ -77,7 +77,7 @@ div.daily-targets {
   font-style: italic;
 }
 
-.color-rod {
+.color-red {
   color: red;
 }
 
@@ -443,9 +443,19 @@ div.daily-targets {
   left: 45%;
 }
 
+@media only screen and (max-width: 600px) {
+  .font-size-error {
+    font-size: 12.5px;
+  }
+}
+
 @media only screen and (max-width: 586px) {
   .flex-media {
     flex-basis: 57%;
+  }
+
+  .font-size-error {
+    font-size: 12.5px;
   }
 }
 
@@ -468,6 +478,10 @@ div.daily-targets {
 
   table {
     width: 325px;
+  }
+
+  .font-size-error {
+    font-size: 10px;
   }
 
   .margin-right {
