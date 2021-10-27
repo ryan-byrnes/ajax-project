@@ -52,7 +52,7 @@ function submitTargets() {
   var fatsInput = inputValue.fats;
   var carbInput = inputValue.carbohydrates;
 
-  if (!Number.isInteger(calorieInput.value) || !Number.isInteger(proteinInput.value) || !Number.isInteger(fatsInput.value) || !Number.isInteger(carbInput.value) || !calorieInput.value || !proteinInput.value || !fatsInput.value || !carbInput.value) {
+  if (!Number.isInteger(parseInt(calorieInput.value)) || !Number.isInteger(parseInt(proteinInput.value)) || !Number.isInteger(parseInt(fatsInput.value)) || !Number.isInteger(parseInt(carbInput.value)) || !calorieInput.value || !proteinInput.value || !fatsInput.value || !carbInput.value) {
     const submitButton = document.querySelector('.error-message');
     if (!document.querySelector('.error-message').firstElementChild) {
       submitButton.append(requiredFields());
