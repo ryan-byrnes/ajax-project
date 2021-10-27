@@ -65,6 +65,10 @@ div.daily-targets {
   border-radius: 5px;
 }
 
+.font-size-error {
+  font-size: 14px;
+}
+
 .height-225 {
   height: 225px;
 }
@@ -445,17 +449,13 @@ div.daily-targets {
 
 @media only screen and (max-width: 600px) {
   .font-size-error {
-    font-size: 12.5px;
+    font-size: 11px;
   }
 }
 
 @media only screen and (max-width: 586px) {
   .flex-media {
     flex-basis: 57%;
-  }
-
-  .font-size-error {
-    font-size: 12.5px;
   }
 }
 
@@ -481,7 +481,7 @@ div.daily-targets {
   }
 
   .font-size-error {
-    font-size: 10px;
+    font-size: 9px;
   }
 
   .margin-right {
