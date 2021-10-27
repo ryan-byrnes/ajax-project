@@ -315,6 +315,10 @@ div.daily-targets {
   width: 23%;
 }
 
+.delete-icon {
+  color: red;
+}
+
 .cancel-delete-button {
   color: white;
   background-color: rgb(10, 82, 130);
